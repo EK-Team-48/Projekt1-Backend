@@ -3,9 +3,11 @@ package com.example.projekt1backend.movie;
 import com.example.projekt1backend.ageLimit.AgeLimit;
 import com.example.projekt1backend.genre.Genre;
 import com.example.projekt1backend.movieStatus.MovieStatus;
+import com.example.projekt1backend.screening.Screening;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -35,6 +37,9 @@ public class Movie {
     @ManyToOne
     @JoinColumn(name = "movieStatusId", referencedColumnName = "movieStatusId")
     private MovieStatus movieStatus;
+
+    @OneToMany(mappedBy = "movieId")
+    private List<Screening> screeningList;
 
     public Movie() {}
 
@@ -110,5 +115,13 @@ public class Movie {
 
     public void setMovieStatus(MovieStatus movieStatus) {
         this.movieStatus = movieStatus;
+    }
+
+    public List<Screening> getScreeningList() {
+        return screeningList;
+    }
+
+    public void setScreeningList(List<Screening> screeningList) {
+        this.screeningList = screeningList;
     }
 }
