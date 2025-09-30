@@ -1,17 +1,10 @@
 package com.example.projekt1backend;
 
+
 import com.example.projekt1backend.Seat.Seat;
 import com.example.projekt1backend.Seat.SeatRepository;
 import com.example.projekt1backend.Seat.Status;
 import com.example.projekt1backend.Seat.StatusRepository;
-import com.example.projekt1backend.ageLimit.AgeLimit;
-import com.example.projekt1backend.ageLimit.AgeLimitRepository;
-import com.example.projekt1backend.genre.Genre;
-import com.example.projekt1backend.genre.GenreRepository;
-import com.example.projekt1backend.movie.Movie;
-import com.example.projekt1backend.movie.MovieRepository;
-import com.example.projekt1backend.movieStatus.MovieStatus;
-import com.example.projekt1backend.movieStatus.MovieStatusRepository;
 import com.example.projekt1backend.theater.Theater;
 import com.example.projekt1backend.theater.TheaterRepository;
 import com.example.projekt1backend.ageLimit.entity.AgeLimit;
