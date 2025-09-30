@@ -1,7 +1,7 @@
 package com.example.projekt1backend.screening.controller;
 
 
-import com.example.projekt1backend.movie.Movie;
+import com.example.projekt1backend.movie.entity.Movie;
 import com.example.projekt1backend.screening.model.Screening;
 import com.example.projekt1backend.screening.service.ScreeningService;
 import org.springframework.beans.factory.annotation.Autowired;

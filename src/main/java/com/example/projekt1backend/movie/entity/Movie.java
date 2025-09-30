@@ -1,8 +1,8 @@
-package com.example.projekt1backend.movie;
+package com.example.projekt1backend.movie.entity;
 
-import com.example.projekt1backend.ageLimit.AgeLimit;
-import com.example.projekt1backend.genre.Genre;
-import com.example.projekt1backend.movieStatus.MovieStatus;
+import com.example.projekt1backend.ageLimit.entity.AgeLimit;
+import com.example.projekt1backend.genre.entity.Genre;
+import com.example.projekt1backend.movieStatus.entity.MovieStatus;
 import com.example.projekt1backend.screening.model.Screening;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;

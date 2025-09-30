@@ -1,13 +1,13 @@
 package com.example.projekt1backend;
 
-import com.example.projekt1backend.ageLimit.AgeLimit;
-import com.example.projekt1backend.ageLimit.AgeLimitRepository;
-import com.example.projekt1backend.genre.Genre;
-import com.example.projekt1backend.genre.GenreRepository;
-import com.example.projekt1backend.movie.Movie;
-import com.example.projekt1backend.movie.MovieRepository;
-import com.example.projekt1backend.movieStatus.MovieStatus;
-import com.example.projekt1backend.movieStatus.MovieStatusRepository;
+import com.example.projekt1backend.ageLimit.entity.AgeLimit;
+import com.example.projekt1backend.ageLimit.repository.AgeLimitRepository;
+import com.example.projekt1backend.genre.entity.Genre;
+import com.example.projekt1backend.genre.repository.GenreRepository;
+import com.example.projekt1backend.movie.entity.Movie;
+import com.example.projekt1backend.movie.repository.MovieRepository;
+import com.example.projekt1backend.movieStatus.entity.MovieStatus;
+import com.example.projekt1backend.movieStatus.repository.MovieStatusRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -83,7 +83,7 @@ public class Projekt1BackendApplication {
             forrest.setDescription("Livshistorie om Forrest Gump");
             forrest.setDuration(140);
             forrest.setTrailerLink("https://youtu.be/bLvqoHBptjg");
-            forrest.setAgeLimit(ageLimitRepo.findById(2).orElseThrow(() -> new RuntimeException("fail")));
+            forrest.setAgeLimit(pg18);
             forrest.setMovieStatus(released);
             forrest.getGenres().add(drama);
             forrest.getGenres().add(comedy);

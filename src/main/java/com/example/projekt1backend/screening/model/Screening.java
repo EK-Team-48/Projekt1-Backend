@@ -1,6 +1,5 @@
 package com.example.projekt1backend.screening.model;
-
-import com.example.projekt1backend.movie.Movie;
+import com.example.projekt1backend.movie.entity.Movie;
 import com.example.projekt1backend.theater.Theater;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
@@ -27,15 +26,15 @@ public class Screening {
     private Double price;
 
 
+    public Screening() {
+    }
+
     public Screening(Integer screeningId, Movie movieId, Integer startTime, Theater theaterId, Double price) {
         this.screeningId = screeningId;
         this.movieId = movieId;
         this.startTime = startTime;
         this.theaterId = theaterId;
         this.price = price;
-    }
-
-    public Screening() {
     }
 
     public Integer getScreeningId() {
