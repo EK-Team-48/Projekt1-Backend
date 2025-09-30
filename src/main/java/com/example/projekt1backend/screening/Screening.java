@@ -1,6 +1,6 @@
 package com.example.projekt1backend.screening;
 
-import com.example.projekt1backend.movie.Movie;
+import com.example.projekt1backend.movie.entity.Movie;
 import com.example.projekt1backend.theater.Theater;
 import jakarta.persistence.*;
 import lombok.*;
