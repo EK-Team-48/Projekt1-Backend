@@ -1,4 +1,4 @@
-package com.example.projekt1backend.reservation;
+package com.example.projekt1backend.reservation.entity;
 
 import com.example.projekt1backend.customer.Customer;
 import com.example.projekt1backend.screening.model.Screening;
