@@ -5,7 +5,6 @@ import com.example.projekt1backend.customer.Customer;
 import com.example.projekt1backend.customer.CustomerService;
 import com.example.projekt1backend.reservation.entity.Reservation;
 import com.example.projekt1backend.reservation.service.ReservationService;
-import com.example.projekt1backend.screening.Screening;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
