@@ -17,7 +17,11 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer movieId;
 
+
+    private String movieImg;
     private String movieTitle;
+
+    @Column(columnDefinition = "TEXT")
     private String description;
     private Integer duration;
     private String trailerLink;
@@ -43,7 +47,8 @@ public class Movie {
 
     public Movie() {}
 
-    public Movie(String movieTitle, String description, Integer duration, String trailerLink, AgeLimit ageLimit, Set<Genre> genres, MovieStatus movieStatus) {
+    public Movie(String movieImg, String movieTitle, String description, Integer duration, String trailerLink, AgeLimit ageLimit, Set<Genre> genres, MovieStatus movieStatus, List<Screening> screeningList) {
+        this.movieImg = movieImg;
         this.movieTitle = movieTitle;
         this.description = description;
         this.duration = duration;
@@ -51,6 +56,7 @@ public class Movie {
         this.ageLimit = ageLimit;
         this.genres = genres;
         this.movieStatus = movieStatus;
+        this.screeningList = screeningList;
     }
 
     public Integer getMovieId() {
@@ -59,6 +65,14 @@ public class Movie {
 
     public void setMovieId(Integer movieId) {
         this.movieId = movieId;
+    }
+
+    public String getMovieImg() {
+        return movieImg;
+    }
+
+    public void setMovieImg(String movieImg) {
+        this.movieImg = movieImg;
     }
 
     public String getMovieTitle() {
