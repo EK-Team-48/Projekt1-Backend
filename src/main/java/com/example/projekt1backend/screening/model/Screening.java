@@ -1,4 +1,4 @@
-package com.example.projekt1backend.screening;
+package com.example.projekt1backend.screening.model;
 
 import com.example.projekt1backend.movie.Movie;
 import com.example.projekt1backend.theater.Theater;
@@ -15,7 +15,7 @@ public class Screening {
 
     @Id
     @GeneratedValue
-    private Integer screningId;
+    private Integer screeningId;
 
     @ManyToOne
     @JoinColumn(name = "movie_id")

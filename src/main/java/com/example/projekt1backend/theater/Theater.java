@@ -1,7 +1,7 @@
 package com.example.projekt1backend.theater;
 
 import com.example.projekt1backend.Seat.Seat;
-import com.example.projekt1backend.screening.Screening;
+import com.example.projekt1backend.screening.model.Screening;
 import jakarta.persistence.*;
 import lombok.*;
 

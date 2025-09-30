@@ -3,7 +3,7 @@ package com.example.projekt1backend.movie;
 import com.example.projekt1backend.ageLimit.AgeLimit;
 import com.example.projekt1backend.genre.Genre;
 import com.example.projekt1backend.movieStatus.MovieStatus;
-import com.example.projekt1backend.screening.Screening;
+import com.example.projekt1backend.screening.model.Screening;
 import jakarta.persistence.*;
 
 import java.util.HashSet;

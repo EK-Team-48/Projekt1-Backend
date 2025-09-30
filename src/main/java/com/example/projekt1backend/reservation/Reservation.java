@@ -1,7 +1,7 @@
 package com.example.projekt1backend.reservation;
 
 import com.example.projekt1backend.customer.Customer;
-import com.example.projekt1backend.screening.Screening;
+import com.example.projekt1backend.screening.model.Screening;
 import jakarta.persistence.*;
 import lombok.*;
 
