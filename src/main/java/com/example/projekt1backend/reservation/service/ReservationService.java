@@ -22,4 +22,8 @@ public class ReservationService {
     public Reservation addReservation(Reservation reservation) {
         return reservationRepository.save(reservation);
     }
+
+    public Reservation findById(Integer id) {
+        return reservationRepository.findById(id).orElseThrow(() -> new RuntimeException("reservation not found"));
+    }
 }
