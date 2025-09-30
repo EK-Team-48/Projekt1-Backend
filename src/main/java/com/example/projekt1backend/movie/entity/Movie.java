@@ -3,8 +3,9 @@ package com.example.projekt1backend.movie.entity;
 import com.example.projekt1backend.ageLimit.entity.AgeLimit;
 import com.example.projekt1backend.genre.entity.Genre;
 import com.example.projekt1backend.movieStatus.entity.MovieStatus;
-import com.example.projekt1backend.screening.Screening;
+import com.example.projekt1backend.screening.model.Screening;
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.HashSet;
 import java.util.List;
@@ -30,7 +31,7 @@ public class Movie {
     @JoinColumn(name = "age_limit_id", referencedColumnName = "ageLimitId")
     private AgeLimit ageLimit;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(
             name = "movie_genre",
             joinColumns = @JoinColumn(name = "movie_id"),
@@ -42,6 +43,7 @@ public class Movie {
     @JoinColumn(name = "movieStatusId", referencedColumnName = "movieStatusId")
     private MovieStatus movieStatus;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "movieId")
     private List<Screening> screeningList;
 

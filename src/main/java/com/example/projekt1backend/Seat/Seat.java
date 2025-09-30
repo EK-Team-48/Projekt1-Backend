@@ -6,11 +6,6 @@ import lombok.*;
 
 import java.util.List;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
 @Entity
 public class Seat {
 
@@ -20,12 +15,59 @@ public class Seat {
 
     private Integer seatNumber;
 
-    private char seatRow;
+    private Integer seatRow;
+
+    @ManyToOne
+    @JoinColumn(name = "statusId", referencedColumnName = "statusId")
+    private Status seatStatus;
+
 
     @ManyToOne
     @JoinColumn(name = "theater_id")
     private Theater theaterId;
 
-    @OneToMany(mappedBy = "seatId")
-    private List<Status> seatStatus;
+
+    public Seat(Integer seatNumber, Integer seatRow, Theater theaterId, Status seatStatus) {
+        this.id = id;
+        this.seatNumber = seatNumber;
+        this.seatRow = seatRow;
+        this.theaterId = theaterId;
+        this.seatStatus = seatStatus;
+    }
+
+    public Seat() {}
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getSeatNumber() {
+        return seatNumber;
+    }
+
+    public void setSeatNumber(Integer seatNumber) {
+        this.seatNumber = seatNumber;
+    }
+
+    public Integer getSeatRow() {
+        return seatRow;
+    }
+
+    public void setSeatRow(Integer seatRow) {
+        this.seatRow = seatRow;
+    }
+
+    public Theater getTheaterId() {
+        return theaterId;
+    }
+
+    public void setTheaterId(Theater theaterId) {
+        this.theaterId = theaterId;
+    }
+
+
 }
