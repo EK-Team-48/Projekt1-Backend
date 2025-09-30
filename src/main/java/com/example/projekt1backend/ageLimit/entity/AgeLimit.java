@@ -1,6 +1,6 @@
-package com.example.projekt1backend.ageLimit;
+package com.example.projekt1backend.ageLimit.entity;
 
-import com.example.projekt1backend.movie.Movie;
+import com.example.projekt1backend.movie.entity.Movie;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
