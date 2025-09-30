@@ -1,5 +1,12 @@
 package com.example.projekt1backend;
 
+
+import com.example.projekt1backend.Seat.Seat;
+import com.example.projekt1backend.Seat.SeatRepository;
+import com.example.projekt1backend.Seat.Status;
+import com.example.projekt1backend.Seat.StatusRepository;
+import com.example.projekt1backend.theater.Theater;
+import com.example.projekt1backend.theater.TheaterRepository;
 import com.example.projekt1backend.ageLimit.entity.AgeLimit;
 import com.example.projekt1backend.ageLimit.repository.AgeLimitRepository;
 import com.example.projekt1backend.genre.entity.Genre;
@@ -27,7 +34,10 @@ public class Projekt1BackendApplication {
     CommandLineRunner loadTestData(MovieRepository movieRepo,
                                    GenreRepository genreRepo,
                                    AgeLimitRepository ageLimitRepo,
-                                   MovieStatusRepository movieStatusRepo) {
+                                   MovieStatusRepository movieStatusRepo,
+                                   TheaterRepository theaterRepo,
+                                   SeatRepository seatRepo,
+                                   StatusRepository statusRepo) {
         return args -> {
             // --- Genres ---
             Genre action = new Genre();
@@ -100,6 +110,38 @@ public class Projekt1BackendApplication {
 
 
             movieRepo.saveAll(Set.of(dieHard, forrest, avengers));
+
+            Theater theater1 = new Theater();
+            theater1.setTheaterName("SAL 1");
+            theaterRepo.save(theater1);
+
+            Theater theater2 = new Theater();
+            theater2.setTheaterName("SAL 2");
+            theaterRepo.save(theater2);
+
+            Status status1 = new Status("Active");
+            statusRepo.save(status1);
+
+            Status status2 = new Status("Inactive");
+            statusRepo.save(status2);
+
+
+            //Largest theater of 25 rows and 16 seats per row
+            for (int i = 1; i < 26; i++) {
+                for (int j = 1; j < 17; j++) {
+                    seatRepo.save(new Seat(j, i, theater1, status1));
+                }
+            }
+
+            //Smallest theater of 20 rows and 12 seats per row
+            for (int k = 1; k < 21; k++) {
+                for (int l = 1; l < 13; l++) {
+                    seatRepo.save(new Seat(l, k, theater2, status1));
+                }
+            }
+
+
+
 
 
             System.out.println("✅ Testdata indlæst i databasen!");
