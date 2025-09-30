@@ -1,15 +1,10 @@
 package com.example.projekt1backend.Seat;
 
 import jakarta.persistence.*;
-import lombok.*;
+
 
 import java.util.List;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
 @Entity
 public class Status {
     @Id
