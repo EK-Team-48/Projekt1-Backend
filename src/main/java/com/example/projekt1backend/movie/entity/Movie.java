@@ -3,9 +3,9 @@ package com.example.projekt1backend.movie.entity;
 import com.example.projekt1backend.ageLimit.entity.AgeLimit;
 import com.example.projekt1backend.genre.entity.Genre;
 import com.example.projekt1backend.movieStatus.entity.MovieStatus;
-import com.example.projekt1backend.screening.model.Screening;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.example.projekt1backend.screening.Screening;
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.HashSet;
 import java.util.List;

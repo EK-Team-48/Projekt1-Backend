@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/reservations")
+@RequestMapping("/api/v1")
 public class ReservationController {
 
     private final ReservationService reservationService;
@@ -23,21 +23,20 @@ public class ReservationController {
         this.customerService = customerService;
     }
 
-    @GetMapping("/getall")
+    @GetMapping("/reservations")
     public ResponseEntity<List<Reservation>> getAll() {
         return new ResponseEntity<>(reservationService.getAllReservations(), HttpStatus.OK);
     }
 
-    @PostMapping("/addreservation")
+    @PostMapping("/reservations")
     public ResponseEntity<?> createReservation(@RequestBody Reservation reservation) {
         //Tester lige nu med en bruger jeg selv opretter for at se om det virker som det skal i backend.
         //Hvilke det gør, skal bare lige finde ud af hvordan jeg får id fra brugeren med.
         //Plus det skal være i service klassen det her, ikke i controller. To be continued....
         Customer customer = customerService.findById(1);
+        //Screening screening = something here
         reservation.setCustomer(customer);
         reservationService.addReservation(reservation);
         return new ResponseEntity<>(reservation + ": has been created", HttpStatus.CREATED);
     }
-
-
 }
