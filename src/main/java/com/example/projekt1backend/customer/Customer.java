@@ -1,7 +1,13 @@
 package com.example.projekt1backend.customer;
 
 import jakarta.persistence.*;
+import lombok.*;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Entity
 public class Customer {
 
@@ -16,6 +22,5 @@ public class Customer {
     private Integer age;
 
     private String number;
-
 
 }

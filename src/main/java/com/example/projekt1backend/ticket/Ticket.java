@@ -1,7 +1,7 @@
 package com.example.projekt1backend.ticket;
 
 import com.example.projekt1backend.Seat.Seat;
-import com.example.projekt1backend.reservation.Reservation;
+import com.example.projekt1backend.reservation.entity.Reservation;
 import jakarta.persistence.*;
 import lombok.*;
 
