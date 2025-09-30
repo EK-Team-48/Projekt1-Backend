@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/customer")
+@RequestMapping("/api/v1")
+@CrossOrigin(origins = "*")
 public class CustomerController {
 
     private final CustomerService service;
@@ -23,7 +24,7 @@ public class CustomerController {
         return new ResponseEntity<>(service.findAllCustomer(),HttpStatus.OK);
     }
 
-    @PostMapping("/addcustomer")
+    @PostMapping("/customer")
     public ResponseEntity<?> addCustomer(@RequestBody Customer customer) {
         service.addCustomer(customer);
         return new ResponseEntity<>(customer + ": has been created", HttpStatus.CREATED);
