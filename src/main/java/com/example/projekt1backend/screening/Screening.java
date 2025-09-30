@@ -15,7 +15,7 @@ public class Screening {
 
     @Id
     @GeneratedValue
-    private Integer screningId;
+    private Integer screeningId;
 
     @ManyToOne
     @JoinColumn(name = "movie_id")
