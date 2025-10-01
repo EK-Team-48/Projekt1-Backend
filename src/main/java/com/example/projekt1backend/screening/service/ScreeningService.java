@@ -29,4 +29,8 @@ public class ScreeningService {
         return screeningRepository.save(screening);
     }
 
+    public Screening findById(Integer id) {
+        return screeningRepository.findById(id).orElseThrow(() -> new RuntimeException("screening not found"));
+    }
+
 }

@@ -22,7 +22,7 @@ public class Movie {
     private String movieImg;
     private String movieTitle;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT") //vil det ikke være bedre at bruge @Lob annotation her?
     private String description;
     private Integer duration;
     private String trailerLink;
