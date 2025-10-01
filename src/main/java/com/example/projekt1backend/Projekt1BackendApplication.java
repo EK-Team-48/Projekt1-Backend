@@ -1,10 +1,8 @@
 package com.example.projekt1backend;
 
 
-import com.example.projekt1backend.Seat.Seat;
-import com.example.projekt1backend.Seat.SeatRepository;
-import com.example.projekt1backend.Seat.Status;
-import com.example.projekt1backend.Seat.StatusRepository;
+import com.example.projekt1backend.Seat.model.Seat;
+import com.example.projekt1backend.Seat.repository.SeatRepository;
 import com.example.projekt1backend.theater.Theater;
 import com.example.projekt1backend.theater.TheaterRepository;
 import com.example.projekt1backend.ageLimit.entity.AgeLimit;
@@ -206,14 +204,14 @@ public class Projekt1BackendApplication {
             //Largest theater of 25 rows and 16 seats per row
             for (int i = 1; i < 26; i++) {
                 for (int j = 1; j < 17; j++) {
-                    seatRepo.save(new Seat(j, i, theater1, status1));
+                    seatRepo.save(new Seat(j, i, theater1));
                 }
             }
 
             //Smallest theater of 20 rows and 12 seats per row
             for (int k = 1; k < 21; k++) {
                 for (int l = 1; l < 13; l++) {
-                    seatRepo.save(new Seat(l, k, theater2, status1));
+                    seatRepo.save(new Seat(l, k, theater2));
                 }
             }
 

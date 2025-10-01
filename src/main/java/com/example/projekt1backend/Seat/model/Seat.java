@@ -1,10 +1,12 @@
-package com.example.projekt1backend.Seat;
+package com.example.projekt1backend.Seat.model;
 
+import com.example.projekt1backend.screening.model.Screening;
 import com.example.projekt1backend.theater.Theater;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.*;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Seat {
@@ -17,22 +19,20 @@ public class Seat {
 
     private Integer seatRow;
 
-    @ManyToOne
-    @JoinColumn(name = "statusId", referencedColumnName = "statusId")
-    private Status seatStatus;
-
 
     @ManyToOne
     @JoinColumn(name = "theater_id")
     private Theater theaterId;
 
+    @ManyToMany(mappedBy = "seats", fetch = FetchType.LAZY)
+    @JsonBackReference
+    private Set<Screening> screenings = new HashSet<>();
 
-    public Seat(Integer seatNumber, Integer seatRow, Theater theaterId, Status seatStatus) {
-        this.id = id;
+
+    public Seat(Integer seatNumber, Integer seatRow, Theater theaterId) {
         this.seatNumber = seatNumber;
         this.seatRow = seatRow;
         this.theaterId = theaterId;
-        this.seatStatus = seatStatus;
     }
 
     public Seat() {}
@@ -69,5 +69,11 @@ public class Seat {
         this.theaterId = theaterId;
     }
 
+    public Set<Screening> getScreenings() {
+        return screenings;
+    }
 
+    public void setScreenings(Set<Screening> screenings) {
+        this.screenings = screenings;
+    }
 }

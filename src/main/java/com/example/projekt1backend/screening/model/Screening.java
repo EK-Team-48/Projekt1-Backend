@@ -1,8 +1,12 @@
 package com.example.projekt1backend.screening.model;
+import com.example.projekt1backend.Seat.model.Seat;
 import com.example.projekt1backend.movie.entity.Movie;
 import com.example.projekt1backend.theater.Theater;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Screening {
@@ -24,6 +28,14 @@ public class Screening {
     private Integer startTime;
 
     private Double price;
+
+    @ManyToMany
+    @JoinTable(
+            name = "booked_seats",
+            joinColumns = @JoinColumn(name = "screening_id"),
+            inverseJoinColumns = @JoinColumn(name = "seat_id")
+    )
+    private Set<Seat> seats = new HashSet<>();
 
 
     public Screening() {
