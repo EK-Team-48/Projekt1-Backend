@@ -72,6 +72,7 @@ CREATE TABLE screening
     screening_id INT AUTO_INCREMENT PRIMARY KEY,
     movie_id     INT,
     theater_id   INT,
+    screening_date         DATE,
     start_time   INT,
     price        DOUBLE,
     CONSTRAINT FK_SCREENING_ON_MOVIE FOREIGN KEY (movie_id) REFERENCES movie (movie_id),
@@ -150,11 +151,11 @@ VALUES ('Bob', 'Berg', '2001-11-23', '87654321');
 INSERT INTO theater (theater_name) VALUES ('Main Hall');
 INSERT INTO theater (theater_name) VALUES ('VIP Lounge');
 
-INSERT INTO screening (movie_id, theater_id, start_time, price)
-VALUES (1, 1, '123', 95.0);
+INSERT INTO screening (movie_id, theater_id, screening_date, start_time, price)
+VALUES (1, 1, '2025-10-01', '123', 95.0);
 
-INSERT INTO screening (movie_id, theater_id, start_time, price)
-VALUES (2, 2, '123', 120.0);
+INSERT INTO screening (movie_id, theater_id, screening_date, start_time, price)
+VALUES (2, 2, '2025-10-01','123', 120.0);
 
 INSERT INTO reservation (customer_id, screening_id) VALUES (1, 1);
 INSERT INTO reservation (customer_id, screening_id) VALUES (2, 2);
