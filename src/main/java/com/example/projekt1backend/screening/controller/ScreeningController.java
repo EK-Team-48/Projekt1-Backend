@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/screenings")
+@CrossOrigin(origins = "*")
 public class ScreeningController {
 
     @Autowired
