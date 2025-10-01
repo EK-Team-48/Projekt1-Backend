@@ -1,10 +1,7 @@
 package com.example.projekt1backend.Seat;
 
-import com.example.projekt1backend.theater.Theater;
+import com.example.projekt1backend.theater.model.Theater;
 import jakarta.persistence.*;
-import lombok.*;
-
-import java.util.List;
 
 @Entity
 public class Seat {

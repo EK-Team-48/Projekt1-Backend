@@ -1,10 +1,9 @@
-package com.example.projekt1backend.theater;
+package com.example.projekt1backend.theater.model;
 
 import com.example.projekt1backend.Seat.Seat;
 import com.example.projekt1backend.screening.model.Screening;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.*;
 
 import java.util.List;
 
