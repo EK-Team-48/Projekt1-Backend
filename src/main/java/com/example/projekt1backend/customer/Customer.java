@@ -1,7 +1,15 @@
 package com.example.projekt1backend.customer;
 
 import jakarta.persistence.*;
+import lombok.*;
 
+import java.sql.Date;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Entity
 public class Customer {
 
@@ -13,9 +21,8 @@ public class Customer {
 
     private String lastName;
 
-    private Integer age;
+    private Date age;
 
     private String number;
-
 
 }
