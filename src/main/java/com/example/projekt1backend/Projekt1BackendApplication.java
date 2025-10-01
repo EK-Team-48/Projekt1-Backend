@@ -3,8 +3,15 @@ package com.example.projekt1backend;
 
 import com.example.projekt1backend.Seat.model.Seat;
 import com.example.projekt1backend.Seat.repository.SeatRepository;
-import com.example.projekt1backend.theater.Theater;
-import com.example.projekt1backend.theater.TheaterRepository;
+import com.example.projekt1backend.theater.model.Theater;
+import com.example.projekt1backend.theater.repository.TheaterRepository;
+import com.example.projekt1backend.Seat.model.Seat;
+import com.example.projekt1backend.Seat.repository.SeatRepository;
+
+import com.example.projekt1backend.screening.model.Screening;
+import com.example.projekt1backend.screening.repository.ScreeningRepository;
+import com.example.projekt1backend.theater.model.Theater;
+import com.example.projekt1backend.theater.repository.TheaterRepository;
 import com.example.projekt1backend.ageLimit.entity.AgeLimit;
 import com.example.projekt1backend.ageLimit.repository.AgeLimitRepository;
 import com.example.projekt1backend.genre.entity.Genre;
@@ -18,6 +25,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.time.LocalDate;
 import java.util.Set;
 
 @SpringBootApplication
@@ -34,7 +42,8 @@ public class Projekt1BackendApplication {
                                    AgeLimitRepository ageLimitRepo,
                                    MovieStatusRepository movieStatusRepo,
                                    TheaterRepository theaterRepo,
-                                   SeatRepository seatRepo) {
+                                   SeatRepository seatRepo,
+                                   ScreeningRepository screeningRepository) {
         return args -> {
             // --- Genres ---
             Genre action = new Genre();
@@ -207,6 +216,48 @@ public class Projekt1BackendApplication {
                     seatRepo.save(new Seat(l, k, theater2));
                 }
             }
+
+            //Screenings test data:
+            Screening screening1 = new Screening();
+            screening1.setMovieId(dieHard);
+            screening1.setScreeningDate(LocalDate.now());
+            screening1.setTheaterId(theater1);
+            screening1.setStartTime(1800);
+            screening1.setPrice(150.0);
+            screeningRepository.save(screening1);
+
+            Screening screening4 = new Screening();
+            screening4.setScreeningDate(LocalDate.now());
+            screening4.setMovieId(dieHard);
+            screening4.setTheaterId(theater1);
+            screening4.setStartTime(1500);
+            screening4.setPrice(180.0);
+            screeningRepository.save(screening4);
+
+            Screening screening5 = new Screening();
+            screening5.setScreeningDate(LocalDate.now());
+            screening5.setMovieId(dieHard);
+            screening5.setTheaterId(theater2);
+            screening5.setStartTime(1700);
+            screening5.setPrice(180.0);
+            screeningRepository.save(screening5);
+
+            Screening screening2 = new Screening();
+            screening2.setScreeningDate(LocalDate.now());
+            screening2.setMovieId(forrest);
+            screening2.setTheaterId(theater2);
+            screening2.setStartTime(2000);
+            screening2.setPrice(145.50);
+            screeningRepository.save(screening2);
+
+
+            Screening screening3 = new Screening();
+            screening3.setScreeningDate(LocalDate.now());
+            screening3.setMovieId(darkKnight);
+            screening3.setTheaterId(theater2);
+            screening3.setStartTime(1230);
+            screening3.setPrice(140.0);
+            screeningRepository.save(screening3);
 
 
 

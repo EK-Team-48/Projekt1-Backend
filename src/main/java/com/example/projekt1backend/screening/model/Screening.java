@@ -1,15 +1,18 @@
 package com.example.projekt1backend.screening.model;
 import com.example.projekt1backend.Seat.model.Seat;
 import com.example.projekt1backend.movie.entity.Movie;
-import com.example.projekt1backend.theater.Theater;
+import com.example.projekt1backend.theater.model.Theater;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 public class Screening {
+
 
     @Id
     @GeneratedValue
@@ -24,6 +27,8 @@ public class Screening {
     @ManyToOne
     @JoinColumn(name = "theater_id")
     private Theater theaterId;
+
+    private LocalDate screeningDate;
 
     private Integer startTime;
 
@@ -47,6 +52,15 @@ public class Screening {
         this.startTime = startTime;
         this.theaterId = theaterId;
         this.price = price;
+        this.screeningDate = screeningDate;
+    }
+
+    public LocalDate getScreeningDate() {
+        return screeningDate;
+    }
+
+    public void setScreeningDate(LocalDate date) {
+        this.screeningDate = date;
     }
 
     public Integer getScreeningId() {

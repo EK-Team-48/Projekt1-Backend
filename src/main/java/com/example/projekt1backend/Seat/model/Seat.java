@@ -1,10 +1,10 @@
 package com.example.projekt1backend.Seat.model;
 
 import com.example.projekt1backend.screening.model.Screening;
-import com.example.projekt1backend.theater.Theater;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.example.projekt1backend.theater.model.Theater;
 import jakarta.persistence.*;
-
+import lombok.*;
 import java.util.HashSet;
 import java.util.Set;
 

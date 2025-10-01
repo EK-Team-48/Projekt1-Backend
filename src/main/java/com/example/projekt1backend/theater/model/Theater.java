@@ -1,4 +1,4 @@
-package com.example.projekt1backend.theater;
+package com.example.projekt1backend.theater.model;
 
 import com.example.projekt1backend.Seat.model.Seat;
 import com.example.projekt1backend.screening.model.Screening;
