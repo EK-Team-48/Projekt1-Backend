@@ -34,8 +34,7 @@ public class Projekt1BackendApplication {
                                    AgeLimitRepository ageLimitRepo,
                                    MovieStatusRepository movieStatusRepo,
                                    TheaterRepository theaterRepo,
-                                   SeatRepository seatRepo,
-                                   StatusRepository statusRepo) {
+                                   SeatRepository seatRepo) {
         return args -> {
             // --- Genres ---
             Genre action = new Genre();
@@ -193,12 +192,6 @@ public class Projekt1BackendApplication {
             Theater theater2 = new Theater();
             theater2.setTheaterName("SAL 2");
             theaterRepo.save(theater2);
-
-            Status status1 = new Status("Active");
-            statusRepo.save(status1);
-
-            Status status2 = new Status("Inactive");
-            statusRepo.save(status2);
 
 
             //Largest theater of 25 rows and 16 seats per row
