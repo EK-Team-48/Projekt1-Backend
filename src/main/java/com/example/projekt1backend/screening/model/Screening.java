@@ -1,10 +1,13 @@
 package com.example.projekt1backend.screening.model;
+import com.example.projekt1backend.Seat.model.Seat;
 import com.example.projekt1backend.movie.entity.Movie;
 import com.example.projekt1backend.theater.model.Theater;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Screening {
@@ -27,6 +30,14 @@ public class Screening {
     private Integer startTime;
 
     private Double price;
+
+    @ManyToMany
+    @JoinTable(
+            name = "booked_seats",
+            joinColumns = @JoinColumn(name = "screening_id"),
+            inverseJoinColumns = @JoinColumn(name = "seat_id")
+    )
+    private Set<Seat> seats = new HashSet<>();
 
 
     public Screening() {
@@ -87,5 +98,13 @@ public class Screening {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Set<Seat> getSeats() {
+        return seats;
+    }
+
+    public void setSeats(Set<Seat> seats) {
+        this.seats = seats;
     }
 }

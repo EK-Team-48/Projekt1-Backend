@@ -1,6 +1,6 @@
 package com.example.projekt1backend.theater.model;
 
-import com.example.projekt1backend.Seat.Seat;
+import com.example.projekt1backend.Seat.model.Seat;
 import com.example.projekt1backend.screening.model.Screening;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
