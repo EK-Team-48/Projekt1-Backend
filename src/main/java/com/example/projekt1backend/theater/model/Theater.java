@@ -24,10 +24,12 @@ public class Theater {
     @OneToMany(mappedBy = "theater")
     private List<Seat> seatList;
 
-    public Theater(Integer id, String theaterName, List<Seat> seatList) {
-        this.id = id;
+    public Theater(String theaterName, List<Seat> seatList) {
         this.theaterName = theaterName;
         this.seatList = seatList;
+    }
+    public Theater(String theaterName){
+        this.theaterName = theaterName;
     }
 
     public Theater() {}
