@@ -2,7 +2,10 @@ package com.example.projekt1backend.movieStatus.entity;
 
 import com.example.projekt1backend.movie.entity.Movie;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
 
 import java.util.Set;
 
@@ -13,6 +16,7 @@ public class MovieStatus {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer movieStatusId;
 
+    @Column(nullable = false, unique = true)
     private String status;
 
     public MovieStatus() {}

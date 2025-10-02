@@ -4,9 +4,12 @@ import com.example.projekt1backend.ageLimit.entity.AgeLimit;
 import com.example.projekt1backend.genre.entity.Genre;
 import com.example.projekt1backend.movieStatus.entity.MovieStatus;
 import com.example.projekt1backend.screening.model.Screening;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,13 +21,17 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer movieId;
 
-
     private String movieImg;
+
+    @Column(nullable = false)
     private String movieTitle;
 
-    @Column(columnDefinition = "TEXT") //vil det ikke være bedre at bruge @Lob annotation her?
+    @Lob
     private String description;
+
+    @Column(nullable = false)
     private Integer duration;
+
     private String trailerLink;
 
     @ManyToOne
@@ -35,13 +42,15 @@ public class Movie {
     @JoinTable(
             name = "movie_genre",
             joinColumns = @JoinColumn(name = "movie_id"),
-            inverseJoinColumns = @JoinColumn(name = "genre_id")
+            inverseJoinColumns = @JoinColumn(name = "genre_id"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"movie_id","genre_id"})
     )
     private Set<Genre> genres = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "movieStatusId")
     private MovieStatus movieStatus;
+
 
     public Movie() {}
 
