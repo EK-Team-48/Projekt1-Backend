@@ -4,9 +4,12 @@ import com.example.projekt1backend.ageLimit.entity.AgeLimit;
 import com.example.projekt1backend.genre.entity.Genre;
 import com.example.projekt1backend.movieStatus.entity.MovieStatus;
 import com.example.projekt1backend.screening.model.Screening;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,38 +21,40 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer movieId;
 
-
     private String movieImg;
+
+    @Column(nullable = false)
     private String movieTitle;
 
-    @Column(columnDefinition = "TEXT") //vil det ikke være bedre at bruge @Lob annotation her?
+    @Lob
     private String description;
+
+    @Column(nullable = false)
     private Integer duration;
+
     private String trailerLink;
 
     @ManyToOne
-    @JoinColumn(name = "age_limit_id", referencedColumnName = "ageLimitId")
+    @JoinColumn(name = "age_limit_id")
     private AgeLimit ageLimit;
 
     @ManyToMany
     @JoinTable(
             name = "movie_genre",
             joinColumns = @JoinColumn(name = "movie_id"),
-            inverseJoinColumns = @JoinColumn(name = "genre_id")
+            inverseJoinColumns = @JoinColumn(name = "genre_id"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"movie_id","genre_id"})
     )
     private Set<Genre> genres = new HashSet<>();
 
     @ManyToOne
-    @JoinColumn(name = "movieStatusId", referencedColumnName = "movieStatusId")
+    @JoinColumn(name = "movieStatusId")
     private MovieStatus movieStatus;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "movieId")
-    private List<Screening> screeningList;
 
     public Movie() {}
 
-    public Movie(String movieImg, String movieTitle, String description, Integer duration, String trailerLink, AgeLimit ageLimit, Set<Genre> genres, MovieStatus movieStatus, List<Screening> screeningList) {
+    public Movie(String movieImg, String movieTitle, String description, Integer duration, String trailerLink, AgeLimit ageLimit, Set<Genre> genres, MovieStatus movieStatus) {
         this.movieImg = movieImg;
         this.movieTitle = movieTitle;
         this.description = description;
@@ -58,7 +63,6 @@ public class Movie {
         this.ageLimit = ageLimit;
         this.genres = genres;
         this.movieStatus = movieStatus;
-        this.screeningList = screeningList;
     }
 
     public Integer getMovieId() {
@@ -131,13 +135,5 @@ public class Movie {
 
     public void setMovieStatus(MovieStatus movieStatus) {
         this.movieStatus = movieStatus;
-    }
-
-    public List<Screening> getScreeningList() {
-        return screeningList;
-    }
-
-    public void setScreeningList(List<Screening> screeningList) {
-        this.screeningList = screeningList;
     }
 }

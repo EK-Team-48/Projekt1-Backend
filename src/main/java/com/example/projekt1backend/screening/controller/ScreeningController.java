@@ -13,25 +13,26 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/v1/screenings")
+@RequestMapping("/api/v1")
 @CrossOrigin(origins = "*")
 public class ScreeningController {
 
     @Autowired
     ScreeningService screeningService;
 
-    @GetMapping("/getAll")
+    @GetMapping("/screenings")
     public ResponseEntity<List<Screening>> getAllScreenings(){
         return new ResponseEntity<>(screeningService.findAllScreenings(), HttpStatus.OK);
     }
 
 
-    @GetMapping("/{movieId}")
-    public ResponseEntity<List<Screening>>getScreeningsByMovieId(@PathVariable Movie movieId){
-        return new ResponseEntity<>(screeningService.findScreeningByMovieId(movieId), HttpStatus.OK);
+    @GetMapping("/screenings/{movie_id}")
+    public ResponseEntity<List<Screening>>getScreeningsByMovie(@PathVariable Movie movie_id){
+
+        return new ResponseEntity<>(screeningService.getScreeningsForMovieNextWeek(movie_id), HttpStatus.OK);
     }
 
-    @PostMapping("/addScreening")
+    @PostMapping("/screenings")
     public ResponseEntity<Screening>createScreening(@RequestBody Screening screening){
         return new ResponseEntity<>(screeningService.addScreening(screening), HttpStatus.CREATED);
     }

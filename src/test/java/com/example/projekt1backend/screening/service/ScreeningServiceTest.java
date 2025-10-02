@@ -52,9 +52,6 @@ class ScreeningServiceTest {
     void findScreeningByMovieId() {
         Movie smurfs = new Movie();
 
-        //List<Screening>emptyScreenings = screeningService.findScreeningByMovieId(smurfs);
-        //assertTrue(emptyScreenings.isEmpty());
-
 
         smurfs.setMovieTitle("The return of the smurfs");
         smurfs.setAgeLimit(null);
@@ -64,15 +61,15 @@ class ScreeningServiceTest {
 
         Screening screening = new Screening();
         screening.setScreeningDate(LocalDate.now());
-        screening.setMovieId(smurfs);
+        screening.setMovie(smurfs);
         screening.setPrice(100.0);
         screening.setStartTime(1800);
         screeningService.addScreening(screening);
 
 
-        List<Screening>notEmptyScreening = screeningService.findScreeningByMovieId(smurfs);
+        List<Screening>notEmptyScreening = screeningService.getScreeningsForMovieNextWeek(smurfs);
         assertFalse(notEmptyScreening.isEmpty());
-        assertEquals(notEmptyScreening.getFirst().getMovieId().getMovieTitle(), "The return of the smurfs");
+        assertEquals(notEmptyScreening.getFirst().getMovie().getMovieTitle(), "The return of the smurfs");
 
     }
 

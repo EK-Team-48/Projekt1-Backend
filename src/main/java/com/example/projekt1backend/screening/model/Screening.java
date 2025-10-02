@@ -14,15 +14,13 @@ public class Screening {
     @GeneratedValue
     private Integer screeningId;
 
-    @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "movie_id")
-    private Movie movieId;
+    @JoinColumn(name = "movie_id", nullable = false)
+    private Movie movie;
 
-    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "theater_id")
-    private Theater theaterId;
+    private Theater theater;
 
     private LocalDate screeningDate;
 
@@ -34,11 +32,11 @@ public class Screening {
     public Screening() {
     }
 
-    public Screening(Integer screeningId, Movie movieId, Integer startTime, Theater theaterId, Double price, LocalDate screeningDate) {
+    public Screening(Integer screeningId, Movie movie, Integer startTime, Theater theater, Double price, LocalDate screeningDate) {
         this.screeningId = screeningId;
-        this.movieId = movieId;
+        this.movie = movie;
         this.startTime = startTime;
-        this.theaterId = theaterId;
+        this.theater = theater;
         this.price = price;
         this.screeningDate = screeningDate;
     }
@@ -59,20 +57,20 @@ public class Screening {
         this.screeningId = screeningId;
     }
 
-    public Movie getMovieId() {
-        return movieId;
+    public Movie getMovie() {
+        return movie;
     }
 
-    public void setMovieId(Movie movieId) {
-        this.movieId = movieId;
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 
-    public Theater getTheaterId() {
-        return theaterId;
+    public Theater getTheater() {
+        return theater;
     }
 
-    public void setTheaterId(Theater theaterId) {
-        this.theaterId = theaterId;
+    public void setTheater(Theater theater) {
+        this.theater = theater;
     }
 
     public Integer getStartTime() {

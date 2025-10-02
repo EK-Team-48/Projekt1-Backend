@@ -2,7 +2,10 @@ package com.example.projekt1backend.movieStatus.entity;
 
 import com.example.projekt1backend.movie.entity.Movie;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
 
 import java.util.Set;
 
@@ -13,17 +16,13 @@ public class MovieStatus {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer movieStatusId;
 
+    @Column(nullable = false, unique = true)
     private String status;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "movieStatus")
-    @JsonBackReference
-    private Set<Movie> movies;
 
     public MovieStatus() {}
 
-    public MovieStatus(String status, Set<Movie> movies) {
+    public MovieStatus(String status) {
         this.status = status;
-        this.movies = movies;
     }
 
     public Integer getMovieStatusId() {
@@ -40,13 +39,5 @@ public class MovieStatus {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public Set<Movie> getMovies() {
-        return movies;
-    }
-
-    public void setMovies(Set<Movie> movies) {
-        this.movies = movies;
     }
 }

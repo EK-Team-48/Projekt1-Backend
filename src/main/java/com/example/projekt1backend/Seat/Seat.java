@@ -21,14 +21,14 @@ public class Seat {
 
     @ManyToOne
     @JoinColumn(name = "theater_id")
-    private Theater theaterId;
+    private Theater theater;
 
 
-    public Seat(Integer seatNumber, Integer seatRow, Theater theaterId, Status seatStatus) {
+    public Seat(Integer seatNumber, Integer seatRow, Theater theater, Status seatStatus) {
         this.id = id;
         this.seatNumber = seatNumber;
         this.seatRow = seatRow;
-        this.theaterId = theaterId;
+        this.theater = theater;
         this.seatStatus = seatStatus;
     }
 
@@ -58,12 +58,12 @@ public class Seat {
         this.seatRow = seatRow;
     }
 
-    public Theater getTheaterId() {
-        return theaterId;
+    public Theater getTheater() {
+        return theater;
     }
 
-    public void setTheaterId(Theater theaterId) {
-        this.theaterId = theaterId;
+    public void setTheater(Theater theater) {
+        this.theater = theater;
     }
 
 
