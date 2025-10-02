@@ -19,7 +19,7 @@ public class Screening {
     private Movie movie;
 
     @ManyToOne
-    @JoinColumn(name = "theater_id")
+    @JoinColumn(name = "theater_id", nullable = false)
     private Theater theater;
 
     private LocalDate screeningDate;
