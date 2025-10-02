@@ -35,7 +35,8 @@ public class Screening {
     @JoinTable(
             name = "booked_seats",
             joinColumns = @JoinColumn(name = "screening_id"),
-            inverseJoinColumns = @JoinColumn(name = "seat_id")
+            inverseJoinColumns = @JoinColumn(name = "seat_id"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"screening_id","seat_id"})
     )
     private Set<Seat> seats = new HashSet<>();
 

@@ -19,6 +19,7 @@ public class  Genre {
     @Column(nullable = false, unique = true)
     private String genre;
 
+
     @JsonBackReference
     @ManyToMany(mappedBy = "genres")
     private Set<Movie> movies = new HashSet<>();

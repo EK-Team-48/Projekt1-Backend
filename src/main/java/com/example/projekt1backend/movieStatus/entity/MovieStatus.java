@@ -40,4 +40,5 @@ public class MovieStatus {
     public void setStatus(String status) {
         this.status = status;
     }
+
 }

@@ -13,7 +13,7 @@ public class Seat {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer seatId;
 
     private Integer seatNumber;
 
@@ -36,12 +36,12 @@ public class Seat {
 
     public Seat() {}
 
-    public Integer getId() {
-        return id;
+    public Integer getSeatId() {
+        return seatId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setSeatId(Integer id) {
+        this.seatId = id;
     }
 
     public Integer getSeatNumber() {
@@ -64,8 +64,10 @@ public class Seat {
         return theater;
     }
 
+
     public void setTheater(Theater theater) {
         this.theater = theater;
+
     }
 
     public Set<Screening> getScreenings() {

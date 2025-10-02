@@ -3,7 +3,9 @@ package com.example.projekt1backend.theater.model;
 import com.example.projekt1backend.Seat.model.Seat;
 import com.example.projekt1backend.screening.model.Screening;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -24,7 +26,9 @@ public class Theater {
     @OneToMany(mappedBy = "theater")
     private List<Seat> seatList;
 
+
     public Theater(String theaterName, List<Seat> seatList) {
+
         this.theaterName = theaterName;
         this.seatList = seatList;
     }
