@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Genre {
+public class  Genre {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
