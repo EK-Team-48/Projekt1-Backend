@@ -1,4 +1,9 @@
+-- *** 1. FIX: H2-Specific Command to ignore foreign key constraints during cleanup ***
+SET REFERENTIAL_INTEGRITY FALSE;
+
+-- *** 2. DROP TABLES: Including the new 'booked_seats' join table ***
 DROP TABLE IF EXISTS ticket;
+DROP TABLE IF EXISTS booked_seats; -- New join table for ManyToMany
 DROP TABLE IF EXISTS seat;
 DROP TABLE IF EXISTS reservation;
 DROP TABLE IF EXISTS screening;
@@ -10,6 +15,8 @@ DROP TABLE IF EXISTS age_limit;
 DROP TABLE IF EXISTS movie_status;
 DROP TABLE IF EXISTS theater;
 DROP TABLE IF EXISTS status;
+
+-- *** CREATE TABLES ***
 
 CREATE TABLE age_limit
 (
@@ -99,7 +106,7 @@ CREATE TABLE seat
     id          INT AUTO_INCREMENT PRIMARY KEY,
     seat_number INT,
     seat_row    INT,
-    status_id   INT,
+    status_id   INT, -- Kept for compatibility with your existing schema
     theater_id  INT,
     CONSTRAINT FK_SEAT_ON_STATUSID FOREIGN KEY (status_id) REFERENCES status (status_id),
     CONSTRAINT FK_SEAT_ON_THEATER FOREIGN KEY (theater_id) REFERENCES theater (id)
@@ -113,6 +120,18 @@ CREATE TABLE ticket
     CONSTRAINT FK_TICKET_ON_RESERVATION FOREIGN KEY (reservation_id) REFERENCES reservation (reservation_id),
     CONSTRAINT FK_TICKET_ON_SEAT FOREIGN KEY (seat_id) REFERENCES seat (id)
 );
+
+-- *** NEW JOIN TABLE FOR SEAT <--> SCREENING (booked_seats) ***
+CREATE TABLE booked_seats
+(
+    screening_id INT NOT NULL,
+    seat_id      INT NOT NULL,
+    CONSTRAINT pk_booked_seats PRIMARY KEY (screening_id, seat_id),
+    CONSTRAINT fk_bs_on_screening FOREIGN KEY (screening_id) REFERENCES screening (screening_id),
+    CONSTRAINT fk_bs_on_seat FOREIGN KEY (seat_id) REFERENCES seat (id)
+);
+
+-- *** INSERT DATA ***
 
 INSERT INTO age_limit (age_rating) VALUES (0);
 INSERT INTO age_limit (age_rating) VALUES (7);
@@ -152,21 +171,29 @@ INSERT INTO theater (theater_name) VALUES ('Main Hall');
 INSERT INTO theater (theater_name) VALUES ('VIP Lounge');
 
 INSERT INTO screening (movie_id, theater_id, screening_date, start_time, price)
-VALUES (1, 1, '2025-10-01', '123', 95.0);
+VALUES (1, 1, '2025-10-01', '123', 95.0); -- Screening ID 1
 
 INSERT INTO screening (movie_id, theater_id, screening_date, start_time, price)
-VALUES (2, 2, '2025-10-01','123', 120.0);
+VALUES (2, 2, '2025-10-01','123', 120.0); -- Screening ID 2
 
 INSERT INTO reservation (customer_id, screening_id) VALUES (1, 1);
 INSERT INTO reservation (customer_id, screening_id) VALUES (2, 2);
 
-INSERT INTO status (status_name) VALUES ('Available');
-INSERT INTO status (status_name) VALUES ('Reserved');
-INSERT INTO status (status_name) VALUES ('Broken');
+INSERT INTO status (status_name) VALUES ('Available'); -- Status ID 1
+INSERT INTO status (status_name) VALUES ('Reserved'); -- Status ID 2
+INSERT INTO status (status_name) VALUES ('Broken'); -- Status ID 3
 
-INSERT INTO seat (seat_number, seat_row, status_id, theater_id) VALUES (1, 1, 1, 1);
-INSERT INTO seat (seat_number, seat_row, status_id, theater_id) VALUES (2, 1, 2, 1);
-INSERT INTO seat (seat_number, seat_row, status_id, theater_id) VALUES (1, 1, 1, 2);
+INSERT INTO seat (seat_number, seat_row, status_id, theater_id) VALUES (1, 1, 1, 1); -- Seat ID 1
+INSERT INTO seat (seat_number, seat_row, status_id, theater_id) VALUES (2, 1, 2, 1); -- Seat ID 2 (Reserved in DB)
+INSERT INTO seat (seat_number, seat_row, status_id, theater_id) VALUES (1, 1, 1, 2); -- Seat ID 3
 
 INSERT INTO ticket (reservation_id, seat_id) VALUES (1, 1);
 INSERT INTO ticket (reservation_id, seat_id) VALUES (2, 3);
+
+-- *** 3. INSERT TEST DATA for booked_seats (ManyToMany relationship) ***
+-- Link Seat 1 to Screening 1
+INSERT INTO booked_seats (screening_id, seat_id) VALUES (1, 1);
+-- Link Seat 2 to Screening 1
+INSERT INTO booked_seats (screening_id, seat_id) VALUES (1, 2);
+-- Link Seat 3 to Screening 2
+INSERT INTO booked_seats (screening_id, seat_id) VALUES (2, 3);
