@@ -17,7 +17,7 @@ public class Genre {
     @Column(nullable = false, unique = true)
     private String genre;
 
-    @ManyToMany(mappedBy = "genres", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "genres")
     @JsonBackReference
     private Set<Movie> movies = new HashSet<>();
 

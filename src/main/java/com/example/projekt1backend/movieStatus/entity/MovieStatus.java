@@ -15,15 +15,10 @@ public class MovieStatus {
 
     private String status;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "movieStatus")
-    @JsonBackReference
-    private Set<Movie> movies;
-
     public MovieStatus() {}
 
-    public MovieStatus(String status, Set<Movie> movies) {
+    public MovieStatus(String status) {
         this.status = status;
-        this.movies = movies;
     }
 
     public Integer getMovieStatusId() {
@@ -42,11 +37,4 @@ public class MovieStatus {
         this.status = status;
     }
 
-    public Set<Movie> getMovies() {
-        return movies;
-    }
-
-    public void setMovies(Set<Movie> movies) {
-        this.movies = movies;
-    }
 }

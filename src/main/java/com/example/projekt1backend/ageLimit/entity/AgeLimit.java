@@ -17,15 +17,10 @@ public class AgeLimit {
 
     private Integer ageRating;
 
-    @OneToMany(mappedBy = "ageLimit")
-    @JsonBackReference
-    private Set<Movie> movies = new HashSet<>();
-
     public AgeLimit() {}
 
-    public AgeLimit(Integer ageRating, Set<Movie> movies) {
+    public AgeLimit(Integer ageRating) {
         this.ageRating = ageRating;
-        this.movies = movies;
     }
 
     public Integer getAgeLimitId() {
@@ -42,13 +37,5 @@ public class AgeLimit {
 
     public void setAgeRating(Integer ageRating) {
         this.ageRating = ageRating;
-    }
-
-    public Set<Movie> getMovies() {
-        return movies;
-    }
-
-    public void setMovies(Set<Movie> movies) {
-        this.movies = movies;
     }
 }

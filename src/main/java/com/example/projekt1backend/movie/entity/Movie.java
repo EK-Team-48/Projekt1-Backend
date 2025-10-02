@@ -28,7 +28,7 @@ public class Movie {
     private String trailerLink;
 
     @ManyToOne
-    @JoinColumn(name = "age_limit_id", referencedColumnName = "ageLimitId")
+    @JoinColumn(name = "age_limit_id")
     private AgeLimit ageLimit;
 
     @ManyToMany
@@ -40,16 +40,12 @@ public class Movie {
     private Set<Genre> genres = new HashSet<>();
 
     @ManyToOne
-    @JoinColumn(name = "movieStatusId", referencedColumnName = "movieStatusId")
+    @JoinColumn(name = "movieStatusId")
     private MovieStatus movieStatus;
-
-    @JsonManagedReference
-    @OneToMany(mappedBy = "movieId")
-    private List<Screening> screeningList;
 
     public Movie() {}
 
-    public Movie(String movieImg, String movieTitle, String description, Integer duration, String trailerLink, AgeLimit ageLimit, Set<Genre> genres, MovieStatus movieStatus, List<Screening> screeningList) {
+    public Movie(String movieImg, String movieTitle, String description, Integer duration, String trailerLink, AgeLimit ageLimit, Set<Genre> genres, MovieStatus movieStatus) {
         this.movieImg = movieImg;
         this.movieTitle = movieTitle;
         this.description = description;
@@ -58,7 +54,6 @@ public class Movie {
         this.ageLimit = ageLimit;
         this.genres = genres;
         this.movieStatus = movieStatus;
-        this.screeningList = screeningList;
     }
 
     public Integer getMovieId() {
@@ -131,13 +126,5 @@ public class Movie {
 
     public void setMovieStatus(MovieStatus movieStatus) {
         this.movieStatus = movieStatus;
-    }
-
-    public List<Screening> getScreeningList() {
-        return screeningList;
-    }
-
-    public void setScreeningList(List<Screening> screeningList) {
-        this.screeningList = screeningList;
     }
 }

@@ -17,12 +17,10 @@ public class Screening {
     @GeneratedValue
     private Integer screeningId;
 
-    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "movie_id")
     private Movie movieId;
 
-    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "theater_id")
     private Theater theaterId;
@@ -37,7 +35,8 @@ public class Screening {
     @JoinTable(
             name = "booked_seats",
             joinColumns = @JoinColumn(name = "screening_id"),
-            inverseJoinColumns = @JoinColumn(name = "seat_id")
+            inverseJoinColumns = @JoinColumn(name = "seat_id"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"screening_id","seat_id"})
     )
     private Set<Seat> seats = new HashSet<>();
 
