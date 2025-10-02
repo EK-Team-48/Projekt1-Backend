@@ -3,6 +3,7 @@ package com.example.projekt1backend.screening.service;
 import com.example.projekt1backend.movie.entity.Movie;
 import com.example.projekt1backend.movie.service.MovieService;
 import com.example.projekt1backend.screening.model.Screening;
+import com.example.projekt1backend.theater.model.Theater;
 import com.example.projekt1backend.theater.service.TheaterService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,6 +16,7 @@ import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -52,9 +54,6 @@ class ScreeningServiceTest {
     void findScreeningByMovieId() {
         Movie smurfs = new Movie();
 
-        //List<Screening>emptyScreenings = screeningService.findScreeningByMovieId(smurfs);
-        //assertTrue(emptyScreenings.isEmpty());
-
 
         smurfs.setMovieTitle("The return of the smurfs");
         smurfs.setAgeLimit(null);
@@ -64,15 +63,18 @@ class ScreeningServiceTest {
 
         Screening screening = new Screening();
         screening.setScreeningDate(LocalDate.now());
-        screening.setMovieId(smurfs);
+        screening.setMovie(smurfs);
         screening.setPrice(100.0);
         screening.setStartTime(1800);
+        Theater theater = theaterService.findById(1);
+        screening.setTheater(theater);
+
         screeningService.addScreening(screening);
 
 
-        List<Screening>notEmptyScreening = screeningService.findScreeningByMovieId(smurfs);
+        List<Screening>notEmptyScreening = screeningService.getScreeningsForMovieNextWeek(smurfs);
         assertFalse(notEmptyScreening.isEmpty());
-        assertEquals(notEmptyScreening.getFirst().getMovieId().getMovieTitle(), "The return of the smurfs");
+        assertEquals(notEmptyScreening.getFirst().getMovie().getMovieTitle(), "The return of the smurfs");
 
     }
 
@@ -86,6 +88,13 @@ class ScreeningServiceTest {
         newScreening.setPrice(100.0);
         newScreening.setStartTime(1800);
         newScreening.setScreeningDate(LocalDate.now());
+
+        Theater theater = theaterService.findById(1);
+        newScreening.setTheater(theater);
+
+        Movie movie =movieService.findAll().getFirst();
+        newScreening.setMovie(movie);
+
         screeningService.addScreening(newScreening);
 
         screening = screeningService.findById(newScreening.getScreeningId());

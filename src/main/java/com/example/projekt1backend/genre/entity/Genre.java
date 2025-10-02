@@ -2,7 +2,9 @@ package com.example.projekt1backend.genre.entity;
 
 import com.example.projekt1backend.movie.entity.Movie;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
 
 import java.util.HashSet;
 import java.util.Set;
@@ -17,8 +19,8 @@ public class Genre {
     @Column(nullable = false, unique = true)
     private String genre;
 
-    @ManyToMany(mappedBy = "genres", fetch = FetchType.LAZY)
     @JsonBackReference
+    @ManyToMany(mappedBy = "genres")
     private Set<Movie> movies = new HashSet<>();
 
     public Genre() {}

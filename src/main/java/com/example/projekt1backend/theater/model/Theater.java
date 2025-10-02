@@ -2,6 +2,8 @@ package com.example.projekt1backend.theater.model;
 
 import com.example.projekt1backend.Seat.model.Seat;
 import com.example.projekt1backend.screening.model.Screening;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -17,19 +19,17 @@ public class Theater {
 
     private String theaterName;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "theaterId")
-    private List<Screening> screeningList;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "theaterId")
+    @JsonBackReference
+    @OneToMany(mappedBy = "theater")
     private List<Seat> seatList;
 
-    public Theater(Integer id, String theaterName, List<Screening> screeningList, List<Seat> seatList) {
-        this.id = id;
+    public Theater(String theaterName, List<Seat> seatList) {
         this.theaterName = theaterName;
-        this.screeningList = screeningList;
         this.seatList = seatList;
+    }
+    public Theater(String theaterName){
+        this.theaterName = theaterName;
     }
 
     public Theater() {}
@@ -48,14 +48,6 @@ public class Theater {
 
     public void setTheaterName(String theaterName) {
         this.theaterName = theaterName;
-    }
-
-    public List<Screening> getScreeningList() {
-        return screeningList;
-    }
-
-    public void setScreeningList(List<Screening> screeningList) {
-        this.screeningList = screeningList;
     }
 
     public List<Seat> getSeatList() {

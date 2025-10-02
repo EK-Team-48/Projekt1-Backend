@@ -21,18 +21,17 @@ public class Seat {
 
     @ManyToOne
     @JoinColumn(name = "theater_id")
-    private Theater theaterId;
+    private Theater theater;
 
     @ManyToMany(mappedBy = "seats", fetch = FetchType.LAZY)
     @JsonBackReference
     private Set<Screening> screenings = new HashSet<>();
 
 
-    public Seat(Integer seatNumber, Integer seatRow, Theater theaterId) {
-        this.id = id;
+    public Seat(Integer seatNumber, Integer seatRow, Theater theater) {
         this.seatNumber = seatNumber;
         this.seatRow = seatRow;
-        this.theaterId = theaterId;
+        this.theater = theater;
     }
 
     public Seat() {}
@@ -61,12 +60,12 @@ public class Seat {
         this.seatRow = seatRow;
     }
 
-    public Theater getTheaterId() {
-        return theaterId;
+    public Theater getTheater() {
+        return theater;
     }
 
-    public void setTheaterId(Theater theaterId) {
-        this.theaterId = theaterId;
+    public void setTheater(Theater theater) {
+        this.theater = theater;
     }
 
     public Set<Screening> getScreenings() {
