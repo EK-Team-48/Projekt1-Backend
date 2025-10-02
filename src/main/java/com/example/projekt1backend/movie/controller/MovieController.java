@@ -50,7 +50,7 @@ public class MovieController {
         Optional<Movie> orgMovie = movieService.findById(id);
         if (orgMovie.isPresent()) {
             String title = orgMovie.get().getMovieTitle();
-            movieService.delete(orgMovie.get());
+            movieService.deleteById(orgMovie.get().getMovieId());
             return ResponseEntity.ok(title + ": Has been removed");
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Movie not found");
