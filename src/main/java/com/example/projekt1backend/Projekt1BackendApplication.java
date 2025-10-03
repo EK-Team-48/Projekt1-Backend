@@ -201,15 +201,15 @@ public class Projekt1BackendApplication {
 
 
             //Largest theater of 25 rows and 16 seats per row
-            for (int i = 1; i < 26; i++) {
-                for (int j = 1; j < 17; j++) {
+            for (int i = 1; i < 9; i++) {
+                for (int j = 1; j < 11; j++) {
                     seatRepo.save(new Seat(j, i, theater1));
                 }
             }
 
             //Smallest theater of 20 rows and 12 seats per row
-            for (int k = 1; k < 21; k++) {
-                for (int l = 1; l < 13; l++) {
+            for (int k = 1; k < 7; k++) {
+                for (int l = 1; l < 9; l++) {
                     seatRepo.save(new Seat(l, k, theater2));
                 }
             }

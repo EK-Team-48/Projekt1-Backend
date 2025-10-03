@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class SeatController {
 
     private BookedSeatRepository bookedSeatRepository;
@@ -26,10 +26,9 @@ public class SeatController {
     }
 
 
-    @GetMapping("/seats/{screeningId}")
+    @GetMapping("/bookedseats/{screeningId}")
     public List<Seat> getAllBookedSeatsByScreeningId(@PathVariable Integer screeningId) {
         return bookedSeatRepository.findByScreenings_ScreeningId(screeningId);
-
     }
 
     @PostMapping("/seats")
@@ -37,10 +36,9 @@ public class SeatController {
         return new ResponseEntity<>(seatRepository.save(seat), HttpStatus.CREATED);
     }
 
-    @GetMapping("/seats")
-        public ResponseEntity<List<Seat>> getAllSeats() {
-        return ResponseEntity.ok(seatRepository.findAll());
-
+    @GetMapping("/seats/{theaterId}")
+        public ResponseEntity<List<Seat>> getSeatsByTheaterId(@PathVariable Integer theaterId) {
+        return new ResponseEntity<>(seatRepository.findAllByTheater_Id(theaterId), HttpStatus.OK);
         }
 
 
