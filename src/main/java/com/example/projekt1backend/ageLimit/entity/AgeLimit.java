@@ -2,7 +2,10 @@ package com.example.projekt1backend.ageLimit.entity;
 
 import com.example.projekt1backend.movie.entity.Movie;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
 
 
 import java.util.HashSet;
@@ -15,6 +18,7 @@ public class AgeLimit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer ageLimitId;
 
+    @Column(nullable = false, unique = true)
     private Integer ageRating;
 
     public AgeLimit() {}
@@ -38,4 +42,5 @@ public class AgeLimit {
     public void setAgeRating(Integer ageRating) {
         this.ageRating = ageRating;
     }
+
 }

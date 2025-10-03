@@ -29,7 +29,6 @@ public class Seat {
 
 
     public Seat(Integer seatNumber, Integer seatRow, Theater theater) {
-        this.seatId = seatId;
         this.seatNumber = seatNumber;
         this.seatRow = seatRow;
         this.theater = theater;
@@ -65,8 +64,10 @@ public class Seat {
         return theater;
     }
 
-    public void setTheater(Theater theaterId) {
-        this.theater = theaterId;
+
+    public void setTheater(Theater theater) {
+        this.theater = theater;
+
     }
 
     public Set<Screening> getScreenings() {

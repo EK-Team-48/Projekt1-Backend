@@ -214,35 +214,45 @@ public class Projekt1BackendApplication {
                 }
             }
 
+
+
             //Screenings test data:
-            Screening screening1 = new Screening();
-            screening1.setMovieId(dieHard);
-            screening1.setScreeningDate(LocalDate.now());
-            screening1.setTheaterId(theater1);
-            screening1.setStartTime(1800);
-            screening1.setPrice(150.0);
-            screeningRepository.save(screening1);
+            //die hard filme:
 
-            Screening screening4 = new Screening();
-            screening4.setScreeningDate(LocalDate.now());
-            screening4.setMovieId(dieHard);
-            screening4.setTheaterId(theater1);
-            screening4.setStartTime(1500);
-            screening4.setPrice(180.0);
-            screeningRepository.save(screening4);
+            for (int b = 800; b <= 2400; b += 400) {
+                LocalDate[] dates = {
+                        LocalDate.now(),
+                        LocalDate.of(2025, 10, 3),
+                        LocalDate.of(2025, 10, 4),
+                        LocalDate.of(2025, 10, 5),
+                        LocalDate.of(2025, 10, 6),
+                        LocalDate.of(2025, 10, 7),
+                        //LocalDate.of(2025, 10, 8),
+                        //LocalDate.of(2025, 10, 9),
+                        //LocalDate.of(2025, 10, 10)
 
-            Screening screening5 = new Screening();
-            screening5.setScreeningDate(LocalDate.now());
-            screening5.setMovieId(dieHard);
-            screening5.setTheaterId(theater2);
-            screening5.setStartTime(1700);
-            screening5.setPrice(180.0);
-            screeningRepository.save(screening5);
+                };
 
+                for (LocalDate date : dates) {
+                    Screening screening = new Screening();
+                    screening.setMovie(dieHard);
+                    screening.setTheater(theater1);
+                    screening.setStartTime(b);
+                    screening.setPrice(150.0);
+                    screening.setScreeningDate(date);
+                    screeningRepository.save(screening);
+                }
+            }
+
+
+
+
+
+            //andre filme:
             Screening screening2 = new Screening();
             screening2.setScreeningDate(LocalDate.now());
-            screening2.setMovieId(forrest);
-            screening2.setTheaterId(theater2);
+            screening2.setMovie(forrest);
+            screening2.setTheater(theater2);
             screening2.setStartTime(2000);
             screening2.setPrice(145.50);
             screeningRepository.save(screening2);
@@ -250,8 +260,8 @@ public class Projekt1BackendApplication {
 
             Screening screening3 = new Screening();
             screening3.setScreeningDate(LocalDate.now());
-            screening3.setMovieId(darkKnight);
-            screening3.setTheaterId(theater2);
+            screening3.setMovie(darkKnight);
+            screening3.setTheater(theater2);
             screening3.setStartTime(1230);
             screening3.setPrice(140.0);
             screeningRepository.save(screening3);
