@@ -31,6 +31,11 @@ public class SeatController {
         return bookedSeatRepository.findByScreenings_ScreeningId(screeningId);
     }
 
+    @PostMapping("/bookedseats/{screeningId}")
+    public ResponseEntity<Seat>createBookedSeat(@RequestBody Seat seat){
+        return new ResponseEntity<>(seatRepository.save(seat), HttpStatus.CREATED);
+    }
+
     @PostMapping("/seats")
     public ResponseEntity<Seat> createNewSeat(@RequestBody Seat seat) {
         return new ResponseEntity<>(seatRepository.save(seat), HttpStatus.CREATED);
