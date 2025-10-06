@@ -30,7 +30,7 @@ public class SeatController {
 
 
     @GetMapping("/bookedseats/{screeningId}")
-    public List<BookedSeat> getAllBookedSeatsByScreeningId(@PathVariable Integer screeningId) {
+    public List<BookedSeat> getAllBookedSeatsByScreeningId(@PathVariable("screeningId") Integer screeningId) {
         return bookedSeatRepository.findBookedSeatsById_ScreeningId(screeningId);
     }
 
@@ -62,7 +62,7 @@ public class SeatController {
     }
 
     @GetMapping("/seats/{theaterId}")
-        public ResponseEntity<List<Seat>> getSeatsByTheaterId(@PathVariable Integer theaterId) {
+        public ResponseEntity<List<Seat>> getSeatsByTheaterId(@PathVariable("theaterId") Integer theaterId) {
         return new ResponseEntity<>(seatRepository.findAllByTheater_Id(theaterId), HttpStatus.OK);
         }
 
