@@ -1,10 +1,14 @@
 package com.example.projekt1backend.reservation.entity;
 
+import com.example.projekt1backend.Seat.model.Seat;
 import com.example.projekt1backend.customer.Customer;
 import com.example.projekt1backend.screening.model.Screening;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
 
 
 @Entity
@@ -21,6 +25,15 @@ public class Reservation {
     @ManyToOne
     @JoinColumn(name ="screening_id")
     private Screening screening;
+
+    @ManyToMany
+    @JoinTable(
+            name = "reservation_seats",
+            joinColumns = @JoinColumn(name = "reservation_id"),
+            inverseJoinColumns = @JoinColumn(name = "seat_id")
+    )
+    @JsonManagedReference
+    private List<Seat> seats;
 
 
     public Reservation() {
@@ -54,5 +67,13 @@ public class Reservation {
 
     public void setScreening(Screening screening) {
         this.screening = screening;
+    }
+
+    public List<Seat> getSeats() {
+        return seats;
+    }
+
+    public void setSeats(List<Seat> seats) {
+        this.seats = seats;
     }
 }

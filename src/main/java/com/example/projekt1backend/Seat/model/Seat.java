@@ -1,11 +1,13 @@
 package com.example.projekt1backend.Seat.model;
 
+import com.example.projekt1backend.reservation.entity.Reservation;
 import com.example.projekt1backend.screening.model.Screening;
 import com.example.projekt1backend.theater.model.Theater;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -26,6 +28,10 @@ public class Seat {
     @ManyToMany(mappedBy = "seats", fetch = FetchType.LAZY)
     @JsonBackReference
     private Set<Screening> screenings = new HashSet<>();
+
+    @ManyToMany(mappedBy = "seats")
+    @JsonBackReference
+    private List<Reservation> reservations;
 
 
     public Seat(Integer seatNumber, Integer seatRow, Theater theater) {
@@ -78,4 +84,11 @@ public class Seat {
         this.screenings = screenings;
     }
 
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }
 }
