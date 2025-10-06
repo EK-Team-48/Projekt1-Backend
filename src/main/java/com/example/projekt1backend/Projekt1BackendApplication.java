@@ -1,10 +1,7 @@
 package com.example.projekt1backend;
 
 
-import com.example.projekt1backend.Seat.model.BookedSeat;
-import com.example.projekt1backend.Seat.model.BookedSeatId;
 import com.example.projekt1backend.Seat.model.Seat;
-import com.example.projekt1backend.Seat.repository.BookedSeatRepository;
 import com.example.projekt1backend.Seat.repository.SeatRepository;
 import com.example.projekt1backend.customer.Customer;
 import com.example.projekt1backend.customer.CustomerRepository;
@@ -49,7 +46,7 @@ public class Projekt1BackendApplication {
                                    ScreeningRepository screeningRepo,
                                    CustomerRepository customerRepo,
                                    ReservationRepository reservationRepo) {
-                                   ScreeningRepository screeningRepository, BookedSeatRepository bookedSeatRepository) {
+
         return args -> {
 
             // --- GENRES ---
@@ -117,34 +114,6 @@ public class Projekt1BackendApplication {
             screening1.setStartTime(2000);
             screening1.setPrice(95.0);
             screeningRepo.save(screening1);
-
-            //Screenings test data:
-            //die hard filme:
-
-            for (int b = 800; b <= 2400; b += 400) {
-                LocalDate[] dates = {
-                        LocalDate.now(),
-                        LocalDate.of(2025, 10, 3),
-                        LocalDate.of(2025, 10, 4),
-                        LocalDate.of(2025, 10, 5),
-                        LocalDate.of(2025, 10, 6),
-                        LocalDate.of(2025, 10, 7),
-                        //LocalDate.of(2025, 10, 8),
-                        //LocalDate.of(2025, 10, 9),
-                        //LocalDate.of(2025, 10, 10)
-
-                };
-
-                for (LocalDate date : dates) {
-                    Screening screening = new Screening();
-                    screening.setMovie(dieHard);
-                    screening.setTheater(theater1);
-                    screening.setStartTime(b);
-                    screening.setPrice(150.0);
-                    screening.setScreeningDate(date);
-                    screeningRepository.save(screening);
-                }
-            }
 
             Screening screening2 = new Screening();
             screening2.setMovie(forrest);
