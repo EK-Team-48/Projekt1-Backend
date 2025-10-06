@@ -37,4 +37,5 @@ public class ScreeningService {
         return screeningRepository.findByMovieAndScreeningDateBetween(movie, today, weekAhead);
     }
 
+
 }
