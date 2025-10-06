@@ -37,5 +37,9 @@ public class ScreeningService {
         return screeningRepository.findByMovieAndScreeningDateBetween(movie, today, weekAhead);
     }
 
+    public void deletedScreening(Integer id){
+        screeningRepository.deleteById(id);
+    }
+
 
 }
