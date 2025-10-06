@@ -101,11 +101,4 @@ public class Screening {
         this.price = price;
     }
 
-    public Set<Seat> getSeats() {
-        return seats;
-    }
-
-    public void setSeats(Set<Seat> seats) {
-        this.seats = seats;
-    }
 }

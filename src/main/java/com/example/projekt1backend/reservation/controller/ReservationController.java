@@ -16,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
+@CrossOrigin(origins = "*")
 public class ReservationController {
 
     private final ReservationService reservationService;
@@ -35,7 +36,7 @@ public class ReservationController {
 
     @PostMapping("/reservations")
     public ResponseEntity<String> createReservation(@RequestBody ReservationDTO reservationDTO) {
-        
+
         Customer customer = customerService.findById(reservationDTO.customerID());
         Screening screening = screeningService.findById(reservationDTO.screeningID());
         Reservation reservation = new Reservation();
