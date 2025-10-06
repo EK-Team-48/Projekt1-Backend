@@ -2,6 +2,7 @@ package com.example.projekt1backend.screening.controller;
 
 
 import com.example.projekt1backend.movie.entity.Movie;
+import com.example.projekt1backend.movie.service.MovieService;
 import com.example.projekt1backend.screening.model.Screening;
 import com.example.projekt1backend.screening.service.ScreeningService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,13 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class ScreeningController {
 
-    @Autowired
-    ScreeningService screeningService;
+    private final ScreeningService screeningService;
+    private final MovieService movieService;
+
+    public ScreeningController(ScreeningService screeningService, MovieService movieService) {
+        this.screeningService = screeningService;
+        this.movieService = movieService;
+    }
 
     @GetMapping("/screenings")
     public ResponseEntity<List<Screening>> getAllScreenings(){
@@ -26,9 +32,9 @@ public class ScreeningController {
     }
 
 
-    @GetMapping("/screenings/{movie_id}")
-    public ResponseEntity<List<Screening>>getScreeningsByMovie(@PathVariable Movie movie_id){
-
+    @GetMapping("/screenings/{id}")
+    public ResponseEntity<List<Screening>>getScreeningsByMovie(@PathVariable("id") Integer id){
+        Movie movie_id = movieService.findById(id).orElseThrow(() -> new RuntimeException("Movie not found"));
         return new ResponseEntity<>(screeningService.getScreeningsForMovieNextWeek(movie_id), HttpStatus.OK);
     }
 

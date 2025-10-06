@@ -25,8 +25,8 @@ public class CustomerController {
     }
 
     @PostMapping("/customer")
-    public ResponseEntity<?> addCustomer(@RequestBody Customer customer) {
+    public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
         service.addCustomer(customer);
-        return new ResponseEntity<>(customer + ": has been created", HttpStatus.CREATED);
+        return new ResponseEntity<>(customer, HttpStatus.CREATED);
     }
 }
