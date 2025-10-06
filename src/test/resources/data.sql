@@ -1,9 +1,9 @@
--- *** 1. FIX: H2-Specific Command to ignore foreign key constraints during cleanup ***
-SET REFERENTIAL_INTEGRITY FALSE;
+SET
+REFERENTIAL_INTEGRITY FALSE;
 
--- *** 2. DROP TABLES: Including the new 'booked_seats' join table ***
 DROP TABLE IF EXISTS ticket;
-DROP TABLE IF EXISTS booked_seats; -- New join table for ManyToMany
+DROP TABLE IF EXISTS reservation_seats;
+DROP TABLE IF EXISTS booked_seats;
 DROP TABLE IF EXISTS seat;
 DROP TABLE IF EXISTS reservation;
 DROP TABLE IF EXISTS screening;
@@ -16,12 +16,22 @@ DROP TABLE IF EXISTS movie_status;
 DROP TABLE IF EXISTS theater;
 DROP TABLE IF EXISTS status;
 
--- *** CREATE TABLES ***
-
 CREATE TABLE age_limit
 (
     age_limit_id INT AUTO_INCREMENT PRIMARY KEY,
     age_rating   INT
+);
+
+CREATE TABLE movie_status
+(
+    movie_status_id INT AUTO_INCREMENT PRIMARY KEY,
+    status          VARCHAR(255)
+);
+
+CREATE TABLE genre
+(
+    genre_id INT AUTO_INCREMENT PRIMARY KEY,
+    genre    VARCHAR(255) NOT NULL UNIQUE
 );
 
 CREATE TABLE customer
@@ -33,16 +43,10 @@ CREATE TABLE customer
     number      VARCHAR(255)
 );
 
-CREATE TABLE genre
+CREATE TABLE theater
 (
-    genre_id INT AUTO_INCREMENT PRIMARY KEY,
-    genre    VARCHAR(255) NOT NULL UNIQUE
-);
-
-CREATE TABLE movie_status
-(
-    movie_status_id INT AUTO_INCREMENT PRIMARY KEY,
-    status          VARCHAR(255)
+    id           INT AUTO_INCREMENT PRIMARY KEY,
+    theater_name VARCHAR(255)
 );
 
 CREATE TABLE movie
@@ -68,20 +72,14 @@ CREATE TABLE movie_genre
     CONSTRAINT fk_movgen_on_movie FOREIGN KEY (movie_id) REFERENCES movie (movie_id)
 );
 
-CREATE TABLE theater
-(
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    theater_name VARCHAR(255)
-);
-
 CREATE TABLE screening
 (
-    screening_id INT AUTO_INCREMENT PRIMARY KEY,
-    movie_id     INT,
-    theater_id   INT,
-    screening_date         DATE,
-    start_time   INT,
-    price        DOUBLE,
+    screening_id   INT AUTO_INCREMENT PRIMARY KEY,
+    movie_id       INT,
+    theater_id     INT,
+    screening_date DATE,
+    start_time     INT,
+    price DOUBLE,
     CONSTRAINT FK_SCREENING_ON_MOVIE FOREIGN KEY (movie_id) REFERENCES movie (movie_id),
     CONSTRAINT FK_SCREENING_ON_THEATER FOREIGN KEY (theater_id) REFERENCES theater (id)
 );
@@ -106,7 +104,7 @@ CREATE TABLE seat
     id          INT AUTO_INCREMENT PRIMARY KEY,
     seat_number INT,
     seat_row    INT,
-    status_id   INT, -- Kept for compatibility with your existing schema
+    status_id   INT,
     theater_id  INT,
     CONSTRAINT FK_SEAT_ON_STATUSID FOREIGN KEY (status_id) REFERENCES status (status_id),
     CONSTRAINT FK_SEAT_ON_THEATER FOREIGN KEY (theater_id) REFERENCES theater (id)
@@ -121,7 +119,6 @@ CREATE TABLE ticket
     CONSTRAINT FK_TICKET_ON_SEAT FOREIGN KEY (seat_id) REFERENCES seat (id)
 );
 
--- *** NEW JOIN TABLE FOR SEAT <--> SCREENING (booked_seats) ***
 CREATE TABLE booked_seats
 (
     screening_id INT NOT NULL,
@@ -131,69 +128,86 @@ CREATE TABLE booked_seats
     CONSTRAINT fk_bs_on_seat FOREIGN KEY (seat_id) REFERENCES seat (id)
 );
 
--- *** INSERT DATA ***
+CREATE TABLE reservation_seats
+(
+    reservation_id INT NOT NULL,
+    seat_id        INT NOT NULL,
+    CONSTRAINT pk_reservation_seats PRIMARY KEY (reservation_id, seat_id),
+    CONSTRAINT fk_rs_on_reservation FOREIGN KEY (reservation_id) REFERENCES reservation (reservation_id),
+    CONSTRAINT fk_rs_on_seat FOREIGN KEY (seat_id) REFERENCES seat (id)
+);
 
-INSERT INTO age_limit (age_rating) VALUES (0);
-INSERT INTO age_limit (age_rating) VALUES (7);
-INSERT INTO age_limit (age_rating) VALUES (11);
-INSERT INTO age_limit (age_rating) VALUES (15);
-
-INSERT INTO movie_status (status) VALUES ('Coming Soon');
-INSERT INTO movie_status (status) VALUES ('Now Showing');
-INSERT INTO movie_status (status) VALUES ('Archived');
-
-INSERT INTO genre (genre) VALUES ('Action');
-INSERT INTO genre (genre) VALUES ('Comedy');
-INSERT INTO genre (genre) VALUES ('Drama');
-INSERT INTO genre (genre) VALUES ('Sci-Fi');
+INSERT INTO age_limit (age_rating)
+VALUES (0),
+       (7),
+       (11),
+       (15);
+INSERT INTO movie_status (status)
+VALUES ('Coming Soon'),
+       ('Now Showing'),
+       ('Archived');
+INSERT INTO genre (genre)
+VALUES ('Action'),
+       ('Comedy'),
+       ('Drama'),
+       ('Sci-Fi');
 
 INSERT INTO movie (movie_img, movie_title, description, duration, trailer_link, age_limit_id, movie_status_id)
-VALUES ('img1.jpg', 'Fast & Curious', 'An action movie about car chases and thinking too much.', 120, 'https://youtu.be/trailer1', 2, 2);
+VALUES ('img1.jpg', 'Fast & Curious', 'An action movie about car chases and thinking too much.', 120,
+        'https://youtu.be/trailer1', 2, 2),
+       ('img2.jpg', 'Laugh Hard', 'A ridiculous comedy about two guys coding.', 95, 'https://youtu.be/trailer2', 1, 2),
+       ('img3.jpg', 'Sad Robots', 'Dystopian drama about AI discovering feelings.', 140, 'https://youtu.be/trailer3', 3,
+        1);
 
-INSERT INTO movie (movie_img, movie_title, description, duration, trailer_link, age_limit_id, movie_status_id)
-VALUES ('img2.jpg', 'Laugh Hard', 'A ridiculous comedy about two guys coding.', 95, 'https://youtu.be/trailer2', 1, 2);
-
-INSERT INTO movie (movie_img, movie_title, description, duration, trailer_link, age_limit_id, movie_status_id)
-VALUES ('img3.jpg', 'Sad Robots', 'Dystopian drama about AI discovering feelings.', 140, 'https://youtu.be/trailer3', 3, 1);
-
-INSERT INTO movie_genre (genre_id, movie_id) VALUES (1, 1);
-INSERT INTO movie_genre (genre_id, movie_id) VALUES (2, 2);
-INSERT INTO movie_genre (genre_id, movie_id) VALUES (4, 3);
-INSERT INTO movie_genre (genre_id, movie_id) VALUES (3, 3);
+INSERT INTO movie_genre (genre_id, movie_id)
+VALUES (1, 1),
+       (2, 2),
+       (4, 3),
+       (3, 3);
 
 INSERT INTO customer (first_name, last_name, age, number)
-VALUES ('Alice', 'Andersen', '1995-04-12', '12345678');
+VALUES ('Alice', 'Andersen', '1995-04-12', '12345678'),
+       ('Bob', 'Berg', '2001-11-23', '87654321');
 
-INSERT INTO customer (first_name, last_name, age, number)
-VALUES ('Bob', 'Berg', '2001-11-23', '87654321');
-
-INSERT INTO theater (theater_name) VALUES ('Main Hall');
-INSERT INTO theater (theater_name) VALUES ('VIP Lounge');
-
-INSERT INTO screening (movie_id, theater_id, screening_date, start_time, price)
-VALUES (1, 1, '2025-10-01', '123', 95.0); -- Screening ID 1
+INSERT INTO theater (theater_name)
+VALUES ('Main Hall'),
+       ('VIP Lounge');
 
 INSERT INTO screening (movie_id, theater_id, screening_date, start_time, price)
-VALUES (2, 2, '2025-10-01','123', 120.0); -- Screening ID 2
+VALUES (1, 1, '2025-10-01', 123, 95.0),
+       (2, 2, '2025-10-01', 123, 120.0);
 
-INSERT INTO reservation (customer_id, screening_id) VALUES (1, 1);
-INSERT INTO reservation (customer_id, screening_id) VALUES (2, 2);
+INSERT INTO reservation (customer_id, screening_id)
+VALUES (1, 1),
+       (2, 2);
 
-INSERT INTO status (status_name) VALUES ('Available'); -- Status ID 1
-INSERT INTO status (status_name) VALUES ('Reserved'); -- Status ID 2
-INSERT INTO status (status_name) VALUES ('Broken'); -- Status ID 3
+INSERT INTO status (status_name)
+VALUES ('Available'),
+       ('Reserved'),
+       ('Broken');
 
-INSERT INTO seat (seat_number, seat_row, status_id, theater_id) VALUES (1, 1, 1, 1); -- Seat ID 1
-INSERT INTO seat (seat_number, seat_row, status_id, theater_id) VALUES (2, 1, 2, 1); -- Seat ID 2 (Reserved in DB)
-INSERT INTO seat (seat_number, seat_row, status_id, theater_id) VALUES (1, 1, 1, 2); -- Seat ID 3
+INSERT INTO seat (seat_number, seat_row, status_id, theater_id)
+VALUES (1, 1, 1, 1),
+       (2, 1, 2, 1),
+       (1, 1, 1, 2);
 
-INSERT INTO ticket (reservation_id, seat_id) VALUES (1, 1);
-INSERT INTO ticket (reservation_id, seat_id) VALUES (2, 3);
+INSERT INTO ticket (reservation_id, seat_id)
+VALUES (1, 1),
+       (2, 3);
 
--- *** 3. INSERT TEST DATA for booked_seats (ManyToMany relationship) ***
--- Link Seat 1 to Screening 1
-INSERT INTO booked_seats (screening_id, seat_id) VALUES (1, 1);
--- Link Seat 2 to Screening 1
-INSERT INTO booked_seats (screening_id, seat_id) VALUES (1, 2);
--- Link Seat 3 to Screening 2
-INSERT INTO booked_seats (screening_id, seat_id) VALUES (2, 3);
+INSERT INTO booked_seats (screening_id, seat_id)
+VALUES (1, 1),
+       (1, 2),
+       (2, 3);
+
+INSERT INTO reservation_seats (reservation_id, seat_id)
+VALUES (1, 1),
+       (1, 2),
+       (2, 3);
+
+INSERT INTO ticket (reservation_id, seat_id)
+VALUES (1, 2),
+       (2, 3);
+
+SET
+REFERENTIAL_INTEGRITY TRUE;
