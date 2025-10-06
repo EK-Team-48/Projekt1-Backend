@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -34,7 +35,7 @@ public class SeatController {
     }
 
     @PostMapping("/bookedseats")
-    public ResponseEntity<String>createBookedSeat(@RequestBody BookingRequestDTO bookedSeat){
+    public ResponseEntity<?>createBookedSeat(@RequestBody BookingRequestDTO bookedSeat){
         Integer screeningId = bookedSeat.screeningId();
         List<Integer> seatIds = bookedSeat.seatIds();
 
@@ -46,7 +47,13 @@ public class SeatController {
             bookedSeatRepository.save(newBooking);
         }
 
-        return ResponseEntity.ok("Successfully booked " + seatIds.size() + " seats.");
+        return ResponseEntity.status(HttpStatus.CREATED).body(
+                Map.of(
+                        "message", "Successfully booked seats.",
+                        "seatsBookedCount", seatIds.size(),
+                        "screeningId", screeningId
+                )
+        );
     }
 
     @PostMapping("/seats")
