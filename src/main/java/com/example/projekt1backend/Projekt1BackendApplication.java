@@ -1,7 +1,10 @@
 package com.example.projekt1backend;
 
 
+import com.example.projekt1backend.Seat.model.BookedSeat;
+import com.example.projekt1backend.Seat.model.BookedSeatId;
 import com.example.projekt1backend.Seat.model.Seat;
+import com.example.projekt1backend.Seat.repository.BookedSeatRepository;
 import com.example.projekt1backend.Seat.repository.SeatRepository;
 import com.example.projekt1backend.screening.model.Screening;
 import com.example.projekt1backend.screening.repository.ScreeningRepository;
@@ -38,7 +41,7 @@ public class Projekt1BackendApplication {
                                    MovieStatusRepository movieStatusRepo,
                                    TheaterRepository theaterRepo,
                                    SeatRepository seatRepo,
-                                   ScreeningRepository screeningRepository) {
+                                   ScreeningRepository screeningRepository, BookedSeatRepository bookedSeatRepository) {
         return args -> {
             // --- Genres ---
             Genre action = new Genre();
@@ -216,6 +219,7 @@ public class Projekt1BackendApplication {
 
 
 
+
             //Screenings test data:
             //die hard filme:
 
@@ -265,6 +269,14 @@ public class Projekt1BackendApplication {
             screening3.setStartTime(1230);
             screening3.setPrice(140.0);
             screeningRepository.save(screening3);
+
+            BookedSeatId bookedSeat1 = new BookedSeatId();
+            bookedSeat1.setScreeningId(1);
+            bookedSeat1.setSeatId(33);
+
+            BookedSeat newBooking = new BookedSeat();
+            newBooking.setId(bookedSeat1);
+            bookedSeatRepository.save(newBooking);
 
 
 

@@ -1,5 +1,7 @@
 package com.example.projekt1backend.Seat.controller;
 
+import com.example.projekt1backend.Seat.model.BookedSeat;
+import com.example.projekt1backend.Seat.model.BookingRequestDTO;
 import com.example.projekt1backend.Seat.model.Seat;
 import com.example.projekt1backend.Seat.repository.BookedSeatRepository;
 import com.example.projekt1backend.Seat.repository.SeatRepository;
@@ -27,13 +29,24 @@ public class SeatController {
 
 
     @GetMapping("/bookedseats/{screeningId}")
-    public List<Seat> getAllBookedSeatsByScreeningId(@PathVariable Integer screeningId) {
-        return bookedSeatRepository.findByScreenings_ScreeningId(screeningId);
+    public List<BookedSeat> getAllBookedSeatsByScreeningId(@PathVariable Integer screeningId) {
+        return bookedSeatRepository.findBookedSeatsById_ScreeningId(screeningId);
     }
 
-    @PostMapping("/bookedseats/{screeningId}")
-    public ResponseEntity<Seat>createBookedSeat(@RequestBody Seat seat){
-        return new ResponseEntity<>(seatRepository.save(seat), HttpStatus.CREATED);
+    @PostMapping("/bookedseats")
+    public ResponseEntity<String>createBookedSeat(@RequestBody BookingRequestDTO bookedSeat){
+        Integer screeningId = bookedSeat.screeningId();
+        List<Integer> seatIds = bookedSeat.seatIds();
+
+        for(Integer id : seatIds) {
+            BookedSeat newBooking = new BookedSeat();
+
+            newBooking.setScreeningId(screeningId);
+            newBooking.setSeatId(id);
+            bookedSeatRepository.save(newBooking);
+        }
+
+        return ResponseEntity.ok("Successfully booked " + seatIds.size() + " seats.");
     }
 
     @PostMapping("/seats")
