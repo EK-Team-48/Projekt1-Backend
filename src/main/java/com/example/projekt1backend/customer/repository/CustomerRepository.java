@@ -1,5 +1,6 @@
-package com.example.projekt1backend.customer;
+package com.example.projekt1backend.customer.repository;
 
+import com.example.projekt1backend.customer.entity.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

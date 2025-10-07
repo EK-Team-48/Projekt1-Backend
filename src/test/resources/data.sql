@@ -15,6 +15,7 @@ DROP TABLE IF EXISTS age_limit;
 DROP TABLE IF EXISTS movie_status;
 DROP TABLE IF EXISTS theater;
 DROP TABLE IF EXISTS status;
+DROP TABLE IF EXISTS employee;
 
 CREATE TABLE age_limit
 (
@@ -137,6 +138,15 @@ CREATE TABLE reservation_seats
     CONSTRAINT fk_rs_on_seat FOREIGN KEY (seat_id) REFERENCES seat (id)
 );
 
+CREATE TABLE employee
+(
+    employee_id           INT AUTO_INCREMENT PRIMARY KEY,
+    employee_name         VARCHAR(100) NOT NULL,
+    employee_password     VARCHAR(255) NOT NULL,
+    employee_created_date DATE,
+    employee_type         VARCHAR(50)
+);
+
 INSERT INTO age_limit (age_rating)
 VALUES (0),
        (7),
@@ -208,6 +218,13 @@ VALUES (1, 1),
 INSERT INTO ticket (reservation_id, seat_id)
 VALUES (1, 2),
        (2, 3);
+
+INSERT INTO employee (employee_name, employee_password, employee_created_date, employee_type)
+VALUES ('Anna Jensen', '1234', '2024-10-01', 'ADMIN'),
+       ('Mark Thomsen', '1234', '2024-10-05', 'MANAGER'),
+       ('Sara Madsen', '1234', '2024-11-10', 'EMPLOYEE'),
+       ('Jonas Nielsen', '1234', '2024-12-20', 'EMPLOYEE'),
+       ('Emma Sørensen', '1234', '2025-01-05', 'MANAGER');
 
 SET
 REFERENTIAL_INTEGRITY TRUE;

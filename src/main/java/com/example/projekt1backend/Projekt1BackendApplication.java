@@ -3,8 +3,8 @@ package com.example.projekt1backend;
 
 import com.example.projekt1backend.Seat.model.Seat;
 import com.example.projekt1backend.Seat.repository.SeatRepository;
-import com.example.projekt1backend.customer.Customer;
-import com.example.projekt1backend.customer.CustomerRepository;
+import com.example.projekt1backend.customer.entity.Customer;
+import com.example.projekt1backend.customer.repository.CustomerRepository;
 import com.example.projekt1backend.reservation.entity.Reservation;
 import com.example.projekt1backend.reservation.repository.ReservationRepository;
 import com.example.projekt1backend.screening.model.Screening;

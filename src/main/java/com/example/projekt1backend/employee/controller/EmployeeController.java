@@ -1,7 +1,7 @@
 package com.example.projekt1backend.employee.controller;
 
 
-import com.example.projekt1backend.employee.EmployeeDTO;
+import com.example.projekt1backend.employee.dto.EmployeeDTO;
 import com.example.projekt1backend.employee.entity.Employee;
 import com.example.projekt1backend.employee.service.EmployeeService;
 import org.springframework.http.HttpStatus;
@@ -40,12 +40,12 @@ public class EmployeeController {
 
     @PostMapping("/authenticate")
     public ResponseEntity<?> authenticateLogin(@RequestBody EmployeeDTO employee) {
-            try {
-                employeeService.AuthenticateEmployee(employee.username(), employee.password());
-                return new ResponseEntity<>(employee.username(), HttpStatus.OK);
-            } catch (RuntimeException e) {
-                return new ResponseEntity<>("User credentials not valid", HttpStatus.UNAUTHORIZED);
-            }
+        boolean authenticated = employeeService.authenticate(employee.username(), employee.password());
+        if (authenticated) {
+            return new ResponseEntity<>(employee.username(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("User credentials not valid", HttpStatus.UNAUTHORIZED);
+        }
     }
 
     @DeleteMapping("/employee/{id}")
