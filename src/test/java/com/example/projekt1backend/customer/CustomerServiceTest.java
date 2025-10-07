@@ -1,5 +1,7 @@
 package com.example.projekt1backend.customer;
 
+import com.example.projekt1backend.customer.entity.Customer;
+import com.example.projekt1backend.customer.service.CustomerService;
 import com.example.projekt1backend.reservation.entity.Reservation;
 import com.example.projekt1backend.reservation.service.ReservationService;
 import com.example.projekt1backend.screening.service.ScreeningService;
@@ -9,11 +11,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 

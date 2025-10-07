@@ -1,12 +1,10 @@
 package com.example.projekt1backend.reservation.entity;
 
 import com.example.projekt1backend.Seat.model.Seat;
-import com.example.projekt1backend.customer.Customer;
+import com.example.projekt1backend.customer.entity.Customer;
 import com.example.projekt1backend.screening.model.Screening;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.*;
 
 import java.util.List;
 
