@@ -43,5 +43,28 @@ public class ScreeningController {
         return new ResponseEntity<>(screeningService.addScreening(screening), HttpStatus.CREATED);
     }
 
+    @DeleteMapping("/screenings/{id}")
+    public ResponseEntity<String>deleteScreening(@PathVariable Integer id){
+        Screening screening = screeningService.findById(id);
+        if(screening != null){
+            screeningService.deletedScreening(screening.getScreeningId());
+            return ResponseEntity.ok("screening has been removed");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Screening not found");
+        }
+    }
+
+
+    @PutMapping("/screenings/{id}")
+    public ResponseEntity<Screening>updateScreening(@PathVariable Integer id, @RequestBody Screening screening){
+        Screening src = screeningService.findById(id);
+        if(src != null && screening != null){
+            screeningService.addScreening(screening);
+            return ResponseEntity.ok(screening);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
 }
