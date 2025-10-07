@@ -1,4 +1,12 @@
 package com.example.projekt1backend.screening.dto;
 
-public record ScreeningDTO() {
+import java.time.LocalDate;
+
+public record ScreeningDTO(
+        Integer movieId,
+        Integer theaterId,
+        LocalDate screeningDate,
+        Integer startTime,
+        Double price
+) {
 }

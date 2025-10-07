@@ -3,8 +3,11 @@ package com.example.projekt1backend.screening.controller;
 
 import com.example.projekt1backend.movie.entity.Movie;
 import com.example.projekt1backend.movie.service.MovieService;
+import com.example.projekt1backend.screening.dto.ScreeningDTO;
 import com.example.projekt1backend.screening.model.Screening;
 import com.example.projekt1backend.screening.service.ScreeningService;
+import com.example.projekt1backend.theater.model.Theater;
+import com.example.projekt1backend.theater.service.TheaterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,10 +23,12 @@ public class ScreeningController {
 
     private final ScreeningService screeningService;
     private final MovieService movieService;
+    private final TheaterService theaterService;
 
-    public ScreeningController(ScreeningService screeningService, MovieService movieService) {
+    public ScreeningController(ScreeningService screeningService, MovieService movieService, TheaterService theaterService) {
         this.screeningService = screeningService;
         this.movieService = movieService;
+        this.theaterService = theaterService;
     }
 
     @GetMapping("/screenings")
@@ -39,7 +44,17 @@ public class ScreeningController {
     }
 
     @PostMapping("/screenings")
-    public ResponseEntity<Screening>createScreening(@RequestBody Screening screening){
+    public ResponseEntity<Screening> createScreening(@RequestBody ScreeningDTO dto){
+        Movie movie = movieService.findById(dto.movieId()).orElseThrow();
+        Theater theater = theaterService.findById(dto.theaterId());
+
+        Screening screening = new Screening();
+        screening.setMovie(movie);
+        screening.setTheater(theater);
+        screening.setScreeningDate(dto.screeningDate());
+        screening.setStartTime(dto.startTime());
+        screening.setPrice(dto.price());
+
         return new ResponseEntity<>(screeningService.addScreening(screening), HttpStatus.CREATED);
     }
 
@@ -54,17 +69,23 @@ public class ScreeningController {
         }
     }
 
-
     @PutMapping("/screenings/{id}")
-    public ResponseEntity<Screening>updateScreening(@PathVariable Integer id, @RequestBody Screening screening){
+    public ResponseEntity<Screening>updateScreening(@PathVariable Integer id, @RequestBody ScreeningDTO dto){
         Screening src = screeningService.findById(id);
-        if(src != null && screening != null){
-            screeningService.addScreening(screening);
-            return ResponseEntity.ok(screening);
+        if(src != null && dto != null){
+            Movie movie = movieService.findById(dto.movieId()).orElseThrow();
+            Theater theater = theaterService.findById(dto.theaterId());
+            Screening screening = new Screening();
+            screening.setScreeningId(id);
+            screening.setMovie(movie);
+            screening.setTheater(theater);
+            screening.setScreeningDate(dto.screeningDate());
+            screening.setStartTime(dto.startTime());
+            screening.setPrice(dto.price());
+            return new ResponseEntity<>(screeningService.addScreening(screening), HttpStatus.CREATED);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
-
 
 }
