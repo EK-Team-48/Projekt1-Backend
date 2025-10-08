@@ -17,8 +17,7 @@ import com.example.projekt1backend.genre.entity.Genre;
 import com.example.projekt1backend.genre.repository.GenreRepository;
 import com.example.projekt1backend.movie.entity.Movie;
 import com.example.projekt1backend.movie.repository.MovieRepository;
-import com.example.projekt1backend.movieStatus.entity.MovieStatus;
-import com.example.projekt1backend.movieStatus.repository.MovieStatusRepository;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -40,7 +39,6 @@ public class Projekt1BackendApplication {
     CommandLineRunner loadTestData(MovieRepository movieRepo,
                                    GenreRepository genreRepo,
                                    AgeLimitRepository ageLimitRepo,
-                                   MovieStatusRepository movieStatusRepo,
                                    TheaterRepository theaterRepo,
                                    SeatRepository seatRepo,
                                    ScreeningRepository screeningRepo,
@@ -60,10 +58,6 @@ public class Projekt1BackendApplication {
             AgeLimit pg18 = new AgeLimit(); pg18.setAgeRating(18);
             ageLimitRepo.saveAll(Set.of(pg13, pg18));
 
-            // --- MOVIE STATUSES ---
-            MovieStatus released = new MovieStatus(); released.setStatus("Released");
-            MovieStatus comingSoon = new MovieStatus(); comingSoon.setStatus("Coming Soon");
-            movieStatusRepo.saveAll(Set.of(released, comingSoon));
 
             // --- MOVIES ---
             Movie dieHard = new Movie();
@@ -73,7 +67,6 @@ public class Projekt1BackendApplication {
             dieHard.setDuration(120);
             dieHard.setTrailerLink("https://www.youtube.com/watch?v=gYWvwkXreaI");
             dieHard.setAgeLimit(pg18);
-            dieHard.setMovieStatus(released);
             dieHard.getGenres().add(action);
             movieRepo.save(dieHard);
 
@@ -84,7 +77,6 @@ public class Projekt1BackendApplication {
             forrest.setDuration(140);
             forrest.setTrailerLink("https://www.youtube.com/watch?v=bLvqoHBptjg");
             forrest.setAgeLimit(pg13);
-            forrest.setMovieStatus(released);
             forrest.getGenres().add(drama);
             forrest.getGenres().add(comedy);
             movieRepo.save(forrest);

@@ -3,7 +3,6 @@ package com.example.projekt1backend.movie;
 import com.example.projekt1backend.ageLimit.entity.AgeLimit;
 import com.example.projekt1backend.movie.entity.Movie;
 import com.example.projekt1backend.movie.service.MovieService;
-import com.example.projekt1backend.movieStatus.entity.MovieStatus;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
@@ -41,7 +40,6 @@ class MovieServiceTest {
         m.setMovieImg("poster.jpg");
 
         m.setAgeLimit(em.getReference(AgeLimit.class, 1));
-        m.setMovieStatus(em.getReference(MovieStatus.class, 2));
 
         return m;
     }
@@ -64,7 +62,6 @@ class MovieServiceTest {
         assertTrue(m1.isPresent());
         assertEquals("Fast & Curious", m1.get().getMovieTitle());
         assertNotNull(m1.get().getAgeLimit());
-        assertNotNull(m1.get().getMovieStatus());
     }
 
     @Test
@@ -78,7 +75,6 @@ class MovieServiceTest {
         assertTrue(found.isPresent());
         assertEquals("test movie", found.get().getMovieTitle());
         assertNotNull(found.get().getAgeLimit());
-        assertNotNull(found.get().getMovieStatus());
 
         List<Movie> after = movieService.findAll();
         assertEquals(before + 1, after.size());
