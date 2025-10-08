@@ -1,4 +1,4 @@
-package com.example.projekt1backend.customer;
+package com.example.projekt1backend.integrationTest.customer;
 
 import com.example.projekt1backend.customer.entity.Customer;
 import com.example.projekt1backend.customer.service.CustomerService;
