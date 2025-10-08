@@ -4,6 +4,7 @@ import com.example.projekt1backend.Seat.model.Seat;
 import com.example.projekt1backend.screening.model.Screening;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class Theater {
     private String theaterName;
 
 
-    @JsonBackReference
+    @JsonManagedReference
     @OneToMany(mappedBy = "theater", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Seat> seatList;
 
