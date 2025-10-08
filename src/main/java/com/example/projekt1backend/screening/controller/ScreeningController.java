@@ -35,9 +35,12 @@ public class ScreeningController {
     public ResponseEntity<List<Screening>> getAllScreenings(){
         return new ResponseEntity<>(screeningService.findAllScreenings(), HttpStatus.OK);
     }
-
-
     @GetMapping("/screenings/{id}")
+    public ResponseEntity<Screening>getScreeningById(@PathVariable("id") Integer id){
+        return new ResponseEntity<>(screeningService.findById(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/screenings/movie/{id}")
     public ResponseEntity<List<Screening>>getScreeningsByMovie(@PathVariable("id") Integer id){
         Movie movie_id = movieService.findById(id).orElseThrow(() -> new RuntimeException("Movie not found"));
         return new ResponseEntity<>(screeningService.getScreeningsForMovieNextWeek(movie_id), HttpStatus.OK);
