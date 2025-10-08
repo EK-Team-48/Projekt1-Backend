@@ -46,7 +46,6 @@ public class TheaterController {
         }
     }
 
-    //delete mapping virker ikke pga dens relationer
     @DeleteMapping("/theaters/{id}")
     public ResponseEntity<String>deleteTheater(@PathVariable Integer id){
         Theater theater = theaterService.findById(id);

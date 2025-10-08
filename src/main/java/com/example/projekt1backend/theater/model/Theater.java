@@ -4,9 +4,6 @@ import com.example.projekt1backend.Seat.model.Seat;
 import com.example.projekt1backend.screening.model.Screening;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -17,14 +14,17 @@ public class Theater {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer theaterId;
 
     private String theaterName;
 
 
     @JsonBackReference
-    @OneToMany(mappedBy = "theater")
+    @OneToMany(mappedBy = "theater", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Seat> seatList;
+
+    @OneToMany(mappedBy = "theater", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Screening> screenings;
 
 
     public Theater(String theaterName, List<Seat> seatList) {
@@ -38,12 +38,12 @@ public class Theater {
 
     public Theater() {}
 
-    public Integer getId() {
-        return id;
+    public Integer getTheaterId() {
+        return theaterId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setTheaterId(Integer id) {
+        this.theaterId = id;
     }
 
     public String getTheaterName() {
@@ -59,5 +59,13 @@ public class Theater {
 
     public void setSeatList(List<Seat> seatList) {
         this.seatList = seatList;
+    }
+
+    public List<Screening> getScreenings() {
+        return screenings;
+    }
+
+    public void setScreenings(List<Screening> screenings) {
+        this.screenings = screenings;
     }
 }

@@ -1,12 +1,14 @@
 package com.example.projekt1backend.screening.model;
 import com.example.projekt1backend.Seat.model.Seat;
 import com.example.projekt1backend.movie.entity.Movie;
+import com.example.projekt1backend.reservation.entity.Reservation;
 import com.example.projekt1backend.theater.model.Theater;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -39,6 +41,9 @@ public class Screening {
             uniqueConstraints = @UniqueConstraint(columnNames = {"screening_id","seat_id"})
     )
     private Set<Seat> seats = new HashSet<>();
+
+    @OneToMany(mappedBy = "screening", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Reservation> reservations;
 
 
     public Screening() {
@@ -107,5 +112,13 @@ public class Screening {
 
     public void setSeats(Set<Seat> seats) {
         this.seats = seats;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
     }
 }

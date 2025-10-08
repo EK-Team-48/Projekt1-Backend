@@ -29,7 +29,7 @@ public class Seat {
     @JsonBackReference
     private Set<Screening> screenings = new HashSet<>();
 
-    @ManyToMany(mappedBy = "seats")
+    @ManyToMany(mappedBy = "seats", cascade = {CascadeType.REMOVE, CascadeType.MERGE})
     @JsonBackReference
     private List<Reservation> reservations;
 
