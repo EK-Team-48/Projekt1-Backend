@@ -20,11 +20,13 @@ public class Theater {
     private String theaterName;
 
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "theater", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("theater-seats")
     private List<Seat> seatList;
 
+
     @OneToMany(mappedBy = "theater", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("theater-screenings")
     private List<Screening> screenings;
 
 

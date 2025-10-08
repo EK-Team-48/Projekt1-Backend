@@ -34,7 +34,6 @@ public class TheaterController {
         return new ResponseEntity<>(theaterService.createTheater(theater), HttpStatus.CREATED);
     }
 
-    //virker åbenbart heller ikke pga relationer
     @PutMapping("/theaters/{id}")
     public ResponseEntity<Theater>updateTheater(@PathVariable Integer id, @RequestBody Theater theater){
         Theater oldTheater = theaterService.findById(id);

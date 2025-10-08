@@ -4,6 +4,7 @@ import com.example.projekt1backend.movie.entity.Movie;
 import com.example.projekt1backend.reservation.entity.Reservation;
 import com.example.projekt1backend.theater.model.Theater;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -25,7 +26,7 @@ public class Screening {
 
     @ManyToOne
     @JoinColumn(name = "theater_id", nullable = false)
-    @JsonBackReference
+    @JsonBackReference("theater-screenings")
     private Theater theater;
 
     private LocalDate screeningDate;
@@ -44,6 +45,7 @@ public class Screening {
     private Set<Seat> seats = new HashSet<>();
 
     @OneToMany(mappedBy = "screening", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("screening-reservations")
     private List<Reservation> reservations;
 
 

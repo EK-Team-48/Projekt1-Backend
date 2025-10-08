@@ -23,6 +23,7 @@ public class Seat {
 
     @ManyToOne
     @JoinColumn(name = "theater_id")
+    @JsonBackReference("theater-seats")
     private Theater theater;
 
     @ManyToMany(mappedBy = "seats", fetch = FetchType.LAZY)
@@ -30,7 +31,7 @@ public class Seat {
     private Set<Screening> screenings = new HashSet<>();
 
     @ManyToMany(mappedBy = "seats", cascade = {CascadeType.REMOVE, CascadeType.MERGE})
-    @JsonBackReference
+    @JsonBackReference("seat-reservations")
     private List<Reservation> reservations;
 
 
