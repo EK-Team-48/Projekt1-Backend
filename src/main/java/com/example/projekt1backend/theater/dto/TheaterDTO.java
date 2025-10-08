@@ -1,9 +1,8 @@
 package com.example.projekt1backend.theater.dto;
 
-import java.util.List;
 
-public record TheaterDTO(
-        String theaterName,
-        List<Integer> seatIds
-) {
+public record TheaterDTO(Integer theaterId, String theaterName) {
+    public String getTheaterName() {
+        return theaterName;
+    }
 }

@@ -27,7 +27,7 @@ public class Seat {
     private Theater theater;
 
     @ManyToMany(mappedBy = "seats", fetch = FetchType.LAZY)
-    @JsonBackReference
+    @JsonBackReference("screening-seats")
     private Set<Screening> screenings = new HashSet<>();
 
     @ManyToMany(mappedBy = "seats", cascade = {CascadeType.REMOVE, CascadeType.MERGE})

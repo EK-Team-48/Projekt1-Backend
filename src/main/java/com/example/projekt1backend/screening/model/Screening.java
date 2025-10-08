@@ -42,6 +42,7 @@ public class Screening {
             inverseJoinColumns = @JoinColumn(name = "seat_id"),
             uniqueConstraints = @UniqueConstraint(columnNames = {"screening_id","seat_id"})
     )
+    @JsonManagedReference("screening-seats")
     private Set<Seat> seats = new HashSet<>();
 
     @OneToMany(mappedBy = "screening", cascade = CascadeType.ALL, orphanRemoval = true)

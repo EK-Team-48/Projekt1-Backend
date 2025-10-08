@@ -1,5 +1,6 @@
 package com.example.projekt1backend.theater.controller;
 
+import com.example.projekt1backend.theater.dto.TheaterDTO;
 import com.example.projekt1backend.theater.model.Theater;
 import com.example.projekt1backend.theater.service.TheaterService;
 import org.springframework.http.HttpStatus;
@@ -35,11 +36,10 @@ public class TheaterController {
     }
 
     @PutMapping("/theaters/{id}")
-    public ResponseEntity<Theater>updateTheater(@PathVariable Integer id, @RequestBody Theater theater){
-        Theater oldTheater = theaterService.findById(id);
-        if(oldTheater != null && theater != null){
-            theaterService.createTheater(theater);
-            return ResponseEntity.ok(theater);
+    public ResponseEntity<Theater>updateTheater(@PathVariable Integer id, @RequestBody TheaterDTO dto){
+        Theater updatedTheater = theaterService.updateTheaterName(id, dto);
+        if(updatedTheater != null){
+            return ResponseEntity.ok(updatedTheater);
         } else {
             return ResponseEntity.notFound().build();
         }
