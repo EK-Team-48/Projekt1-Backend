@@ -30,18 +30,26 @@ public class EmployeeService {
         return employeeRespository.findById(id).orElseThrow(() -> new RuntimeException("Employee not found"));
     }
 
+    public void updateEmployee(Employee employee) {
+        employeeRespository.save(employee);
+    }
+
     public Optional<Employee> getEmployeeByUsername(String username) {
         return employeeRespository.findEmployeeByEmployeeName(username);
     }
 
-    public Employee AuthenticateEmployee(String username, String password) {
-        Employee test = employeeRespository.findEmployeeByEmployeeName(username).orElseThrow(() -> new RuntimeException("Employee not found"));
-        if (test.getEmployeePassword().equals(password)) {
-            return test;
-        } else {
-            throw new RuntimeException("User password invalid");
+    public boolean authenticate(String username, String password) {
+        Optional<Employee> optionalEmployee = employeeRespository.findEmployeeByEmployeeName(username);
+
+        if (optionalEmployee.isPresent()) {
+            Employee employee = optionalEmployee.get();
+            if (employee.getEmployeePassword().equals(password)) {
+                return true;
+            }
         }
+        return false;
     }
+
 
     public void deleteEmployee(Integer id) {
         employeeRespository.deleteById(id);

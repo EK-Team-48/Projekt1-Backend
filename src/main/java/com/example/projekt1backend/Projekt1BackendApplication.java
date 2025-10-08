@@ -3,8 +3,8 @@ package com.example.projekt1backend;
 
 import com.example.projekt1backend.Seat.model.Seat;
 import com.example.projekt1backend.Seat.repository.SeatRepository;
-import com.example.projekt1backend.customer.Customer;
-import com.example.projekt1backend.customer.CustomerRepository;
+import com.example.projekt1backend.customer.entity.Customer;
+import com.example.projekt1backend.customer.repository.CustomerRepository;
 import com.example.projekt1backend.reservation.entity.Reservation;
 import com.example.projekt1backend.reservation.repository.ReservationRepository;
 import com.example.projekt1backend.screening.model.Screening;
@@ -107,17 +107,17 @@ public class Projekt1BackendApplication {
             screening1.setPrice(95.0);
             screeningRepo.save(screening1);
 
-                        for (int b = 800; b <= 2400; b += 400) {
+                        for (int b = 700; b <= 2300; b += 400) {
                 LocalDate[] dates = {
                         LocalDate.now(),
-                        LocalDate.of(2025, 10, 3),
-                        LocalDate.of(2025, 10, 4),
-                        LocalDate.of(2025, 10, 5),
-                        LocalDate.of(2025, 10, 6),
-                        LocalDate.of(2025, 10, 7),
-                        //LocalDate.of(2025, 10, 8),
-                        //LocalDate.of(2025, 10, 9),
-                        //LocalDate.of(2025, 10, 10)
+                        LocalDate.of(2025, 10, 9),
+                        LocalDate.of(2025, 10, 10),
+                        LocalDate.of(2025, 10, 11),
+                        LocalDate.of(2025, 10, 12),
+                        LocalDate.of(2025, 10, 13),
+                        LocalDate.of(2025, 10, 14),
+                        LocalDate.of(2025, 10, 15),
+                        LocalDate.of(2025, 10, 16)
 
                 };
 
@@ -161,12 +161,14 @@ public class Projekt1BackendApplication {
             reservation1.setCustomer(alice);
             reservation1.setScreening(screening1);
             reservation1.setSeats(allSeats.subList(0, 3)); // Seats 1–3
+            reservation1.setUserReservationId("12345");
             reservationRepo.save(reservation1);
 
             var reservation2 = new Reservation();
             reservation2.setCustomer(bob);
             reservation2.setScreening(screening2);
             reservation2.setSeats(allSeats.subList(3, 5)); // Seats 4–5
+            reservation2.setUserReservationId("1234");
             reservationRepo.save(reservation2);
 
             System.out.println("✅ Testdata indlæst med reservations og seats!");

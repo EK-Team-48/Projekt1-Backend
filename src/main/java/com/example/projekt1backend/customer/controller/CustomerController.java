@@ -1,9 +1,10 @@
-package com.example.projekt1backend.customer;
+package com.example.projekt1backend.customer.controller;
 
 
+import com.example.projekt1backend.customer.service.CustomerService;
+import com.example.projekt1backend.customer.entity.Customer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

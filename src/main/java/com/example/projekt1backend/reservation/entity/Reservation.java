@@ -1,12 +1,10 @@
 package com.example.projekt1backend.reservation.entity;
 
 import com.example.projekt1backend.Seat.model.Seat;
-import com.example.projekt1backend.customer.Customer;
+import com.example.projekt1backend.customer.entity.Customer;
 import com.example.projekt1backend.screening.model.Screening;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.*;
 
 import java.util.List;
 
@@ -36,13 +34,17 @@ public class Reservation {
     private List<Seat> seats;
 
 
+    private String userReservationId;
+
+
     public Reservation() {
     }
 
-    public Reservation(Integer reservationId, Customer customer, Screening screening) {
+    public Reservation(Integer reservationId, Customer customer, Screening screening, String userReservationId) {
         this.reservationId = reservationId;
         this.customer = customer;
         this.screening = screening;
+        this.userReservationId = userReservationId;
     }
 
     public Integer getReservationId() {
@@ -76,4 +78,13 @@ public class Reservation {
     public void setSeats(List<Seat> seats) {
         this.seats = seats;
     }
+
+    public String getUserReservationId() {
+        return userReservationId;
+    }
+
+    public void setUserReservationId(String userReservationId) {
+        this.userReservationId = userReservationId;
+    }
+
 }

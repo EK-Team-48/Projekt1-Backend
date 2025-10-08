@@ -53,7 +53,6 @@ public class Theater {
     public void setTheaterName(String theaterName) {
         this.theaterName = theaterName;
     }
-
     public List<Seat> getSeatList() {
         return seatList;
     }

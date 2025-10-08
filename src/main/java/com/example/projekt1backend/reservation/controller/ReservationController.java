@@ -3,8 +3,8 @@ package com.example.projekt1backend.reservation.controller;
 
 import com.example.projekt1backend.Seat.model.Seat;
 import com.example.projekt1backend.Seat.repository.SeatRepository;
-import com.example.projekt1backend.customer.Customer;
-import com.example.projekt1backend.customer.CustomerService;
+import com.example.projekt1backend.customer.entity.Customer;
+import com.example.projekt1backend.customer.service.CustomerService;
 import com.example.projekt1backend.reservation.dto.ReservationDTO;
 import com.example.projekt1backend.reservation.dto.ReservationViewDTO;
 import com.example.projekt1backend.reservation.entity.Reservation;
@@ -39,6 +39,18 @@ public class ReservationController {
         return ResponseEntity.ok(reservationService.findAllAsDTOs());
     }
 
+    @GetMapping("/reservations/{userId}")
+    public ResponseEntity<?> getById(@PathVariable("userId") String userId) {
+        try {
+            if (userId.length() != 4) {
+                return ResponseEntity.badRequest().body("Please provide the last four characters of your reservation ID");
+            }
+            return new ResponseEntity<>(reservationService.findByLastFourDTO(userId), HttpStatus.OK);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>("Bad request, control user id", HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @PostMapping("/reservations")
     public ResponseEntity<?> createReservation(@RequestBody ReservationDTO reservationDTO) {
 
@@ -50,6 +62,7 @@ public class ReservationController {
         reservation.setCustomer(customer);
         reservation.setScreening(screening);
         reservation.setSeats(seats);
+        reservation.setUserReservationId(reservationDTO.userReservationId());
 
         reservationService.addReservation(reservation);
         return ResponseEntity.status(HttpStatus.CREATED).body("Reservation created");

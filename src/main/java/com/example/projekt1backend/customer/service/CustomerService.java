@@ -1,5 +1,7 @@
-package com.example.projekt1backend.customer;
+package com.example.projekt1backend.customer.service;
 
+import com.example.projekt1backend.customer.entity.Customer;
+import com.example.projekt1backend.customer.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

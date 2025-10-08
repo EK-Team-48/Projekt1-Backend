@@ -1,4 +1,4 @@
-package com.example.projekt1backend.movie;
+package com.example.projekt1backend.integrationTest.movie;
 
 import com.example.projekt1backend.ageLimit.entity.AgeLimit;
 import com.example.projekt1backend.movie.entity.Movie;

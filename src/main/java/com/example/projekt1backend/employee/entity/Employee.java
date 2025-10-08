@@ -1,9 +1,7 @@
 package com.example.projekt1backend.employee.entity;
 
 
-import com.example.projekt1backend.movie.entity.EmployeeType;
 import jakarta.persistence.*;
-import lombok.extern.slf4j.Slf4j;
 
 import java.sql.Date;
 
