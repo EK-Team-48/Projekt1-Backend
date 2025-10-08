@@ -169,12 +169,14 @@ public class Projekt1BackendApplication {
             reservation1.setCustomer(alice);
             reservation1.setScreening(screening1);
             reservation1.setSeats(allSeats.subList(0, 3)); // Seats 1–3
+            reservation1.setUserReservationId("12345");
             reservationRepo.save(reservation1);
 
             var reservation2 = new Reservation();
             reservation2.setCustomer(bob);
             reservation2.setScreening(screening2);
             reservation2.setSeats(allSeats.subList(3, 5)); // Seats 4–5
+            reservation2.setUserReservationId("1234");
             reservationRepo.save(reservation2);
 
             System.out.println("✅ Testdata indlæst med reservations og seats!");

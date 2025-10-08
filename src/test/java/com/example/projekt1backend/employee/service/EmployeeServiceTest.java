@@ -103,7 +103,7 @@ class EmployeeServiceTest {
     }
 
     @Test
-    void testAuthenticateFailure() {
+    void AuthenticateFail() {
         Employee add = new Employee();
         add.setEmployeeName("Test");
         add.setEmployeeType(EmployeeType.MANAGER);
@@ -116,6 +116,21 @@ class EmployeeServiceTest {
         assertFalse(result);
     }
 
+    @Test
+    void updateEmployee() {
+        Employee add = new Employee();
+        add.setEmployeeName("Test");
+        add.setEmployeeType(EmployeeType.MANAGER);
+        add.setEmployeePassword("1234");
+        add.setEmployeeCreatedDate(Date.valueOf(LocalDate.now()));
+        employeeService.addEmployee(add);
+
+        add.setEmployeeName("Bob");
+        employeeService.updateEmployee(add);
+
+        assertNotNull(add);
+        assertEquals("Bob", add.getEmployeeName());
+    }
 
     @Test
     void deleteEmployee() {

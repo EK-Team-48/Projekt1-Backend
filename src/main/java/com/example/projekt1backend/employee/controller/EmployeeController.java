@@ -34,7 +34,17 @@ public class EmployeeController {
         try {
             return new ResponseEntity<>(employeeService.addEmployee(employee), HttpStatus.CREATED);
         } catch (RuntimeException e) {
-            return new ResponseEntity<>("Employee not able to be created: ", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Employee not able to be created:   ", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping("/employee")
+    public ResponseEntity<?> updateEmployee(@RequestBody Employee employee) {
+        try {
+            employeeService.updateEmployee(employee);
+            return new ResponseEntity<>(employee, HttpStatus.OK);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>("Employee not able to be updated", HttpStatus.BAD_REQUEST);
         }
     }
 
