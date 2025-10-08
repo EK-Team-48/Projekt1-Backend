@@ -1,8 +1,7 @@
 package com.example.projekt1backend.theater.service;
 
 
-import com.example.projekt1backend.screening.model.Screening;
-import com.example.projekt1backend.theater.dto.TheaterDTO;
+import com.example.projekt1backend.theater.dto.TheaterUpdateRequest;
 import com.example.projekt1backend.theater.model.Theater;
 import com.example.projekt1backend.theater.repository.TheaterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,7 @@ public class TheaterService {
         return theaterRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
     }
 
-    public Theater updateTheaterName(Integer id, TheaterDTO dto) {
+    public Theater updateTheaterName(Integer id, TheaterUpdateRequest dto) {
         Theater orgTheater = theaterRepository.findById(id).orElse(null);
 
         if (orgTheater == null) {
