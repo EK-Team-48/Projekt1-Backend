@@ -30,12 +30,12 @@ public class GenreController {
 
     @GetMapping("/genres/{id}")
     public ResponseEntity<Genre> getGenreById(@PathVariable Integer id) {
-        return new ResponseEntity<>(genreService.findById(id).orElseThrow(() -> new RuntimeException("Movie not found with id: " + id)),
+        return new ResponseEntity<>(genreService.findById(id).orElseThrow(() -> new RuntimeException("Genre not found with id: " + id)),
                 HttpStatus.OK);
     }
 
     @PostMapping("/genres")
-    public ResponseEntity<Genre> postMovies(@RequestBody Genre genre) {
+    public ResponseEntity<Genre> postGenre(@RequestBody Genre genre) {
         return new ResponseEntity<>(genreService.save(genre), HttpStatus.CREATED);
     }
 

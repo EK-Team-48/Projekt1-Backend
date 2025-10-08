@@ -22,6 +22,12 @@ CREATE TABLE age_limit
     age_rating   INT
 );
 
+CREATE TABLE movie_status
+(
+    movie_status_id INT AUTO_INCREMENT PRIMARY KEY,
+    status          VARCHAR(255)
+);
+
 CREATE TABLE genre
 (
     genre_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -136,17 +142,22 @@ VALUES (0),
        (7),
        (11),
        (15);
+INSERT INTO movie_status (status)
+VALUES ('Coming Soon'),
+       ('Now Showing'),
+       ('Archived');
 INSERT INTO genre (genre)
 VALUES ('Action'),
        ('Comedy'),
        ('Drama'),
        ('Sci-Fi');
 
-INSERT INTO movie (movie_img, movie_title, description, duration, trailer_link, age_limit_id)
+INSERT INTO movie (movie_img, movie_title, description, duration, trailer_link, age_limit_id, movie_status_id)
 VALUES ('img1.jpg', 'Fast & Curious', 'An action movie about car chases and thinking too much.', 120,
-        'https://youtu.be/trailer1', 2),
-       ('img2.jpg', 'Laugh Hard', 'A ridiculous comedy about two guys coding.', 95, 'https://youtu.be/trailer2', 1),
-       ('img3.jpg', 'Sad Robots', 'Dystopian drama about AI discovering feelings.', 140, 'https://youtu.be/trailer3', 3);
+        'https://youtu.be/trailer1', 2, 2),
+       ('img2.jpg', 'Laugh Hard', 'A ridiculous comedy about two guys coding.', 95, 'https://youtu.be/trailer2', 1, 2),
+       ('img3.jpg', 'Sad Robots', 'Dystopian drama about AI discovering feelings.', 140, 'https://youtu.be/trailer3', 3,
+        1);
 
 INSERT INTO movie_genre (genre_id, movie_id)
 VALUES (1, 1),

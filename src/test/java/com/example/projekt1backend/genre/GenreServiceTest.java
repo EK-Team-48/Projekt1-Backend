@@ -1,12 +1,7 @@
 package com.example.projekt1backend.genre;
 
-import com.example.projekt1backend.ageLimit.entity.AgeLimit;
 import com.example.projekt1backend.genre.entity.Genre;
 import com.example.projekt1backend.genre.service.GenreService;
-import com.example.projekt1backend.movie.entity.Movie;
-import com.example.projekt1backend.movie.service.MovieService;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,7 +38,7 @@ class GenreServiceTest {
         // Der er 4 genre i h2-databasen.
         assertTrue(allGenres.size() >= 4);
 
-        // Undersøger om der er en movie med titlen "Fast & Curious" i h2-databasen.
+        // Undersøger om der er en genre der hedder "Sci-Fi" i h2-databasen.
         assertTrue(allGenres.stream().anyMatch(g -> "Sci-Fi".equals(g.getGenre())));
     }
 
