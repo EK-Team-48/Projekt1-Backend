@@ -34,7 +34,17 @@ public class EmployeeController {
         try {
             return new ResponseEntity<>(employeeService.addEmployee(employee), HttpStatus.CREATED);
         } catch (RuntimeException e) {
-            return new ResponseEntity<>("Employee not able to be created: ", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Employee not able to be created:   ", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping("/employee")
+    public ResponseEntity<?> updateEmployee(@RequestBody Employee employee) {
+        try {
+            employeeService.updateEmployee(employee);
+            return new ResponseEntity<>(employee, HttpStatus.OK);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>("Employee not able to be updated", HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -49,7 +59,7 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/employee/{id}")
-    public ResponseEntity<String> deleteEmployee(@PathVariable Integer id) {
+    public ResponseEntity<String> deleteEmployee(@PathVariable("id") Integer id) {
         try {
             employeeService.deleteEmployee(id);
             return new ResponseEntity<>("User deleted", HttpStatus.ACCEPTED);

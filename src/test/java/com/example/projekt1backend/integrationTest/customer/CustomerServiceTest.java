@@ -1,4 +1,4 @@
-package com.example.projekt1backend.customer;
+package com.example.projekt1backend.integrationTest.customer;
 
 import com.example.projekt1backend.customer.entity.Customer;
 import com.example.projekt1backend.customer.service.CustomerService;
@@ -88,6 +88,30 @@ class CustomerServiceTest {
         assertFalse(getAll.isEmpty());
         assertNotNull(getAll);
         assertTrue(getAll.size() > 1);
+    }
+
+
+    @Test
+    void controlReservation() {
+        Reservation test = new Reservation();
+        test.setCustomer(customerService.findById(1));
+        test.setScreening(screeningService.findById(1));
+        test.setUserReservationId("ef5582d8-499b-4bc3-90b4-ce239f3c73f1");
+
+        Reservation saved = reservationService.addReservation(test);
+        assertNotNull(saved);
+
+        String lastFourSaved = test.getUserReservationId();
+        String lastFourSavedDigits = lastFourSaved.substring(lastFourSaved.length() - 4);
+        Reservation findTest = reservationService.findByLastFour(lastFourSavedDigits);
+        assertNotNull(findTest);
+
+        String lastFourFound = findTest.getUserReservationId();
+        String lastFourFoundDigits = lastFourFound.substring(lastFourFound.length() - 4);
+
+        assertEquals(lastFourFoundDigits, lastFourSavedDigits);
+        assertEquals(saved.getCustomer(), findTest.getCustomer());
+
     }
 
 }

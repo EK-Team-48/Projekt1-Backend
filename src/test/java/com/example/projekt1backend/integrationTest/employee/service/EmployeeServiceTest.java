@@ -1,8 +1,9 @@
-package com.example.projekt1backend.employee.service;
+package com.example.projekt1backend.integrationTest.employee.service;
 
 
 import com.example.projekt1backend.employee.entity.Employee;
 import com.example.projekt1backend.employee.entity.EmployeeType;
+import com.example.projekt1backend.employee.service.EmployeeService;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,7 +104,7 @@ class EmployeeServiceTest {
     }
 
     @Test
-    void testAuthenticateFailure() {
+    void AuthenticateFail() {
         Employee add = new Employee();
         add.setEmployeeName("Test");
         add.setEmployeeType(EmployeeType.MANAGER);
@@ -116,6 +117,21 @@ class EmployeeServiceTest {
         assertFalse(result);
     }
 
+    @Test
+    void updateEmployee() {
+        Employee add = new Employee();
+        add.setEmployeeName("Test");
+        add.setEmployeeType(EmployeeType.MANAGER);
+        add.setEmployeePassword("1234");
+        add.setEmployeeCreatedDate(Date.valueOf(LocalDate.now()));
+        employeeService.addEmployee(add);
+
+        add.setEmployeeName("Bob");
+        employeeService.updateEmployee(add);
+
+        assertNotNull(add);
+        assertEquals("Bob", add.getEmployeeName());
+    }
 
     @Test
     void deleteEmployee() {

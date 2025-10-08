@@ -1,8 +1,9 @@
-package com.example.projekt1backend.screening.service;
+package com.example.projekt1backend.integrationTest.screening.service;
 
 import com.example.projekt1backend.movie.entity.Movie;
 import com.example.projekt1backend.movie.service.MovieService;
 import com.example.projekt1backend.screening.model.Screening;
+import com.example.projekt1backend.screening.service.ScreeningService;
 import com.example.projekt1backend.theater.model.Theater;
 import com.example.projekt1backend.theater.service.TheaterService;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,6 +17,7 @@ import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -51,7 +53,7 @@ class ScreeningServiceTest {
     }
 
     @Test
-    void findScreeningByMovieId() {
+    void getScreeningsForMovieNextWeek() {
         Movie smurfs = new Movie();
 
 
@@ -110,4 +112,40 @@ class ScreeningServiceTest {
         assertTrue(test.getStartTime() == 123);
 
     }
+    @Test
+    void deletedScreening(){
+        Screening screening = new Screening();
+        Double price = null;
+        assertEquals(screening.getPrice(), price);
+
+        Screening newScreening = new Screening();
+        newScreening.setPrice(100.0);
+        newScreening.setStartTime(1800);
+        newScreening.setScreeningDate(LocalDate.now());
+
+        Theater theater = theaterService.findById(1);
+        newScreening.setTheater(theater);
+
+        Movie movie =movieService.findAll().getFirst();
+        newScreening.setMovie(movie);
+
+        screeningService.addScreening(newScreening);
+
+        screening = screeningService.findById(newScreening.getScreeningId());
+        price = 100.0;
+        assertEquals(screening.getPrice(), price);
+
+        screeningService.deletedScreening(screening.getScreeningId());
+
+
+        List<Screening> srcList = screeningService.findAllScreenings();
+
+        for(Screening i: srcList){
+            assertTrue(i.getScreeningId() != screening.getScreeningId());
+        }
+
+    }
+
+
+
 }
