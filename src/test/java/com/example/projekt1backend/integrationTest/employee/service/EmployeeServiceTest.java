@@ -1,8 +1,9 @@
-package com.example.projekt1backend.employee.service;
+package com.example.projekt1backend.integrationTest.employee.service;
 
 
 import com.example.projekt1backend.employee.entity.Employee;
 import com.example.projekt1backend.employee.entity.EmployeeType;
+import com.example.projekt1backend.employee.service.EmployeeService;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
