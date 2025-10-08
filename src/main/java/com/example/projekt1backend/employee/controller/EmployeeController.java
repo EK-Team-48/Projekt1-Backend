@@ -34,7 +34,7 @@ public class EmployeeController {
         try {
             return new ResponseEntity<>(employeeService.addEmployee(employee), HttpStatus.CREATED);
         } catch (RuntimeException e) {
-            return new ResponseEntity<>("Employee not able to be created:", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Employee not able to be created:   ", HttpStatus.BAD_REQUEST);
         }
     }
 
