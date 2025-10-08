@@ -115,17 +115,17 @@ public class Projekt1BackendApplication {
             screening1.setPrice(95.0);
             screeningRepo.save(screening1);
 
-                        for (int b = 800; b <= 2400; b += 400) {
+                        for (int b = 700; b <= 2300; b += 400) {
                 LocalDate[] dates = {
                         LocalDate.now(),
-                        LocalDate.of(2025, 10, 3),
-                        LocalDate.of(2025, 10, 4),
-                        LocalDate.of(2025, 10, 5),
-                        LocalDate.of(2025, 10, 6),
-                        LocalDate.of(2025, 10, 7),
-                        //LocalDate.of(2025, 10, 8),
-                        //LocalDate.of(2025, 10, 9),
-                        //LocalDate.of(2025, 10, 10)
+                        LocalDate.of(2025, 10, 9),
+                        LocalDate.of(2025, 10, 10),
+                        LocalDate.of(2025, 10, 11),
+                        LocalDate.of(2025, 10, 12),
+                        LocalDate.of(2025, 10, 13),
+                        LocalDate.of(2025, 10, 14),
+                        LocalDate.of(2025, 10, 15),
+                        LocalDate.of(2025, 10, 16)
 
                 };
 
