@@ -30,8 +30,8 @@ public class EmployeeService {
         return employeeRespository.findById(id).orElseThrow(() -> new RuntimeException("Employee not found"));
     }
 
-    public Employee updateEmployee(Employee employee) {
-        return employeeRespository.save(employee);
+    public void updateEmployee(Employee employee) {
+        employeeRespository.save(employee);
     }
 
     public Optional<Employee> getEmployeeByUsername(String username) {

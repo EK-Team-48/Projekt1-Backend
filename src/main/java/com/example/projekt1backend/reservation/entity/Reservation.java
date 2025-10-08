@@ -34,13 +34,17 @@ public class Reservation {
     private List<Seat> seats;
 
 
+    private String userReservationId;
+
+
     public Reservation() {
     }
 
-    public Reservation(Integer reservationId, Customer customer, Screening screening) {
+    public Reservation(Integer reservationId, Customer customer, Screening screening, String userReservationId) {
         this.reservationId = reservationId;
         this.customer = customer;
         this.screening = screening;
+        this.userReservationId = userReservationId;
     }
 
     public Integer getReservationId() {
@@ -74,4 +78,13 @@ public class Reservation {
     public void setSeats(List<Seat> seats) {
         this.seats = seats;
     }
+
+    public String getUserReservationId() {
+        return userReservationId;
+    }
+
+    public void setUserReservationId(String userReservationId) {
+        this.userReservationId = userReservationId;
+    }
+
 }
