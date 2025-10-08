@@ -25,7 +25,7 @@ public class GenreController {
 
     @GetMapping("/genres")
     public ResponseEntity<List<Genre>> getAll() {
-        return new ResponseEntity<>(genreService.getAll(), HttpStatus.OK);
+        return new ResponseEntity<>(genreService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/genres/{id}")

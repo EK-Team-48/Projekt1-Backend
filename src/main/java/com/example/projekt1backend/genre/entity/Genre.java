@@ -26,9 +26,8 @@ public class  Genre {
 
     public Genre() {}
 
-    public Genre(String genre, Set<Movie> movies) {
+    public Genre(String genre) {
         this.genre = genre;
-        this.movies = movies;
     }
 
     public Integer getGenreId() {
