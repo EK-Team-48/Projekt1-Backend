@@ -46,7 +46,7 @@ CREATE TABLE customer
 
 CREATE TABLE theater
 (
-    id           INT AUTO_INCREMENT PRIMARY KEY,
+    theater_id           INT AUTO_INCREMENT PRIMARY KEY,
     theater_name VARCHAR(255)
 );
 
@@ -82,7 +82,7 @@ CREATE TABLE screening
     start_time     INT,
     price DOUBLE,
     CONSTRAINT FK_SCREENING_ON_MOVIE FOREIGN KEY (movie_id) REFERENCES movie (movie_id),
-    CONSTRAINT FK_SCREENING_ON_THEATER FOREIGN KEY (theater_id) REFERENCES theater (id)
+    CONSTRAINT FK_SCREENING_ON_THEATER FOREIGN KEY (theater_id) REFERENCES theater (theater_id)
 );
 
 CREATE TABLE reservation
@@ -109,7 +109,7 @@ CREATE TABLE seat
     status_id   INT,
     theater_id  INT,
     CONSTRAINT FK_SEAT_ON_STATUSID FOREIGN KEY (status_id) REFERENCES status (status_id),
-    CONSTRAINT FK_SEAT_ON_THEATER FOREIGN KEY (theater_id) REFERENCES theater (id)
+    CONSTRAINT FK_SEAT_ON_THEATER FOREIGN KEY (theater_id) REFERENCES theater (theater_id)
 );
 
 CREATE TABLE ticket

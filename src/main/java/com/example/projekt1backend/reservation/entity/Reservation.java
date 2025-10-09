@@ -3,6 +3,7 @@ package com.example.projekt1backend.reservation.entity;
 import com.example.projekt1backend.Seat.model.Seat;
 import com.example.projekt1backend.customer.entity.Customer;
 import com.example.projekt1backend.screening.model.Screening;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -22,6 +23,7 @@ public class Reservation {
 
     @ManyToOne
     @JoinColumn(name ="screening_id")
+    @JsonBackReference("screening-reservations")
     private Screening screening;
 
     @ManyToMany
@@ -30,7 +32,7 @@ public class Reservation {
             joinColumns = @JoinColumn(name = "reservation_id"),
             inverseJoinColumns = @JoinColumn(name = "seat_id")
     )
-    @JsonManagedReference
+    @JsonManagedReference("seat-reservations")
     private List<Seat> seats;
 
 

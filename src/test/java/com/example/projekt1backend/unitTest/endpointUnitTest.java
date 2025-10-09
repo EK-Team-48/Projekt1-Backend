@@ -71,7 +71,7 @@ public class endpointUnitTest {
         movie.setMovieId(5);
         movie.setMovieTitle("die hard");
 
-        theater.setId(5);
+        theater.setTheaterId(5);
         theater.setTheaterName("sal 1");
 
         LocalDate dato = LocalDate.now();
