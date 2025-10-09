@@ -26,7 +26,6 @@ public class Screening {
 
     @ManyToOne
     @JoinColumn(name = "theater_id", nullable = false)
-    @JsonBackReference("theater-screenings")
     private Theater theater;
 
     private LocalDate screeningDate;
