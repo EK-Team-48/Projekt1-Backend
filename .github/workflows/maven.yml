@@ -31,7 +31,7 @@ jobs:
     - name: Run docker test
       run: |
           docker compose up -d
-          sleep 15
+          sleep 60
           docker ps -a
           docker logs $(docker ps -aq --filter name=app)
           curl -i http://127.0.0.1:8080/healthz
