@@ -4,7 +4,4 @@ import java.util.List;
 
 public record BookingRequestDTO (Integer screeningId, List<Integer> seatIds) {
 
-
-
-
 }

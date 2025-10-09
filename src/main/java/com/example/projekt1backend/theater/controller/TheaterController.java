@@ -1,5 +1,7 @@
 package com.example.projekt1backend.theater.controller;
 
+import com.example.projekt1backend.theater.dto.TheaterCreationRequest;
+import com.example.projekt1backend.theater.dto.TheaterUpdateRequest;
 import com.example.projekt1backend.theater.model.Theater;
 import com.example.projekt1backend.theater.service.TheaterService;
 import org.springframework.http.HttpStatus;
@@ -30,23 +32,26 @@ public class TheaterController {
     }
 
     @PostMapping("/theaters")
-    public ResponseEntity<Theater>createTheater(@RequestBody Theater theater){
-        return new ResponseEntity<>(theaterService.createTheater(theater), HttpStatus.CREATED);
+    public ResponseEntity<Theater> createTheater(@RequestBody TheaterCreationRequest creationRequest){
+        Theater newTheater = theaterService.createTheaterFromRequest(creationRequest);
+
+        if (newTheater != null) {
+            return new ResponseEntity<>(newTheater, HttpStatus.CREATED);
+        } else {
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
-    //virker åbenbart heller ikke pga relationer
     @PutMapping("/theaters/{id}")
-    public ResponseEntity<Theater>updateTheater(@PathVariable Integer id, @RequestBody Theater theater){
-        Theater oldTheater = theaterService.findById(id);
-        if(oldTheater != null && theater != null){
-            theaterService.createTheater(theater);
-            return ResponseEntity.ok(theater);
+    public ResponseEntity<Theater>updateTheater(@PathVariable Integer id, @RequestBody TheaterUpdateRequest dto){
+        Theater updatedTheater = theaterService.updateTheaterName(id, dto);
+        if(updatedTheater != null){
+            return ResponseEntity.ok(updatedTheater);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
-    //delete mapping virker ikke pga dens relationer
     @DeleteMapping("/theaters/{id}")
     public ResponseEntity<String>deleteTheater(@PathVariable Integer id){
         Theater theater = theaterService.findById(id);
