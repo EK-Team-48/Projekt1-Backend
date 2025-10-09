@@ -26,7 +26,8 @@ public class Theater {
 
 
     @OneToMany(mappedBy = "theater", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference("theater-screenings")
+    @JsonBackReference
+
     private List<Screening> screenings;
 
 
