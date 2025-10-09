@@ -1,9 +1,8 @@
-package com.example.projekt1backend.integrationTest.screening.service;
+package com.example.projekt1backend.screening.service;
 
 import com.example.projekt1backend.movie.entity.Movie;
 import com.example.projekt1backend.movie.service.MovieService;
 import com.example.projekt1backend.screening.model.Screening;
-import com.example.projekt1backend.screening.service.ScreeningService;
 import com.example.projekt1backend.theater.model.Theater;
 import com.example.projekt1backend.theater.service.TheaterService;
 import org.junit.jupiter.api.BeforeEach;
