@@ -23,14 +23,15 @@ public class Seat {
 
     @ManyToOne
     @JoinColumn(name = "theater_id")
+    @JsonBackReference("theater-seats")
     private Theater theater;
 
     @ManyToMany(mappedBy = "seats", fetch = FetchType.LAZY)
-    @JsonBackReference
+    @JsonBackReference("screening-seats")
     private Set<Screening> screenings = new HashSet<>();
 
-    @ManyToMany(mappedBy = "seats")
-    @JsonBackReference
+    @ManyToMany(mappedBy = "seats", cascade = {CascadeType.REMOVE, CascadeType.MERGE})
+    @JsonBackReference("seat-reservations")
     private List<Reservation> reservations;
 
 
