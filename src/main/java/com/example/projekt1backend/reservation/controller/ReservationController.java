@@ -67,4 +67,15 @@ public class ReservationController {
         reservationService.addReservation(reservation);
         return ResponseEntity.status(HttpStatus.CREATED).body("Reservation created");
     }
+
+    @DeleteMapping("/reservations/{deleteId}")
+    public ResponseEntity<?> deleteReservation(@PathVariable Integer deleteId) {
+        try {
+            reservationService.deleteById(deleteId);
+            return new ResponseEntity<>("Reservation deleted", HttpStatus.OK);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>("Reservation not found with id: " + deleteId, HttpStatus.BAD_REQUEST);
+        }
+
+    }
 }
