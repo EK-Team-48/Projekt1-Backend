@@ -13,6 +13,11 @@ services:
       - "127.0.0.1:3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-pkea" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   app:
     build: .
@@ -25,7 +30,8 @@ services:
       - spring.datasource.username=kea
       - spring.datasource.password=kea
     depends_on:
-      - mysql
+      mysql:
+          condition: service_healthy
 
 volumes:
   mysql_data:
