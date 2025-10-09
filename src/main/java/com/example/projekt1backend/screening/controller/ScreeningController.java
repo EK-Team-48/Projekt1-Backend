@@ -62,7 +62,7 @@ public class ScreeningController {
     }
 
     @DeleteMapping("/screenings/{id}")
-    public ResponseEntity<String>deleteScreening(@PathVariable Integer id){
+    public ResponseEntity<String>deleteScreening(@PathVariable("id") Integer id){
         Screening screening = screeningService.findById(id);
         if(screening != null){
             screeningService.deletedScreening(screening.getScreeningId());
@@ -73,7 +73,7 @@ public class ScreeningController {
     }
 
     @PutMapping("/screenings/{id}")
-    public ResponseEntity<Screening>updateScreening(@PathVariable Integer id, @RequestBody ScreeningDTO dto){
+    public ResponseEntity<Screening>updateScreening(@PathVariable("id") Integer id, @RequestBody ScreeningDTO dto){
         Screening src = screeningService.findById(id);
         if(src != null && dto != null){
             Movie movie = movieService.findById(dto.movieId()).orElseThrow();

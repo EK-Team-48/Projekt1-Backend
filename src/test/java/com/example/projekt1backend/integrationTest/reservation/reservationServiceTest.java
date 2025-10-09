@@ -103,7 +103,7 @@ public class reservationServiceTest {
 
         reservationService.deleteById(saved.getReservationId());
         Optional<Reservation> deleted = reservationService.findByIdOptional(saved.getReservationId());
-        
+
         assertTrue(deleted.isEmpty());
         assertTrue(reservationService.findByIdOptional(saved.getReservationId()).isEmpty());
 
