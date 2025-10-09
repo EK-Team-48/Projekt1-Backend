@@ -90,6 +90,7 @@ CREATE TABLE reservation
     reservation_id INT AUTO_INCREMENT PRIMARY KEY,
     customer_id    INT,
     screening_id   INT,
+    user_reservation_id VARCHAR(255),
     CONSTRAINT FK_RESERVATION_ON_CUSTOMER FOREIGN KEY (customer_id) REFERENCES customer (customer_id),
     CONSTRAINT FK_RESERVATION_ON_SCREENING FOREIGN KEY (screening_id) REFERENCES screening (screening_id)
 );
@@ -187,9 +188,9 @@ INSERT INTO screening (movie_id, theater_id, screening_date, start_time, price)
 VALUES (1, 1, '2025-10-01', 123, 95.0),
        (2, 2, '2025-10-01', 123, 120.0);
 
-INSERT INTO reservation (customer_id, screening_id)
-VALUES (1, 1),
-       (2, 2);
+INSERT INTO reservation (customer_id, screening_id, user_reservation_id)
+VALUES (1, 1, '1234'),
+       (2, 2, '123456');
 
 INSERT INTO status (status_name)
 VALUES ('Available'),

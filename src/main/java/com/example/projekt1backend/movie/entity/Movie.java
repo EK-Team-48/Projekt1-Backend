@@ -2,7 +2,7 @@ package com.example.projekt1backend.movie.entity;
 
 import com.example.projekt1backend.ageLimit.entity.AgeLimit;
 import com.example.projekt1backend.genre.entity.Genre;
-import com.example.projekt1backend.movieStatus.entity.MovieStatus;
+
 import com.example.projekt1backend.screening.model.Screening;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
@@ -47,14 +47,10 @@ public class Movie {
     )
     private Set<Genre> genres = new HashSet<>();
 
-    @ManyToOne
-    @JoinColumn(name = "movieStatusId")
-    private MovieStatus movieStatus;
-
 
     public Movie() {}
 
-    public Movie(String movieImg, String movieTitle, String description, Integer duration, String trailerLink, AgeLimit ageLimit, Set<Genre> genres, MovieStatus movieStatus) {
+    public Movie(String movieImg, String movieTitle, String description, Integer duration, String trailerLink, AgeLimit ageLimit, Set<Genre> genres) {
         this.movieImg = movieImg;
         this.movieTitle = movieTitle;
         this.description = description;
@@ -62,7 +58,6 @@ public class Movie {
         this.trailerLink = trailerLink;
         this.ageLimit = ageLimit;
         this.genres = genres;
-        this.movieStatus = movieStatus;
     }
 
     public Integer getMovieId() {
@@ -127,13 +122,5 @@ public class Movie {
 
     public void setGenres(Set<Genre> genres) {
         this.genres = genres;
-    }
-
-    public MovieStatus getMovieStatus() {
-        return movieStatus;
-    }
-
-    public void setMovieStatus(MovieStatus movieStatus) {
-        this.movieStatus = movieStatus;
     }
 }

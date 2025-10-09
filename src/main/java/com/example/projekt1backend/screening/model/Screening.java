@@ -62,6 +62,14 @@ public class Screening {
         this.screeningDate = screeningDate;
     }
 
+    public Screening(Movie movie, Theater theater, LocalDate screeningDate, Integer startTime, Double price) {
+        this.movie = movie;
+        this.theater = theater;
+        this.screeningDate = screeningDate;
+        this.startTime = startTime;
+        this.price = price;
+    }
+
     public LocalDate getScreeningDate() {
         return screeningDate;
     }

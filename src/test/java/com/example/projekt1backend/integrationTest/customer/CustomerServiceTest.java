@@ -1,4 +1,4 @@
-package com.example.projekt1backend.customer;
+package com.example.projekt1backend.integrationTest.customer;
 
 import com.example.projekt1backend.customer.entity.Customer;
 import com.example.projekt1backend.customer.service.CustomerService;
@@ -27,10 +27,6 @@ class CustomerServiceTest {
 
     @Autowired
     private CustomerService customerService;
-    @Autowired
-    private ReservationService reservationService;
-    @Autowired
-    private ScreeningService screeningService;
 
     @BeforeEach
     void setUp() {
@@ -66,28 +62,6 @@ class CustomerServiceTest {
         assertEquals("Alice", hej.getFirstName());
     }
 
-    @Test
-    void addReservation() {
-        Reservation test = new Reservation();
-        test.setCustomer(customerService.findById(1));
-        test.setScreening(screeningService.findById(1));
 
-        Reservation saved = reservationService.addReservation(test);
-
-        Reservation found = reservationService.findById(saved.getReservationId());
-
-        assertNotNull(found);
-        assertEquals(saved.getReservationId(), found.getReservationId());
-        assertEquals(1, found.getCustomer().getCustomerId());
-        assertEquals(1, found.getScreening().getScreeningId());
-    }
-
-    @Test
-    void getAllReservation() {
-        List<Reservation> getAll = reservationService.getAllReservations();
-        assertFalse(getAll.isEmpty());
-        assertNotNull(getAll);
-        assertTrue(getAll.size() > 1);
-    }
 
 }

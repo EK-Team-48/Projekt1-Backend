@@ -35,9 +35,12 @@ public class ScreeningController {
     public ResponseEntity<List<Screening>> getAllScreenings(){
         return new ResponseEntity<>(screeningService.findAllScreenings(), HttpStatus.OK);
     }
-
-
     @GetMapping("/screenings/{id}")
+    public ResponseEntity<Screening>getScreeningById(@PathVariable("id") Integer id){
+        return new ResponseEntity<>(screeningService.findById(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/screenings/movie/{id}")
     public ResponseEntity<List<Screening>>getScreeningsByMovie(@PathVariable("id") Integer id){
         Movie movie_id = movieService.findById(id).orElseThrow(() -> new RuntimeException("Movie not found"));
         return new ResponseEntity<>(screeningService.getScreeningsForMovieNextWeek(movie_id), HttpStatus.OK);
@@ -59,7 +62,7 @@ public class ScreeningController {
     }
 
     @DeleteMapping("/screenings/{id}")
-    public ResponseEntity<String>deleteScreening(@PathVariable Integer id){
+    public ResponseEntity<String>deleteScreening(@PathVariable("id") Integer id){
         Screening screening = screeningService.findById(id);
         if(screening != null){
             screeningService.deletedScreening(screening.getScreeningId());
@@ -70,7 +73,7 @@ public class ScreeningController {
     }
 
     @PutMapping("/screenings/{id}")
-    public ResponseEntity<Screening>updateScreening(@PathVariable Integer id, @RequestBody ScreeningDTO dto){
+    public ResponseEntity<Screening>updateScreening(@PathVariable("id") Integer id, @RequestBody ScreeningDTO dto){
         Screening src = screeningService.findById(id);
         if(src != null && dto != null){
             Movie movie = movieService.findById(dto.movieId()).orElseThrow();
