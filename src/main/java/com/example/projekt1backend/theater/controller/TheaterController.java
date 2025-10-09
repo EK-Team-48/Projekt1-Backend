@@ -1,5 +1,6 @@
 package com.example.projekt1backend.theater.controller;
 
+import com.example.projekt1backend.theater.dto.TheaterCreationRequest;
 import com.example.projekt1backend.theater.dto.TheaterUpdateRequest;
 import com.example.projekt1backend.theater.model.Theater;
 import com.example.projekt1backend.theater.service.TheaterService;
@@ -31,8 +32,14 @@ public class TheaterController {
     }
 
     @PostMapping("/theaters")
-    public ResponseEntity<Theater>createTheater(@RequestBody Theater theater){
-        return new ResponseEntity<>(theaterService.createTheater(theater), HttpStatus.CREATED);
+    public ResponseEntity<Theater> createTheater(@RequestBody TheaterCreationRequest creationRequest){
+        Theater newTheater = theaterService.createTheaterFromRequest(creationRequest);
+
+        if (newTheater != null) {
+            return new ResponseEntity<>(newTheater, HttpStatus.CREATED);
+        } else {
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
     @PutMapping("/theaters/{id}")
