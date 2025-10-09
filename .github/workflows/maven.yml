@@ -31,9 +31,9 @@ jobs:
     - name: Run docker test
       run: |
           docker compose up -d
-          sleep 45
-          curl -f http://localhost:8080/healthz
-          curl -f http://localhost:8080/api/v1/movies
+          sleep 15
+          curl -i http://127.0.0.1:8080/healthz
+          curl -i http://127.0.0.1:8080/api/v1/movies
           docker compose down
 
     - uses: actions/cache@v4
