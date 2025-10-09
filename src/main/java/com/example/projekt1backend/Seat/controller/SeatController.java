@@ -5,15 +5,12 @@ import com.example.projekt1backend.Seat.model.BookingRequestDTO;
 import com.example.projekt1backend.Seat.model.Seat;
 import com.example.projekt1backend.Seat.repository.BookedSeatRepository;
 import com.example.projekt1backend.Seat.repository.SeatRepository;
-import com.example.projekt1backend.theater.model.Theater;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -63,7 +60,7 @@ public class SeatController {
 
     @GetMapping("/seats/{theaterId}")
         public ResponseEntity<List<Seat>> getSeatsByTheaterId(@PathVariable("theaterId") Integer theaterId) {
-        return new ResponseEntity<>(seatRepository.findAllByTheater_Id(theaterId), HttpStatus.OK);
+        return new ResponseEntity<>(seatRepository.findAllByTheater_TheaterId(theaterId), HttpStatus.OK);
         }
 
 
