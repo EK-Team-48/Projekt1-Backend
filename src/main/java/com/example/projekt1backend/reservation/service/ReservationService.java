@@ -9,6 +9,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ReservationService {
@@ -77,5 +78,13 @@ public class ReservationService {
                         .map(seat -> new SeatDTO(seat.getSeatRow(), seat.getSeatNumber()))
                         .toList()
         );
+    }
+
+    public void deleteById(Integer deleteId) {
+        reservationRepository.deleteById(deleteId);
+    }
+
+    public Optional<Reservation> findByIdOptional(Integer id) {
+        return reservationRepository.findById(id);
     }
 }
