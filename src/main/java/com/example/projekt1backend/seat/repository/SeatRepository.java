@@ -1,6 +1,6 @@
-package com.example.projekt1backend.Seat.repository;
+package com.example.projekt1backend.seat.repository;
 
-import com.example.projekt1backend.Seat.model.Seat;
+import com.example.projekt1backend.seat.model.Seat;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

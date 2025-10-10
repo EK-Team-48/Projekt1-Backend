@@ -1,6 +1,5 @@
 package com.example.projekt1backend.reservation.service;
 
-import com.example.projekt1backend.Seat.model.Seat;
 import com.example.projekt1backend.reservation.dto.ReservationViewDTO;
 import com.example.projekt1backend.reservation.dto.SeatDTO;
 import com.example.projekt1backend.reservation.entity.Reservation;
