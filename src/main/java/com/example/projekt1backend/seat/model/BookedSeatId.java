@@ -1,5 +1,5 @@
 // Java: BookedSeatId.java (The Composite Primary Key)
-package com.example.projekt1backend.Seat.model;
+package com.example.projekt1backend.seat.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

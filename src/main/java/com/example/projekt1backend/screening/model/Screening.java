@@ -1,9 +1,8 @@
 package com.example.projekt1backend.screening.model;
-import com.example.projekt1backend.Seat.model.Seat;
+import com.example.projekt1backend.seat.model.Seat;
 import com.example.projekt1backend.movie.entity.Movie;
 import com.example.projekt1backend.reservation.entity.Reservation;
 import com.example.projekt1backend.theater.model.Theater;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 

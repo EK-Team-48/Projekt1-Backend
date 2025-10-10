@@ -1,4 +1,4 @@
-package com.example.projekt1backend.Seat.model;
+package com.example.projekt1backend.seat.model;
 
 import com.example.projekt1backend.reservation.entity.Reservation;
 import com.example.projekt1backend.screening.model.Screening;
