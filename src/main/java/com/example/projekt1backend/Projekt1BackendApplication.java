@@ -5,6 +5,9 @@ import com.example.projekt1backend.Seat.model.Seat;
 import com.example.projekt1backend.Seat.repository.SeatRepository;
 import com.example.projekt1backend.customer.entity.Customer;
 import com.example.projekt1backend.customer.repository.CustomerRepository;
+import com.example.projekt1backend.employee.entity.Employee;
+import com.example.projekt1backend.employee.entity.EmployeeType;
+import com.example.projekt1backend.employee.repository.EmployeeRespository;
 import com.example.projekt1backend.reservation.entity.Reservation;
 import com.example.projekt1backend.reservation.repository.ReservationRepository;
 import com.example.projekt1backend.screening.model.Screening;
@@ -43,7 +46,8 @@ public class Projekt1BackendApplication {
                                    SeatRepository seatRepo,
                                    ScreeningRepository screeningRepo,
                                    CustomerRepository customerRepo,
-                                   ReservationRepository reservationRepo) {
+                                   ReservationRepository reservationRepo,
+                                   EmployeeRespository employeeRepo) {
 
         return args -> {
 
@@ -170,6 +174,15 @@ public class Projekt1BackendApplication {
             reservation2.setSeats(allSeats.subList(3, 5)); // Seats 4–5
             reservation2.setUserReservationId("1234");
             reservationRepo.save(reservation2);
+
+            //EMployees
+            var emp1 = new Employee();
+            emp1.setEmployeeName("Abdi");
+            emp1.setEmployeePassword("1234");
+            emp1.setEmployeeCreatedDate(Date.valueOf(LocalDate.now()));
+            emp1.setEmployeeType(EmployeeType.ADMIN);
+            employeeRepo.save(emp1);
+
 
             System.out.println("✅ Testdata indlæst med reservations og seats!");
         };
