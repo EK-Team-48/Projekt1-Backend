@@ -27,19 +27,16 @@ public class Screening {
     @JoinColumn(name = "theater_id", nullable = false)
     private Theater theater;
 
-    @Column(nullable = false)
     private LocalDate screeningDate;
 
-    @Column(nullable = false)
     private Integer startTime;
 
-    @Column(nullable = false)
     private Double price;
 
     @ManyToMany
     @JoinTable(
             name = "booked_seats",
-            joinColumns = @JoinColumn(name = "screening_id", nullable = false),
+            joinColumns = @JoinColumn(name = "screening_id"),
             inverseJoinColumns = @JoinColumn(name = "seat_id"),
             uniqueConstraints = @UniqueConstraint(columnNames = {"screening_id","seat_id"})
     )

@@ -13,17 +13,13 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer employeeId;
 
-    @Column(nullable = false)
     private String employeeName;
 
-    @Column(nullable = false)
     private String employeePassword;
 
-    @Column(nullable = false)
     private Date employeeCreatedDate;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private EmployeeType employeeType;
 
     public Employee() {

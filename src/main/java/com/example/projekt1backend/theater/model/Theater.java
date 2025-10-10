@@ -17,7 +17,6 @@ public class Theater {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer theaterId;
 
-    @Column(nullable = false)
     private String theaterName;
 
 

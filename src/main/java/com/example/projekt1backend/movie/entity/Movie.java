@@ -21,30 +21,27 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer movieId;
 
-    @Column(nullable = false)
     private String movieImg;
 
     @Column(nullable = false)
     private String movieTitle;
 
     @Lob
-    @Column(nullable = false)
     private String description;
 
     @Column(nullable = false)
     private Integer duration;
 
-    @Column(nullable = false)
     private String trailerLink;
 
     @ManyToOne
-    @JoinColumn(name = "age_limit_id", nullable = false)
+    @JoinColumn(name = "age_limit_id")
     private AgeLimit ageLimit;
 
     @ManyToMany
     @JoinTable(
             name = "movie_genre",
-            joinColumns = @JoinColumn(name = "movie_id", nullable = false),
+            joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "genre_id"),
             uniqueConstraints = @UniqueConstraint(columnNames = {"movie_id","genre_id"})
     )

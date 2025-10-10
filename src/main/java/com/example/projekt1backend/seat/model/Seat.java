@@ -17,14 +17,12 @@ public class Seat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer seatId;
 
-    @Column(nullable = false)
     private Integer seatNumber;
 
-    @Column(nullable = false)
     private Integer seatRow;
 
     @ManyToOne
-    @JoinColumn(name = "theater_id", nullable = false)
+    @JoinColumn(name = "theater_id")
     @JsonBackReference("theater-seats")
     private Theater theater;
 
