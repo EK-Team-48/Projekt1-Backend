@@ -1,7 +1,7 @@
 package com.example.projekt1backend.theater.service;
 
 
-import com.example.projekt1backend.Seat.model.Seat;
+import com.example.projekt1backend.seat.model.Seat;
 import com.example.projekt1backend.theater.dto.TheaterCreationRequest;
 import com.example.projekt1backend.theater.dto.TheaterUpdateRequest;
 import com.example.projekt1backend.theater.model.Theater;

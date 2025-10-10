@@ -1,6 +1,6 @@
 package com.example.projekt1backend.theater.model;
 
-import com.example.projekt1backend.Seat.model.Seat;
+import com.example.projekt1backend.seat.model.Seat;
 import com.example.projekt1backend.screening.model.Screening;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -17,6 +17,7 @@ public class Theater {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer theaterId;
 
+    @Column(nullable = false)
     private String theaterName;
 
 
@@ -27,7 +28,6 @@ public class Theater {
 
     @OneToMany(mappedBy = "theater", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonBackReference
-
     private List<Screening> screenings;
 
 

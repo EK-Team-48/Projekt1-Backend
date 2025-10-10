@@ -1,4 +1,4 @@
-package com.example.projekt1backend.ageLimit;
+package com.example.projekt1backend.integrationTest.ageLimit;
 
 import com.example.projekt1backend.ageLimit.entity.AgeLimit;
 import com.example.projekt1backend.ageLimit.service.AgeLimitService;

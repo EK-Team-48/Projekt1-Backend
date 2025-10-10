@@ -1,4 +1,4 @@
-package com.example.projekt1backend.genre;
+package com.example.projekt1backend.integrationTest.genre;
 
 import com.example.projekt1backend.genre.entity.Genre;
 import com.example.projekt1backend.genre.service.GenreService;

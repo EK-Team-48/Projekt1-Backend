@@ -1,10 +1,10 @@
-package com.example.projekt1backend.Seat.controller;
+package com.example.projekt1backend.seat.controller;
 
-import com.example.projekt1backend.Seat.model.BookedSeat;
-import com.example.projekt1backend.Seat.model.BookingRequestDTO;
-import com.example.projekt1backend.Seat.model.Seat;
-import com.example.projekt1backend.Seat.repository.BookedSeatRepository;
-import com.example.projekt1backend.Seat.repository.SeatRepository;
+import com.example.projekt1backend.seat.model.BookedSeat;
+import com.example.projekt1backend.seat.model.BookingRequestDTO;
+import com.example.projekt1backend.seat.model.Seat;
+import com.example.projekt1backend.seat.repository.BookedSeatRepository;
+import com.example.projekt1backend.seat.repository.SeatRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package com.example.projekt1backend.Seat.model;
+package com.example.projekt1backend.seat.model;
 
 import java.util.List;
 

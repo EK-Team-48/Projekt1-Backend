@@ -1,9 +1,8 @@
 package com.example.projekt1backend.screening.model;
-import com.example.projekt1backend.Seat.model.Seat;
+import com.example.projekt1backend.seat.model.Seat;
 import com.example.projekt1backend.movie.entity.Movie;
 import com.example.projekt1backend.reservation.entity.Reservation;
 import com.example.projekt1backend.theater.model.Theater;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -28,16 +27,19 @@ public class Screening {
     @JoinColumn(name = "theater_id", nullable = false)
     private Theater theater;
 
+    @Column(nullable = false)
     private LocalDate screeningDate;
 
+    @Column(nullable = false)
     private Integer startTime;
 
+    @Column(nullable = false)
     private Double price;
 
     @ManyToMany
     @JoinTable(
             name = "booked_seats",
-            joinColumns = @JoinColumn(name = "screening_id"),
+            joinColumns = @JoinColumn(name = "screening_id", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "seat_id"),
             uniqueConstraints = @UniqueConstraint(columnNames = {"screening_id","seat_id"})
     )

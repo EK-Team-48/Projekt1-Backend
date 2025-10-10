@@ -1,8 +1,8 @@
 package com.example.projekt1backend.reservation.controller;
 
 
-import com.example.projekt1backend.Seat.model.Seat;
-import com.example.projekt1backend.Seat.repository.SeatRepository;
+import com.example.projekt1backend.seat.model.Seat;
+import com.example.projekt1backend.seat.repository.SeatRepository;
 import com.example.projekt1backend.customer.entity.Customer;
 import com.example.projekt1backend.customer.service.CustomerService;
 import com.example.projekt1backend.reservation.dto.ReservationDTO;
