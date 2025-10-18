@@ -12,4 +12,5 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
     @Query(value = "SELECT * FROM reservation WHERE RIGHT(user_reservation_id, 4) = :lastFour", nativeQuery = true)
     Reservation findByLastFour(@Param("lastFour") String lastFour);
 
+
 }

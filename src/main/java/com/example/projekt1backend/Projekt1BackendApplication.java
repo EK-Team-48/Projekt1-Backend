@@ -175,13 +175,20 @@ public class Projekt1BackendApplication {
             reservation2.setUserReservationId("1234");
             reservationRepo.save(reservation2);
 
-            //EMployees
+            //Employees
             var emp1 = new Employee();
-            emp1.setEmployeeName("Abdi");
+            emp1.setEmployeeName("Zahaa");
             emp1.setEmployeePassword("1234");
             emp1.setEmployeeCreatedDate(Date.valueOf(LocalDate.now()));
             emp1.setEmployeeType(EmployeeType.ADMIN);
             employeeRepo.save(emp1);
+
+            var emp2 = new Employee();
+            emp2.setEmployeeName("Kasper");
+            emp2.setEmployeePassword("1234");
+            emp2.setEmployeeCreatedDate(Date.valueOf(LocalDate.now()));
+            emp2.setEmployeeType(EmployeeType.ADMIN);
+            employeeRepo.save(emp2);
 
 
             System.out.println("✅ Testdata indlæst med reservations og seats!");

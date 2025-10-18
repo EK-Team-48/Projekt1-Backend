@@ -9,5 +9,6 @@ public record ReservationViewDTO(
         String phoneNumber,
         String movieTitle,
         LocalDate screeningDate,
+        String reservationID,
         List<SeatDTO> seats
 ) {}

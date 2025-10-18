@@ -60,6 +60,7 @@ public class ReservationService {
                 find.getCustomer().getNumber(),
                 find.getScreening().getMovie().getMovieTitle(),
                 find.getScreening().getScreeningDate(),
+                find.getUserReservationId(),
                 find.getSeats().stream()
                         .map(seat -> new SeatDTO(seat.getSeatRow(), seat.getSeatNumber()))
                         .toList()
@@ -73,6 +74,7 @@ public class ReservationService {
                 reservation.getCustomer().getNumber(),
                 reservation.getScreening().getMovie().getMovieTitle(),
                 reservation.getScreening().getScreeningDate(),
+                reservation.getUserReservationId(),
                 reservation.getSeats().stream()
                         .map(seat -> new SeatDTO(seat.getSeatRow(), seat.getSeatNumber()))
                         .toList()
@@ -81,6 +83,12 @@ public class ReservationService {
 
     public void deleteById(Integer deleteId) {
         reservationRepository.deleteById(deleteId);
+    }
+
+    public void deleteByLastFour(String id) {
+        Reservation delete = reservationRepository.findByLastFour(id);
+        reservationRepository.deleteById(delete.getReservationId());
+
     }
 
     public Optional<Reservation> findByIdOptional(Integer id) {
