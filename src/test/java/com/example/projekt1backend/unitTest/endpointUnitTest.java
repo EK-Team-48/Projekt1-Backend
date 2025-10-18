@@ -102,7 +102,7 @@ public class endpointUnitTest {
     @Test
     void getReservationByLastFourDigits() throws Exception {
         Mockito.when(reservationService.findByLastFourDTO("4321"))
-                .thenReturn(new ReservationViewDTO("123", "123",null, null, null,null));
+                .thenReturn(new ReservationViewDTO("123", "123",null, null, null,null, null));
 
         mockMvc.perform(get("/api/v1/reservations/4321"))
                 .andDo(print())

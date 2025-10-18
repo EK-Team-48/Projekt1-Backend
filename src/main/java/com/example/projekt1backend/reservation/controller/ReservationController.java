@@ -69,9 +69,9 @@ public class ReservationController {
     }
 
     @DeleteMapping("/reservations/{deleteId}")
-    public ResponseEntity<?> deleteReservation(@PathVariable Integer deleteId) {
+    public ResponseEntity<?> deleteReservation(@PathVariable("deleteId") String deleteId) {
         try {
-            reservationService.deleteById(deleteId);
+            reservationService.deleteByLastFour(deleteId);
             return new ResponseEntity<>("Reservation deleted", HttpStatus.OK);
         } catch (RuntimeException e) {
             return new ResponseEntity<>("Reservation not found with id: " + deleteId, HttpStatus.BAD_REQUEST);
