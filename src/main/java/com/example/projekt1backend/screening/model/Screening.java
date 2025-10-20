@@ -1,10 +1,15 @@
 package com.example.projekt1backend.screening.model;
+import com.example.projekt1backend.seat.model.Seat;
 import com.example.projekt1backend.movie.entity.Movie;
+import com.example.projekt1backend.reservation.entity.Reservation;
 import com.example.projekt1backend.theater.model.Theater;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Screening {
@@ -14,15 +19,13 @@ public class Screening {
     @GeneratedValue
     private Integer screeningId;
 
-    @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "movie_id")
-    private Movie movieId;
+    @JoinColumn(name = "movie_id", nullable = false)
+    private Movie movie;
 
-    @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "theater_id")
-    private Theater theaterId;
+    @JoinColumn(name = "theater_id", nullable = false)
+    private Theater theater;
 
     private LocalDate screeningDate;
 
@@ -30,17 +33,39 @@ public class Screening {
 
     private Double price;
 
+    @ManyToMany
+    @JoinTable(
+            name = "booked_seats",
+            joinColumns = @JoinColumn(name = "screening_id"),
+            inverseJoinColumns = @JoinColumn(name = "seat_id"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"screening_id","seat_id"})
+    )
+    @JsonManagedReference("screening-seats")
+    private Set<Seat> seats = new HashSet<>();
+
+    @OneToMany(mappedBy = "screening", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("screening-reservations")
+    private List<Reservation> reservations;
+
 
     public Screening() {
     }
 
-    public Screening(Integer screeningId, Movie movieId, Integer startTime, Theater theaterId, Double price, LocalDate screeningDate) {
+    public Screening(Integer screeningId, Movie movie, Integer startTime, Theater theater, Double price, LocalDate screeningDate) {
         this.screeningId = screeningId;
-        this.movieId = movieId;
+        this.movie = movie;
         this.startTime = startTime;
-        this.theaterId = theaterId;
+        this.theater = theater;
         this.price = price;
         this.screeningDate = screeningDate;
+    }
+
+    public Screening(Movie movie, Theater theater, LocalDate screeningDate, Integer startTime, Double price) {
+        this.movie = movie;
+        this.theater = theater;
+        this.screeningDate = screeningDate;
+        this.startTime = startTime;
+        this.price = price;
     }
 
     public LocalDate getScreeningDate() {
@@ -59,20 +84,20 @@ public class Screening {
         this.screeningId = screeningId;
     }
 
-    public Movie getMovieId() {
-        return movieId;
+    public Movie getMovie() {
+        return movie;
     }
 
-    public void setMovieId(Movie movieId) {
-        this.movieId = movieId;
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 
-    public Theater getTheaterId() {
-        return theaterId;
+    public Theater getTheater() {
+        return theater;
     }
 
-    public void setTheaterId(Theater theaterId) {
-        this.theaterId = theaterId;
+    public void setTheater(Theater theater) {
+        this.theater = theater;
     }
 
     public Integer getStartTime() {
@@ -89,5 +114,21 @@ public class Screening {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Set<Seat> getSeats() {
+        return seats;
+    }
+
+    public void setSeats(Set<Seat> seats) {
+        this.seats = seats;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
     }
 }

@@ -1,7 +1,9 @@
 package com.example.projekt1backend.theater.model;
 
-import com.example.projekt1backend.Seat.Seat;
+import com.example.projekt1backend.seat.model.Seat;
 import com.example.projekt1backend.screening.model.Screening;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -13,33 +15,38 @@ public class Theater {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer theaterId;
 
     private String theaterName;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "theaterId")
-    private List<Screening> screeningList;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "theaterId")
+    @OneToMany(mappedBy = "theater", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("theater-seats")
     private List<Seat> seatList;
 
-    public Theater(Integer id, String theaterName, List<Screening> screeningList, List<Seat> seatList) {
-        this.id = id;
+
+    @OneToMany(mappedBy = "theater", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
+    private List<Screening> screenings;
+
+
+    public Theater(String theaterName, List<Seat> seatList) {
+
         this.theaterName = theaterName;
-        this.screeningList = screeningList;
         this.seatList = seatList;
+    }
+    public Theater(String theaterName){
+        this.theaterName = theaterName;
     }
 
     public Theater() {}
 
-    public Integer getId() {
-        return id;
+    public Integer getTheaterId() {
+        return theaterId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setTheaterId(Integer id) {
+        this.theaterId = id;
     }
 
     public String getTheaterName() {
@@ -49,20 +56,19 @@ public class Theater {
     public void setTheaterName(String theaterName) {
         this.theaterName = theaterName;
     }
-
-    public List<Screening> getScreeningList() {
-        return screeningList;
-    }
-
-    public void setScreeningList(List<Screening> screeningList) {
-        this.screeningList = screeningList;
-    }
-
     public List<Seat> getSeatList() {
         return seatList;
     }
 
     public void setSeatList(List<Seat> seatList) {
         this.seatList = seatList;
+    }
+
+    public List<Screening> getScreenings() {
+        return screenings;
+    }
+
+    public void setScreenings(List<Screening> screenings) {
+        this.screenings = screenings;
     }
 }

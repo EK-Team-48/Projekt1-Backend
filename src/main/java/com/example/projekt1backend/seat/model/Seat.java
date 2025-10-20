@@ -1,0 +1,95 @@
+package com.example.projekt1backend.seat.model;
+
+import com.example.projekt1backend.reservation.entity.Reservation;
+import com.example.projekt1backend.screening.model.Screening;
+import com.example.projekt1backend.theater.model.Theater;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+@Entity
+public class Seat {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer seatId;
+
+    private Integer seatNumber;
+
+    private Integer seatRow;
+
+    @ManyToOne
+    @JoinColumn(name = "theater_id")
+    @JsonBackReference("theater-seats")
+    private Theater theater;
+
+    @ManyToMany(mappedBy = "seats", fetch = FetchType.LAZY)
+    @JsonBackReference("screening-seats")
+    private Set<Screening> screenings = new HashSet<>();
+
+    @ManyToMany(mappedBy = "seats", cascade = {CascadeType.REMOVE, CascadeType.MERGE})
+    @JsonBackReference("seat-reservations")
+    private List<Reservation> reservations;
+
+
+    public Seat(Integer seatNumber, Integer seatRow, Theater theater) {
+        this.seatNumber = seatNumber;
+        this.seatRow = seatRow;
+        this.theater = theater;
+    }
+
+    public Seat() {}
+
+    public Integer getSeatId() {
+        return seatId;
+    }
+
+    public void setSeatId(Integer id) {
+        this.seatId = id;
+    }
+
+    public Integer getSeatNumber() {
+        return seatNumber;
+    }
+
+    public void setSeatNumber(Integer seatNumber) {
+        this.seatNumber = seatNumber;
+    }
+
+    public Integer getSeatRow() {
+        return seatRow;
+    }
+
+    public void setSeatRow(Integer seatRow) {
+        this.seatRow = seatRow;
+    }
+
+    public Theater getTheater() {
+        return theater;
+    }
+
+
+    public void setTheater(Theater theater) {
+        this.theater = theater;
+
+    }
+
+    public Set<Screening> getScreenings() {
+        return screenings;
+    }
+
+    public void setScreenings(Set<Screening> screenings) {
+        this.screenings = screenings;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }
+}
