@@ -53,34 +53,34 @@ public class Projekt1BackendApplication {
         return args -> {
 
             // --- GENRES ---
-            Genre action = new Genre();        action.setGenre("Action");
-            Genre adventure = new Genre();     adventure.setGenre("Adventure");
-            Genre animation = new Genre();     animation.setGenre("Animation");
-            Genre biography = new Genre();     biography.setGenre("Biography");
-            Genre comedy = new Genre();        comedy.setGenre("Comedy");
-            Genre crime = new Genre();         crime.setGenre("Crime");
-            Genre documentary = new Genre();   documentary.setGenre("Documentary");
-            Genre drama = new Genre();         drama.setGenre("Drama");
-            Genre family = new Genre();        family.setGenre("Family");
-            Genre fantasy = new Genre();       fantasy.setGenre("Fantasy");
-            Genre filmNoir = new Genre();      filmNoir.setGenre("Film-Noir");
-            Genre history = new Genre();       history.setGenre("History");
-            Genre horror = new Genre();        horror.setGenre("Horror");
-            Genre music = new Genre();         music.setGenre("Music");
-            Genre musical = new Genre();       musical.setGenre("Musical");
-            Genre mystery = new Genre();       mystery.setGenre("Mystery");
-            Genre romance = new Genre();       romance.setGenre("Romance");
-            Genre sciFi = new Genre();         sciFi.setGenre("Sci-Fi");
-            Genre sport = new Genre();         sport.setGenre("Sport");
-            Genre thriller = new Genre();      thriller.setGenre("Thriller");
-            Genre war = new Genre();           war.setGenre("War");
-            Genre western = new Genre();       western.setGenre("Western");
+            Genre action = new Genre();        action.setGenre("Action");        genreRepo.save(action);
+            Genre adventure = new Genre();     adventure.setGenre("Adventure");  genreRepo.save(adventure);
+            Genre animation = new Genre();     animation.setGenre("Animation");  genreRepo.save(animation);
+            Genre biography = new Genre();     biography.setGenre("Biography");  genreRepo.save(biography);
+            Genre comedy = new Genre();        comedy.setGenre("Comedy");        genreRepo.save(comedy);
+            Genre crime = new Genre();         crime.setGenre("Crime");          genreRepo.save(crime);
+            Genre documentary = new Genre();   documentary.setGenre("Documentary"); genreRepo.save(documentary);
+            Genre drama = new Genre();         drama.setGenre("Drama");          genreRepo.save(drama);
+            Genre family = new Genre();        family.setGenre("Family");        genreRepo.save(family);
+            Genre fantasy = new Genre();       fantasy.setGenre("Fantasy");      genreRepo.save(fantasy);
+            Genre filmNoir = new Genre();      filmNoir.setGenre("Film-Noir");   genreRepo.save(filmNoir);
+            Genre history = new Genre();       history.setGenre("History");      genreRepo.save(history);
+            Genre horror = new Genre();        horror.setGenre("Horror");        genreRepo.save(horror);
+            Genre music = new Genre();         music.setGenre("Music");          genreRepo.save(music);
+            Genre musical = new Genre();       musical.setGenre("Musical");      genreRepo.save(musical);
+            Genre mystery = new Genre();       mystery.setGenre("Mystery");      genreRepo.save(mystery);
+            Genre romance = new Genre();       romance.setGenre("Romance");      genreRepo.save(romance);
+            Genre sciFi = new Genre();         sciFi.setGenre("Sci-Fi");         genreRepo.save(sciFi);
+            Genre sport = new Genre();         sport.setGenre("Sport");          genreRepo.save(sport);
+            Genre thriller = new Genre();      thriller.setGenre("Thriller");    genreRepo.save(thriller);
+            Genre war = new Genre();           war.setGenre("War");              genreRepo.save(war);
+            Genre western = new Genre();       western.setGenre("Western");      genreRepo.save(western);
 
             // --- AGE LIMITS ---
             AgeLimit pg7 = new AgeLimit(); pg7.setAgeRating(7);
             AgeLimit pg13 = new AgeLimit(); pg13.setAgeRating(13);
             AgeLimit pg18 = new AgeLimit(); pg18.setAgeRating(18);
-            ageLimitRepo.saveAll(Set.of(pg13, pg18));
+            ageLimitRepo.saveAll(Set.of(pg7, pg13, pg18));
 
 
             // --- MOVIES ---
@@ -107,10 +107,10 @@ public class Projekt1BackendApplication {
 
             Movie darkKnight = new Movie();
             darkKnight.setMovieTitle("The Dark Knight");
-            darkKnight.setMovieImg("");
+            darkKnight.setMovieImg("https://static.posters.cz/image/1300/198201.jpg");
             darkKnight.setDescription("Batman faces the Joker in a gritty crime saga.");
             darkKnight.setDuration(152);
-            darkKnight.setTrailerLink("");
+            darkKnight.setTrailerLink("https://www.youtube.com/watch?v=EXeTwQWrcwY");
             darkKnight.setAgeLimit(pg13);
             darkKnight.getGenres().add(action);
             darkKnight.getGenres().add(crime);
@@ -118,10 +118,10 @@ public class Projekt1BackendApplication {
 
             Movie inception = new Movie();
             inception.setMovieTitle("Inception");
-            inception.setMovieImg("");
+            inception.setMovieImg("https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg");
             inception.setDescription("A team dives into dreams to plant an idea.");
             inception.setDuration(148);
-            inception.setTrailerLink("");
+            inception.setTrailerLink("https://www.youtube.com/watch?v=YoHD9XEInc0&t=1s");
             inception.setAgeLimit(pg13);
             inception.getGenres().add(sciFi);
             inception.getGenres().add(action);
@@ -129,10 +129,10 @@ public class Projekt1BackendApplication {
 
             Movie godfather = new Movie();
             godfather.setMovieTitle("The Godfather");
-            godfather.setMovieImg("");
+            godfather.setMovieImg("https://m.media-amazon.com/images/M/MV5BNGEwYjgwOGQtYjg5ZS00Njc1LTk2ZGEtM2QwZWQ2NjdhZTE5XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg");
             godfather.setDescription("Epic tale of a crime family and its legacy.");
             godfather.setDuration(175);
-            godfather.setTrailerLink("");
+            godfather.setTrailerLink("https://www.youtube.com/watch?v=UaVTIH8mujA");
             godfather.setAgeLimit(pg18);
             godfather.getGenres().add(crime);
             godfather.getGenres().add(drama);
@@ -140,10 +140,10 @@ public class Projekt1BackendApplication {
 
             Movie findingNemo = new Movie();
             findingNemo.setMovieTitle("Finding Nemo");
-            findingNemo.setMovieImg("");
+            findingNemo.setMovieImg("https://m.media-amazon.com/images/I/71-bSJo53DL._AC_UF894,1000_QL80_.jpg");
             findingNemo.setDescription("A timid clownfish braves the ocean to find his son.");
             findingNemo.setDuration(100);
-            findingNemo.setTrailerLink("");
+            findingNemo.setTrailerLink("https://www.youtube.com/watch?v=9oQ628Seb9w");
             findingNemo.setAgeLimit(pg7);
             findingNemo.getGenres().add(animation);
             findingNemo.getGenres().add(family);
@@ -151,10 +151,10 @@ public class Projekt1BackendApplication {
 
             Movie spiritedAway = new Movie();
             spiritedAway.setMovieTitle("Spirited Away");
-            spiritedAway.setMovieImg("");
+            spiritedAway.setMovieImg("https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_.jpg");
             spiritedAway.setDescription("A girl enters a spirit world to save her parents.");
             spiritedAway.setDuration(125);
-            spiritedAway.setTrailerLink("");
+            spiritedAway.setTrailerLink("https://www.youtube.com/watch?v=ByXuk9QqQkk");
             spiritedAway.setAgeLimit(pg7);
             spiritedAway.getGenres().add(animation);
             spiritedAway.getGenres().add(fantasy);
@@ -162,20 +162,20 @@ public class Projekt1BackendApplication {
 
             Movie shawshank = new Movie();
             shawshank.setMovieTitle("The Shawshank Redemption");
-            shawshank.setMovieImg("");
+            shawshank.setMovieImg("https://media.posterlounge.com/img/products/710000/706559/706559_poster.jpg");
             shawshank.setDescription("Hope sustains two prisoners through decades.");
             shawshank.setDuration(142);
-            shawshank.setTrailerLink("");
+            shawshank.setTrailerLink("https://www.youtube.com/watch?v=PLl99DlL6b4");
             shawshank.setAgeLimit(pg13);
             shawshank.getGenres().add(drama);
             movieRepo.save(shawshank);
 
             Movie parasite = new Movie();
             parasite.setMovieTitle("Parasite");
-            parasite.setMovieImg("");
+            parasite.setMovieImg("https://m.media-amazon.com/images/I/91KArYP03YL._AC_UF894,1000_QL80_.jpg");
             parasite.setDescription("Two families collide in a sharp social thriller.");
             parasite.setDuration(132);
-            parasite.setTrailerLink("");
+            parasite.setTrailerLink("https://www.youtube.com/watch?v=SEUXfv87Wpk");
             parasite.setAgeLimit(pg18);
             parasite.getGenres().add(thriller);
             parasite.getGenres().add(drama);
@@ -183,10 +183,10 @@ public class Projekt1BackendApplication {
 
             Movie laLaLand = new Movie();
             laLaLand.setMovieTitle("La La Land");
-            laLaLand.setMovieImg("");
+            laLaLand.setMovieImg("https://m.media-amazon.com/images/I/71-u32-oOaL.jpg");
             laLaLand.setDescription("Love and ambition in modern-day Los Angeles.");
             laLaLand.setDuration(128);
-            laLaLand.setTrailerLink("");
+            laLaLand.setTrailerLink("https://www.youtube.com/watch?v=0pdqf4P9MB8");
             laLaLand.setAgeLimit(pg13);
             laLaLand.getGenres().add(romance);
             laLaLand.getGenres().add(musical);
@@ -194,10 +194,10 @@ public class Projekt1BackendApplication {
 
             Movie matrix = new Movie();
             matrix.setMovieTitle("The Matrix");
-            matrix.setMovieImg("");
+            matrix.setMovieImg("https://m.media-amazon.com/images/I/71PfZFFz9yL._AC_UF894,1000_QL80_.jpg");
             matrix.setDescription("A hacker discovers reality is a simulation.");
             matrix.setDuration(136);
-            matrix.setTrailerLink("");
+            matrix.setTrailerLink("https://www.youtube.com/watch?v=m8e-FF8MsqU");
             matrix.setAgeLimit(pg13);
             matrix.getGenres().add(sciFi);
             matrix.getGenres().add(action);
@@ -205,10 +205,10 @@ public class Projekt1BackendApplication {
 
             Movie jurassicPark = new Movie();
             jurassicPark.setMovieTitle("Jurassic Park");
-            jurassicPark.setMovieImg("");
+            jurassicPark.setMovieImg("https://filmartgallery.com/cdn/shop/products/Jurassic-Park-Vintage-Movie-Poster-Original.jpg?v=1738906074");
             jurassicPark.setDescription("Dinosaurs roam a theme park with deadly results.");
             jurassicPark.setDuration(127);
-            jurassicPark.setTrailerLink("");
+            jurassicPark.setTrailerLink("https://www.youtube.com/watch?v=QWBKEmWWL38");
             jurassicPark.setAgeLimit(pg13);
             jurassicPark.getGenres().add(adventure);
             jurassicPark.getGenres().add(sciFi);
@@ -216,10 +216,10 @@ public class Projekt1BackendApplication {
 
             Movie lionKing = new Movie();
             lionKing.setMovieTitle("The Lion King");
-            lionKing.setMovieImg("");
+            lionKing.setMovieImg("https://i.ebayimg.com/images/g/Oi4AAOxy2CZTWozq/s-l1200.jpg");
             lionKing.setDescription("A young lion prince finds his place in the circle of life.");
             lionKing.setDuration(88);
-            lionKing.setTrailerLink("");
+            lionKing.setTrailerLink("https://www.youtube.com/watch?v=lFzVJEksoDY");
             lionKing.setAgeLimit(pg7);
             lionKing.getGenres().add(animation);
             lionKing.getGenres().add(family);
@@ -227,10 +227,10 @@ public class Projekt1BackendApplication {
 
             Movie casablanca = new Movie();
             casablanca.setMovieTitle("Casablanca");
-            casablanca.setMovieImg("");
+            casablanca.setMovieImg("https://m.media-amazon.com/images/I/71OusuDiYGL._AC_UF894,1000_QL80_.jpg");
             casablanca.setDescription("Love and sacrifice during World War II.");
             casablanca.setDuration(102);
-            casablanca.setTrailerLink("");
+            casablanca.setTrailerLink("https://www.youtube.com/watch?v=MF7JH_54d8c");
             casablanca.setAgeLimit(pg7);
             casablanca.getGenres().add(romance);
             casablanca.getGenres().add(drama);
@@ -238,10 +238,10 @@ public class Projekt1BackendApplication {
 
             Movie furyRoad = new Movie();
             furyRoad.setMovieTitle("Mad Max: Fury Road");
-            furyRoad.setMovieImg("");
+            furyRoad.setMovieImg("https://m.media-amazon.com/images/I/A1Y9Cqo1FmL.jpg");
             furyRoad.setDescription("A high-octane chase across a wasteland.");
             furyRoad.setDuration(120);
-            furyRoad.setTrailerLink("");
+            furyRoad.setTrailerLink("https://www.youtube.com/watch?v=hEJnMQG9ev8");
             furyRoad.setAgeLimit(pg18);
             furyRoad.getGenres().add(action);
             furyRoad.getGenres().add(adventure);
@@ -249,10 +249,10 @@ public class Projekt1BackendApplication {
 
             Movie getOut = new Movie();
             getOut.setMovieTitle("Get Out");
-            getOut.setMovieImg("");
+            getOut.setMovieImg("https://m.media-amazon.com/images/I/51xp3ybXOiL._AC_UF894,1000_QL80_.jpg");
             getOut.setDescription("A tense visit turns into a surreal nightmare.");
             getOut.setDuration(104);
-            getOut.setTrailerLink("");
+            getOut.setTrailerLink("https://www.youtube.com/watch?v=DzfpyUB60YY");
             getOut.setAgeLimit(pg18);
             getOut.getGenres().add(horror);
             getOut.getGenres().add(mystery);
@@ -260,10 +260,10 @@ public class Projekt1BackendApplication {
 
             Movie socialNetwork = new Movie();
             socialNetwork.setMovieTitle("The Social Network");
-            socialNetwork.setMovieImg("");
+            socialNetwork.setMovieImg("https://image.tmdb.org/t/p/original/n0ybibhJtQ5icDqTp8eRytcIHJx.jpg");
             socialNetwork.setDescription("The contentious rise of a tech giant.");
             socialNetwork.setDuration(120);
-            socialNetwork.setTrailerLink("");
+            socialNetwork.setTrailerLink("https://www.youtube.com/watch?v=lB95KLmpLR4");
             socialNetwork.setAgeLimit(pg13);
             socialNetwork.getGenres().add(drama);
             socialNetwork.getGenres().add(biography);
@@ -271,10 +271,10 @@ public class Projekt1BackendApplication {
 
             Movie nineteenSeventeen = new Movie();
             nineteenSeventeen.setMovieTitle("1917");
-            nineteenSeventeen.setMovieImg("");
+            nineteenSeventeen.setMovieImg("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZrU-t7pjIDooqpf1A57uqniKDPmslDpLCOQ&s");
             nineteenSeventeen.setDescription("Two soldiers race to deliver a lifesaving message.");
             nineteenSeventeen.setDuration(119);
-            nineteenSeventeen.setTrailerLink("");
+            nineteenSeventeen.setTrailerLink("https://www.youtube.com/watch?v=YqNYrYUiMfg");
             nineteenSeventeen.setAgeLimit(pg18);
             nineteenSeventeen.getGenres().add(war);
             nineteenSeventeen.getGenres().add(drama);
@@ -282,10 +282,10 @@ public class Projekt1BackendApplication {
 
             Movie princessBride = new Movie();
             princessBride.setMovieTitle("The Princess Bride");
-            princessBride.setMovieImg("");
+            princessBride.setMovieImg("https://m.media-amazon.com/images/I/61E71gCC53L._AC_UF894,1000_QL80_.jpg");
             princessBride.setDescription("A fairy-tale adventure with true love and pirates.");
             princessBride.setDuration(98);
-            princessBride.setTrailerLink("");
+            princessBride.setTrailerLink("https://www.youtube.com/watch?v=O3CIXEAjcc8");
             princessBride.setAgeLimit(pg7);
             princessBride.getGenres().add(adventure);
             princessBride.getGenres().add(comedy);
@@ -294,10 +294,10 @@ public class Projekt1BackendApplication {
 
             Movie interstellar = new Movie();
             interstellar.setMovieTitle("Interstellar");
-            interstellar.setMovieImg("");
+            interstellar.setMovieImg("https://m.media-amazon.com/images/M/MV5BYzdjMDAxZGItMjI2My00ODA1LTlkNzItOWFjMDU5ZDJlYWY3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg");
             interstellar.setDescription("Explorers journey through a wormhole to save humanity.");
             interstellar.setDuration(169);
-            interstellar.setTrailerLink("");
+            interstellar.setTrailerLink("https://www.youtube.com/watch?v=zSWdZVtXT7E&t=2s");
             interstellar.setAgeLimit(pg13);
             interstellar.getGenres().add(sciFi);
             interstellar.getGenres().add(drama);
@@ -305,10 +305,10 @@ public class Projekt1BackendApplication {
 
             Movie whiplash = new Movie();
             whiplash.setMovieTitle("Whiplash");
-            whiplash.setMovieImg("");
+            whiplash.setMovieImg("https://i.etsystatic.com/36067604/r/il/4355d2/4230665308/il_fullxfull.4230665308_r13v.jpg");
             whiplash.setDescription("A drummer pushes himself under a ruthless mentor.");
             whiplash.setDuration(107);
-            whiplash.setTrailerLink("");
+            whiplash.setTrailerLink("https://www.youtube.com/watch?v=7d_jQycdQGo");
             whiplash.setAgeLimit(pg13);
             whiplash.getGenres().add(drama);
             whiplash.getGenres().add(music);
@@ -316,10 +316,10 @@ public class Projekt1BackendApplication {
 
             Movie bigLebowski = new Movie();
             bigLebowski.setMovieTitle("The Big Lebowski");
-            bigLebowski.setMovieImg("");
+            bigLebowski.setMovieImg("https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRhGcN6t_iLHQWRw0Le9VYQ-crzAbrnLBkMDtM0-NOOtCh1jpSAUhOwyJRRUDjDxCtzTMwSljKIYIyehsJ_cEczCz3dADoNU8rRBLU5HQuvpldYgUVQU905");
             bigLebowski.setDescription("The Dude gets tangled in a bizarre kidnapping.");
             bigLebowski.setDuration(117);
-            bigLebowski.setTrailerLink("");
+            bigLebowski.setTrailerLink("https://www.youtube.com/watch?v=cd-go0oBF4Y");
             bigLebowski.setAgeLimit(pg18);
             bigLebowski.getGenres().add(comedy);
             bigLebowski.getGenres().add(crime);
@@ -327,10 +327,10 @@ public class Projekt1BackendApplication {
 
             Movie grandBudapest = new Movie();
             grandBudapest.setMovieTitle("The Grand Budapest Hotel");
-            grandBudapest.setMovieImg("");
+            grandBudapest.setMovieImg("https://m.media-amazon.com/images/I/713kiC-8JhL.jpg");
             grandBudapest.setDescription("A concierge and lobby boy in a caper across Europe.");
             grandBudapest.setDuration(100);
-            grandBudapest.setTrailerLink("");
+            grandBudapest.setTrailerLink("https://www.youtube.com/watch?v=1Fg5iWmQjwk");
             grandBudapest.setAgeLimit(pg13);
             grandBudapest.getGenres().add(comedy);
             grandBudapest.getGenres().add(crime);
@@ -338,10 +338,10 @@ public class Projekt1BackendApplication {
 
             Movie silenceLambs = new Movie();
             silenceLambs.setMovieTitle("The Silence of the Lambs");
-            silenceLambs.setMovieImg("");
+            silenceLambs.setMovieImg("https://m.media-amazon.com/images/I/81SVDO6WcrL._AC_UF894,1000_QL80_.jpg");
             silenceLambs.setDescription("An FBI trainee seeks a killer with a cannibal’s help.");
             silenceLambs.setDuration(118);
-            silenceLambs.setTrailerLink("");
+            silenceLambs.setTrailerLink("https://www.youtube.com/watch?v=6iB21hsprAQ");
             silenceLambs.setAgeLimit(pg18);
             silenceLambs.getGenres().add(thriller);
             silenceLambs.getGenres().add(crime);
@@ -349,10 +349,10 @@ public class Projekt1BackendApplication {
 
             Movie seven = new Movie();
             seven.setMovieTitle("Se7en");
-            seven.setMovieImg("");
+            seven.setMovieImg("https://m.media-amazon.com/images/I/71ivyTtPwoL._AC_UF894,1000_QL80_.jpg");
             seven.setDescription("Detectives hunt a killer using the seven deadly sins.");
             seven.setDuration(127);
-            seven.setTrailerLink("");
+            seven.setTrailerLink("https://www.youtube.com/watch?v=KPOuJGkpblk");
             seven.setAgeLimit(pg18);
             seven.getGenres().add(crime);
             seven.getGenres().add(mystery);
@@ -361,10 +361,10 @@ public class Projekt1BackendApplication {
 
             Movie rocky = new Movie();
             rocky.setMovieTitle("Rocky");
-            rocky.setMovieImg("");
+            rocky.setMovieImg("https://media.posterlounge.com/img/products/610000/605847/605847_poster.jpg");
             rocky.setDescription("An underdog boxer gets a shot at the title.");
             rocky.setDuration(120);
-            rocky.setTrailerLink("");
+            rocky.setTrailerLink("https://www.youtube.com/watch?v=-Hk-LYcavrw");
             rocky.setAgeLimit(pg13);
             rocky.getGenres().add(sport);
             rocky.getGenres().add(drama);
@@ -372,10 +372,10 @@ public class Projekt1BackendApplication {
 
             Movie goodBadUgly = new Movie();
             goodBadUgly.setMovieTitle("The Good, the Bad and the Ugly");
-            goodBadUgly.setMovieImg("");
+            goodBadUgly.setMovieImg("https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQHI13QRtu5jYlSfoWk2LzW_5CfaAJOzfnkrbZM-bnEo4QhygGQ_KPWchgO1Lz90mxrPJHoK6IB9_A1vPiT7SPYoMR8hL66FopBSWExCQuHj3mwXRDuLNrF6A");
             goodBadUgly.setDescription("Three gunslingers chase buried gold in the Old West.");
             goodBadUgly.setDuration(161);
-            goodBadUgly.setTrailerLink("");
+            goodBadUgly.setTrailerLink("https://www.youtube.com/watch?v=IFNUGzCOQoI");
             goodBadUgly.setAgeLimit(pg13);
             goodBadUgly.getGenres().add(western);
             goodBadUgly.getGenres().add(adventure);
@@ -383,10 +383,10 @@ public class Projekt1BackendApplication {
 
             Movie noCountry = new Movie();
             noCountry.setMovieTitle("No Country for Old Men");
-            noCountry.setMovieImg("");
+            noCountry.setMovieImg("https://m.media-amazon.com/images/I/51CyRJN-iWL._AC_UF894,1000_QL80_.jpg");
             noCountry.setDescription("A hunter, a hitman, and a sheriff cross paths over stolen cash.");
             noCountry.setDuration(122);
-            noCountry.setTrailerLink("");
+            noCountry.setTrailerLink("https://www.youtube.com/watch?v=38A__WT3-o0");
             noCountry.setAgeLimit(pg18);
             noCountry.getGenres().add(crime);
             noCountry.getGenres().add(thriller);
@@ -394,20 +394,20 @@ public class Projekt1BackendApplication {
 
             Movie exorcist = new Movie();
             exorcist.setMovieTitle("The Exorcist");
-            exorcist.setMovieImg("");
+            exorcist.setMovieImg("https://storage.googleapis.com/pod_public/1300/262784.jpg");
             exorcist.setDescription("A possessed girl and a desperate fight against evil.");
             exorcist.setDuration(122);
-            exorcist.setTrailerLink("");
+            exorcist.setTrailerLink("https://www.youtube.com/watch?v=BU2eYAO31Cc");
             exorcist.setAgeLimit(pg18);
             exorcist.getGenres().add(horror);
             movieRepo.save(exorcist);
 
             Movie amelie = new Movie();
             amelie.setMovieTitle("Amélie");
-            amelie.setMovieImg("");
+            amelie.setMovieImg("https://m.media-amazon.com/images/M/MV5BOTNmYzY0MWQtZGZmNy00Y2Y4LWFmMDQtMTZjYTdiYzEwZGQ2XkEyXkFqcGc@._V1_.jpg");
             amelie.setDescription("A whimsical Parisian helps others find joy and love.");
             amelie.setDuration(122);
-            amelie.setTrailerLink("");
+            amelie.setTrailerLink("https://www.youtube.com/watch?v=Py7cDXQae2U");
             amelie.setAgeLimit(pg13);
             amelie.getGenres().add(romance);
             amelie.getGenres().add(comedy);
@@ -415,10 +415,10 @@ public class Projekt1BackendApplication {
 
             Movie beautifulMind = new Movie();
             beautifulMind.setMovieTitle("A Beautiful Mind");
-            beautifulMind.setMovieImg("");
+            beautifulMind.setMovieImg("https://m.media-amazon.com/images/I/71qk53VbCnL._AC_UF894,1000_QL80_.jpg");
             beautifulMind.setDescription("A brilliant mathematician battles inner demons.");
             beautifulMind.setDuration(135);
-            beautifulMind.setTrailerLink("");
+            beautifulMind.setTrailerLink("https://www.youtube.com/watch?v=9wZM7CQY130");
             beautifulMind.setAgeLimit(pg13);
             beautifulMind.getGenres().add(biography);
             beautifulMind.getGenres().add(drama);
@@ -426,10 +426,10 @@ public class Projekt1BackendApplication {
 
             Movie gladiator = new Movie();
             gladiator.setMovieTitle("Gladiator");
-            gladiator.setMovieImg("");
+            gladiator.setMovieImg("https://m.media-amazon.com/images/I/71sj8Yt20qL._AC_UF894,1000_QL80_.jpg");
             gladiator.setDescription("A betrayed general seeks justice in the arena.");
             gladiator.setDuration(155);
-            gladiator.setTrailerLink("");
+            gladiator.setTrailerLink("https://www.youtube.com/watch?v=P5ieIbInFpg");
             gladiator.setAgeLimit(pg18);
             gladiator.getGenres().add(action);
             gladiator.getGenres().add(history);
@@ -437,10 +437,10 @@ public class Projekt1BackendApplication {
 
             Movie backToTheFuture = new Movie();
             backToTheFuture.setMovieTitle("Back to the Future");
-            backToTheFuture.setMovieImg("");
+            backToTheFuture.setMovieImg("https://static.posters.cz/image/750/2795.jpg");
             backToTheFuture.setDescription("A teen travels through time to fix his family history.");
             backToTheFuture.setDuration(116);
-            backToTheFuture.setTrailerLink("");
+            backToTheFuture.setTrailerLink("https://www.youtube.com/watch?v=qvsgGtivCgs");
             backToTheFuture.setAgeLimit(pg7);
             backToTheFuture.getGenres().add(adventure);
             backToTheFuture.getGenres().add(sciFi);
@@ -448,10 +448,10 @@ public class Projekt1BackendApplication {
 
             Movie marchOfPenguins = new Movie();
             marchOfPenguins.setMovieTitle("March of the Penguins");
-            marchOfPenguins.setMovieImg("");
+            marchOfPenguins.setMovieImg("https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1500x1500/products/82580/92423/MARCH-OF-THE-PENGUINS-SINGLE-SIDED-Regular-2005-ORIGINAL-CINEMA-POSTER__48439.1549383017.jpg?c=2");
             marchOfPenguins.setDescription("Emperor penguins endure an epic Antarctic journey.");
             marchOfPenguins.setDuration(80);
-            marchOfPenguins.setTrailerLink("");
+            marchOfPenguins.setTrailerLink("https://www.youtube.com/watch?v=ohL8rF_jluA");
             marchOfPenguins.setAgeLimit(pg7);
             marchOfPenguins.getGenres().add(documentary);
             marchOfPenguins.getGenres().add(family);
@@ -459,10 +459,10 @@ public class Projekt1BackendApplication {
 
             Movie freeSolo = new Movie();
             freeSolo.setMovieTitle("Free Solo");
-            freeSolo.setMovieImg("");
+            freeSolo.setMovieImg("https://m.media-amazon.com/images/I/81Jw991PP6L.jpg");
             freeSolo.setDescription("A climber attempts El Capitan without ropes.");
             freeSolo.setDuration(100);
-            freeSolo.setTrailerLink("");
+            freeSolo.setTrailerLink("https://www.youtube.com/watch?v=urRVZ4SW7WU");
             freeSolo.setAgeLimit(pg13);
             freeSolo.getGenres().add(documentary);
             freeSolo.getGenres().add(sport);
@@ -489,22 +489,23 @@ public class Projekt1BackendApplication {
             Screening screening1 = new Screening();
             screening1.setMovie(dieHard);
             screening1.setTheater(theater1);
-            screening1.setScreeningDate(LocalDate.of(2025, 10, 6));
+            screening1.setScreeningDate(LocalDate.of(2025, 10, 29));
             screening1.setStartTime(2000);
             screening1.setPrice(95.0);
             screeningRepo.save(screening1);
 
-                        for (int b = 700; b <= 2300; b += 400) {
+            for (int b = 700; b <= 2300; b += 400) {
                 LocalDate[] dates = {
                         LocalDate.now(),
-                        LocalDate.of(2025, 10, 9),
-                        LocalDate.of(2025, 10, 10),
-                        LocalDate.of(2025, 10, 11),
-                        LocalDate.of(2025, 10, 12),
-                        LocalDate.of(2025, 10, 13),
-                        LocalDate.of(2025, 10, 14),
-                        LocalDate.of(2025, 10, 15),
-                        LocalDate.of(2025, 10, 16)
+                        LocalDate.of(2025, 10, 21),
+                        LocalDate.of(2025, 10, 22),
+                        LocalDate.of(2025, 10, 23),
+                        LocalDate.of(2025, 10, 24)
+//                        LocalDate.of(2025, 10, 25)
+//                        LocalDate.of(2025, 10, 26),
+//                        LocalDate.of(2025, 10, 27),
+//                        LocalDate.of(2025, 10, 28)
+
 
                 };
 
@@ -522,7 +523,7 @@ public class Projekt1BackendApplication {
             Screening screening2 = new Screening();
             screening2.setMovie(forrest);
             screening2.setTheater(theater2);
-            screening2.setScreeningDate(LocalDate.of(2025, 10, 7));
+            screening2.setScreeningDate(LocalDate.of(2025, 10, 20));
             screening2.setStartTime(1800);
             screening2.setPrice(120.0);
             screeningRepo.save(screening2);
